@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>About Us – NotifySMS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="mobile.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+<style>
+:root{--navy:#003087;--blue:#009cde;--gold:#ffc439;}
+.mesh-bg{background-color:#f0f7ff;background-image:radial-gradient(at 40% 20%,hsla(205,100%,90%,.35) 0,transparent 50%),radial-gradient(at 80% 0%,hsla(213,80%,90%,.3) 0,transparent 50%);}
+.grid-pattern{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;}
+#navbar{transition:all .3s;}#navbar.scrolled{background:rgba(15,23,42,.96)!important;backdrop-filter:blur(12px);box-shadow:0 1px 30px rgba(0,0,0,.3);}
+#mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s;}#mobile-menu.open{max-height:520px;}
+#scrollTop{position:fixed;bottom:28px;right:28px;z-index:999;width:44px;height:44px;background:linear-gradient(135deg,#003087,#009cde);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .3s;}
+#scrollTop.visible{opacity:1;pointer-events:all;}#scrollTop:hover{transform:translateY(-3px);}
+#waBtn{position:fixed;bottom:82px;right:28px;z-index:999;width:44px;height:44px;background:#25d366;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none;}
+#waBtn:hover{transform:translateY(-3px);}
+.page-hero{background:linear-gradient(135deg,#003087 0%,#001a5c 60%,#003087 100%);padding:100px 0 60px;position:relative;overflow:hidden;}
+.page-hero .grid-pattern{position:absolute;inset:0;opacity:.6;}
+.stat-card{background:linear-gradient(135deg,rgba(0,156,222,.08),rgba(0,48,135,.08));border:1px solid rgba(0,156,222,.18);}
+.val-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08);}
+.val-card{transition:all .3s;}
+</style>
+</head>
+<body class="font-sans antialiased bg-white" data-page="about">
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-white text-sm"></i></div>
+<a id="waBtn" href="https://wa.me/8801XXXXXXXXX" target="_blank"><i class="fab fa-whatsapp text-white text-xl"></i></a>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4" style="background:rgba(0,48,135,.95);">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-sm"></i></div><span class="text-white font-bold text-xl">Notify<span style="color:#009cde;">SMS</span></span></a>
+    <div class="hidden lg:flex items-center gap-7">
+      <a href="index.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Home</a>
+      <a href="about.html" class="text-white text-sm font-semibold border-b-2 pb-0.5" style="border-color:#ffc439;">About</a>
+      <a href="services.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Services</a>
+      <a href="pricing.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Pricing</a>
+      <a href="calculator.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Calculator</a>
+      <a href="faq.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">FAQ</a>
+      <a href="contact.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Contact</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-3"><a href="#" class="text-gray-300 hover:text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/10"><i class="fas fa-sign-in-alt mr-1.5 text-xs"></i>Login</a><a href="contact.html" class="text-sm font-semibold px-5 py-2.5 rounded-xl hover:opacity-90" style="background:#ffc439;color:#003087;">Get Started</a></div>
+    <button onclick="toggleMenu()" class="lg:hidden text-white p-2 rounded-lg hover:bg-white/10"><i class="fas fa-bars text-lg"></i></button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden"><div class="max-w-7xl mx-auto mt-3 bg-slate-800/95 backdrop-blur rounded-2xl p-5 flex flex-col gap-1">
+    <a href="index.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Home</a>
+    <a href="about.html" class="text-white text-sm font-semibold py-2.5 px-3 rounded-xl bg-white/10">About</a>
+    <a href="services.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Services</a>
+    <a href="pricing.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Pricing</a>
+    <a href="calculator.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Calculator</a>
+    <a href="faq.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">FAQ</a>
+    <a href="contact.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Contact</a>
+    <div class="flex gap-3 mt-3 pt-3 border-t border-white/10"><a href="#" class="flex-1 border border-white/20 text-white text-sm font-semibold py-3 rounded-xl text-center">Login</a><a href="contact.html" class="flex-1 text-sm font-semibold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get Started</a></div>
+  </div></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="grid-pattern"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4" style="background:rgba(0,156,222,.15);border:1px solid rgba(0,156,222,.3);color:#009cde;">About Us</span>
+    <h1 class="text-5xl font-black text-white mb-4">Bangladesh's Most Trusted<br>SMS Platform</h1>
+    <p class="text-gray-400 text-xl max-w-xl mx-auto" id="ab-vision">Empowering businesses with reliable, fast, and affordable bulk SMS since 2015.</p>
+  </div>
+</div>
+
+<!-- COMPANY OVERVIEW -->
+<section class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest" style="color:#003087;" id="ab-heading">Our Story</span>
+        <h2 class="text-4xl font-black text-gray-900 mt-3 mb-6 leading-tight">Built for Bangladesh,<br>Trusted Nationwide</h2>
+        <p class="text-gray-500 text-lg leading-relaxed mb-6" id="ab-story1">NotifySMS was founded in 2015 with a simple mission: make bulk SMS accessible, affordable, and reliable for every business in Bangladesh — from small startups to large enterprises.</p>
+        <p class="text-gray-500 text-lg leading-relaxed mb-8" id="ab-story2">Today, we serve 10,000+ active clients across retail, banking, healthcare, e-commerce, and NGO sectors. Our platform delivers over 500 million SMS per year with an average delivery rate of 98.5%.</p>
+        <div class="flex flex-wrap gap-4">
+          <a href="services.html" class="font-semibold px-7 py-3.5 rounded-xl text-white hover:opacity-90" style="background:#003087;">Explore Services</a>
+          <a href="contact.html" class="font-semibold px-7 py-3.5 rounded-xl border-2 transition-all hover:text-white" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'">Contact Us</a>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 gap-5" id="about-stats-grid">
+        <div class="stat-card rounded-2xl p-6"><div class="text-3xl font-black mb-2" style="color:#003087;">2015</div><div class="text-gray-900 font-semibold text-sm mb-1">Founded</div><div class="text-gray-500 text-xs">Dhaka, Bangladesh</div></div>
+        <div class="stat-card rounded-2xl p-6 mt-8"><div class="text-3xl font-black text-green-600 mb-2">10K+</div><div class="text-gray-900 font-semibold text-sm mb-1">Active Clients</div><div class="text-gray-500 text-xs">Across Bangladesh</div></div>
+        <div class="stat-card rounded-2xl p-6"><div class="text-3xl font-black mb-2" style="color:#009cde;">500M+</div><div class="text-gray-900 font-semibold text-sm mb-1">SMS Delivered</div><div class="text-gray-500 text-xs">Per year</div></div>
+        <div class="stat-card rounded-2xl p-6 mt-8"><div class="text-3xl font-black text-purple-600 mb-2">98.5%</div><div class="text-gray-900 font-semibold text-sm mb-1">Delivery Rate</div><div class="text-gray-500 text-xs">Industry-leading</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION & VISION -->
+<section class="mesh-bg py-20">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="bg-white rounded-3xl p-10 shadow-sm border border-blue-100">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-6" style="background:linear-gradient(135deg,#003087,#009cde);"><i class="fas fa-bullseye text-white text-xl"></i></div>
+        <h3 class="text-2xl font-black text-gray-900 mb-4">Our Mission</h3>
+        <p class="text-gray-500 leading-relaxed">To empower every business in Bangladesh — regardless of size — with enterprise-grade SMS communication tools that are affordable, reliable, and easy to use. We believe every message matters and we deliver accordingly.</p>
+      </div>
+      <div class="rounded-3xl p-10 shadow-xl" style="background:linear-gradient(135deg,#003087,#009cde);">
+        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-6"><i class="fas fa-eye text-white text-xl"></i></div>
+        <h3 class="text-2xl font-black text-white mb-4">Our Vision</h3>
+        <p class="text-blue-100 leading-relaxed" id="ab-mission">To become South Asia's most trusted bulk SMS platform by continuously innovating, expanding our network coverage, and delivering unmatched value to our clients — with 100% transparent pricing that includes all taxes and charges.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="bg-white py-20">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <span class="text-xs font-bold uppercase tracking-widest" style="color:#003087;">Our Values</span>
+      <h2 class="text-4xl font-black text-gray-900 mt-3 mb-4">What Drives Us</h2>
+    </div>
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="val-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm text-center"><div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><i class="fas fa-bolt text-blue-600 text-xl"></i></div><h4 class="font-bold text-gray-900 text-lg mb-2">Speed</h4><p class="text-gray-500 text-sm">Sub-3-second delivery for every SMS, every time. Performance is non-negotiable.</p></div>
+      <div class="val-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm text-center"><div class="w-14 h-14 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><i class="fas fa-shield-halved text-green-600 text-xl"></i></div><h4 class="font-bold text-gray-900 text-lg mb-2">Trust</h4><p class="text-gray-500 text-sm">BTRC certified, fully compliant, and completely transparent about our pricing including VAT &amp; TAX.</p></div>
+      <div class="val-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm text-center"><div class="w-14 h-14 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><i class="fas fa-headset text-purple-600 text-xl"></i></div><h4 class="font-bold text-gray-900 text-lg mb-2">Support</h4><p class="text-gray-500 text-sm">24/7 expert support team dedicated to resolving your issues quickly and professionally.</p></div>
+      <div class="val-card bg-white border border-gray-100 rounded-2xl p-7 shadow-sm text-center"><div class="w-14 h-14 bg-orange-100 rounded-2xl flex items-center justify-center mx-auto mb-5"><i class="fas fa-lightbulb text-orange-500 text-xl"></i></div><h4 class="font-bold text-gray-900 text-lg mb-2">Innovation</h4><p class="text-gray-500 text-sm">Continuously improving our platform with new features, better APIs, and smarter analytics.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 relative overflow-hidden" style="background:linear-gradient(135deg,#003087 0%,#009cde 100%)">
+  <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+    <h2 class="text-4xl font-black text-white mb-4">Ready to Work With Us?</h2>
+    <p class="text-blue-100 text-lg mb-8">Join 10,000+ businesses across Bangladesh.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="contact.html" class="font-black px-10 py-4 rounded-2xl hover:opacity-90 text-lg" style="background:#ffc439;color:#003087;">Get Started Free</a>
+      <a href="services.html" class="border-2 border-white/40 hover:border-white text-white font-black px-10 py-4 rounded-2xl text-lg hover:bg-white/10">View Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-950 text-gray-400 border-t border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-xs"></i></div><span class="text-white font-bold">Notify<span style="color:#009cde;">SMS</span></span></div>
+    <div class="flex flex-wrap gap-5 text-sm"><a href="index.html" class="hover:text-white">Home</a><a href="about.html" class="text-white font-semibold">About</a><a href="services.html" class="hover:text-white">Services</a><a href="pricing.html" class="hover:text-white">Pricing</a><a href="contact.html" class="hover:text-white">Contact</a></div>
+    <p class="text-gray-600 text-sm">© 2025 NotifySMS. BTRC Licensed.</p>
+  </div>
+</footer>
+<script>function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);});</script>
+<script>
+/* ===== Live About-page content from the backend ===== */
+const _ABOUT_STAT_COLORS=['#003087','text-green-600','#009cde','text-purple-600'];
+function _abEsc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function renderAbout(a){
+  if(!a||typeof a!=='object') return;
+  const set=(id,v)=>{ const el=document.getElementById(id); if(el&&v) el.textContent=v; };
+  set('ab-heading',a.heading); set('ab-story1',a.story1); set('ab-story2',a.story2);
+  set('ab-mission',a.mission); set('ab-vision',a.vision);
+  const grid=document.getElementById('about-stats-grid');
+  if(grid&&Array.isArray(a.stats)&&a.stats.length){
+    grid.innerHTML=a.stats.map((s,i)=>{
+      const c=_ABOUT_STAT_COLORS[i%4];
+      const colorAttr=c.startsWith('#')?`style="color:${c};"`:`class="${c} "`;
+      const valClass=c.startsWith('#')?'text-3xl font-black mb-2':`text-3xl font-black ${c} mb-2`;
+      const valStyle=c.startsWith('#')?`style="color:${c};"`:'';
+      return `<div class="stat-card rounded-2xl p-6 ${i%2?'mt-8':''}"><div class="${valClass}" ${valStyle}>${_abEsc(s.value)}</div><div class="text-gray-900 font-semibold text-sm mb-1">${_abEsc(s.label)}</div><div class="text-gray-500 text-xs">${_abEsc(s.sub)}</div></div>`;
+    }).join('');
+  }
+}
+document.addEventListener('cms:ready', e => renderAbout(e.detail && e.detail.about));
+</script>
+<script src="cms.js"></script>
+</body></html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Contact Us – NotifySMS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="mobile.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+<style>
+:root{--navy:#003087;--blue:#009cde;--gold:#ffc439;}
+.mesh-bg{background-color:#f0f7ff;background-image:radial-gradient(at 40% 20%,hsla(205,100%,90%,.35) 0,transparent 50%);}
+.grid-pattern{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;}
+#navbar{transition:all .3s;}#navbar.scrolled{background:rgba(15,23,42,.96)!important;backdrop-filter:blur(12px);box-shadow:0 1px 30px rgba(0,0,0,.3);}
+#mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s;}#mobile-menu.open{max-height:520px;}
+#scrollTop{position:fixed;bottom:28px;right:28px;z-index:999;width:44px;height:44px;background:linear-gradient(135deg,#003087,#009cde);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .3s;}
+#scrollTop.visible{opacity:1;pointer-events:all;}#scrollTop:hover{transform:translateY(-3px);}
+#waBtn{position:fixed;bottom:82px;right:28px;z-index:999;width:44px;height:44px;background:#25d366;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none;}
+#waBtn:hover{transform:translateY(-3px);}
+.page-hero{background:linear-gradient(135deg,#003087 0%,#001a5c 60%,#003087 100%);padding:100px 0 60px;position:relative;overflow:hidden;}
+.page-hero .grid-pattern{position:absolute;inset:0;opacity:.6;}
+input,textarea,select{outline:none;transition:border-color .2s,box-shadow .2s;}
+input:focus,textarea:focus,select:focus{border-color:#003087!important;box-shadow:0 0 0 3px rgba(0,48,135,.1);}
+.contact-card{transition:all .3s;}.contact-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.08);}
+/* Success toast */
+#toast{position:fixed;top:24px;right:24px;z-index:9999;background:#22c55e;color:white;padding:14px 22px;border-radius:14px;font-weight:700;font-size:14px;display:none;align-items:center;gap:10px;box-shadow:0 8px 24px rgba(34,197,94,.4);}
+#toast.show{display:flex;}
+</style>
+</head>
+<body class="font-sans antialiased bg-white">
+
+<div id="toast"><i class="fas fa-check-circle"></i>Message sent successfully! We'll respond within 1 hour.</div>
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-white text-sm"></i></div>
+<a id="waBtn" href="https://wa.me/8801XXXXXXXXX" target="_blank"><i class="fab fa-whatsapp text-white text-xl"></i></a>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4" style="background:rgba(0,48,135,.95);">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-sm"></i></div><span class="text-white font-bold text-xl">Notify<span style="color:#009cde;">SMS</span></span></a>
+    <div class="hidden lg:flex items-center gap-7">
+      <a href="index.html" class="text-gray-300 hover:text-white text-sm font-medium">Home</a>
+      <a href="about.html" class="text-gray-300 hover:text-white text-sm font-medium">About</a>
+      <a href="services.html" class="text-gray-300 hover:text-white text-sm font-medium">Services</a>
+      <a href="pricing.html" class="text-gray-300 hover:text-white text-sm font-medium">Pricing</a>
+      <a href="calculator.html" class="text-gray-300 hover:text-white text-sm font-medium">Calculator</a>
+      <a href="faq.html" class="text-gray-300 hover:text-white text-sm font-medium">FAQ</a>
+      <a href="contact.html" class="text-white text-sm font-semibold border-b-2 pb-0.5" style="border-color:#ffc439;">Contact</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-3"><a href="#" class="text-gray-300 hover:text-white text-sm px-4 py-2 rounded-lg hover:bg-white/10"><i class="fas fa-sign-in-alt mr-1 text-xs"></i>Login</a><a href="contact.html" class="text-sm font-semibold px-5 py-2.5 rounded-xl" style="background:#ffc439;color:#003087;">Get Started Free</a></div>
+    <button onclick="toggleMenu()" class="lg:hidden text-white p-2 rounded-lg hover:bg-white/10"><i class="fas fa-bars"></i></button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden"><div class="max-w-7xl mx-auto mt-3 bg-slate-800/95 backdrop-blur rounded-2xl p-5 flex flex-col gap-1">
+    <a href="index.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Home</a>
+    <a href="about.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">About</a>
+    <a href="services.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Services</a>
+    <a href="pricing.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Pricing</a>
+    <a href="calculator.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Calculator</a>
+    <a href="faq.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">FAQ</a>
+    <a href="contact.html" class="text-white text-sm font-semibold py-2.5 px-3 rounded-xl bg-white/10">Contact</a>
+    <div class="flex gap-3 mt-3 pt-3 border-t border-white/10"><a href="#" class="flex-1 border border-white/20 text-white text-sm font-semibold py-3 rounded-xl text-center">Login</a><a href="contact.html" class="flex-1 text-sm font-semibold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get Started</a></div>
+  </div></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="grid-pattern"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4" style="background:rgba(0,156,222,.15);border:1px solid rgba(0,156,222,.3);color:#009cde;">Contact Us</span>
+    <h1 class="text-5xl font-black text-white mb-4">Get in Touch</h1>
+    <p class="text-gray-400 text-xl max-w-xl mx-auto">Our team responds within 1 business hour. We'd love to hear from you.</p>
+  </div>
+</div>
+
+<!-- CONTACT CARDS -->
+<section class="bg-white py-14 border-b border-gray-100">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5">
+      <div class="contact-card bg-white border border-gray-100 rounded-2xl p-6 text-center shadow-sm">
+        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-phone text-blue-600 text-lg"></i></div>
+        <p class="text-gray-400 text-xs uppercase tracking-widest mb-2">Phone</p>
+        <p class="font-bold text-gray-900 text-sm">+880 1XXXXXXXXX</p>
+      </div>
+      <div class="contact-card bg-white border border-gray-100 rounded-2xl p-6 text-center shadow-sm">
+        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-envelope text-green-600 text-lg"></i></div>
+        <p class="text-gray-400 text-xs uppercase tracking-widest mb-2">Email</p>
+        <p class="font-bold text-gray-900 text-sm">info@notifysms.com.bd</p>
+      </div>
+      <div class="contact-card bg-white border border-gray-100 rounded-2xl p-6 text-center shadow-sm">
+        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4"><i class="fab fa-whatsapp text-green-600 text-lg"></i></div>
+        <p class="text-gray-400 text-xs uppercase tracking-widest mb-2">WhatsApp</p>
+        <p class="font-bold text-gray-900 text-sm">+880 1XXXXXXXXX</p>
+      </div>
+      <div class="contact-card bg-white border border-gray-100 rounded-2xl p-6 text-center shadow-sm">
+        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4"><i class="fas fa-location-dot text-purple-600 text-lg"></i></div>
+        <p class="text-gray-400 text-xs uppercase tracking-widest mb-2">Office</p>
+        <p class="font-bold text-gray-900 text-sm">Dhaka, Bangladesh</p>
+      </div>
+    </div>
+
+    <!-- Response promise -->
+    <div class="mt-8 flex items-center gap-4 bg-amber-50 border border-amber-200 rounded-2xl p-5 max-w-2xl mx-auto">
+      <div class="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);"><i class="fas fa-clock text-white text-lg"></i></div>
+      <div><p class="font-bold text-amber-900">⚡ Fast Response Guarantee</p><p class="text-amber-700 text-sm">We respond to all inquiries within 1 business hour during office hours (9AM–9PM BD).</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT FORM -->
+<section class="mesh-bg py-20">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="grid lg:grid-cols-5 gap-12 items-start">
+
+      <!-- Left info -->
+      <div class="lg:col-span-2">
+        <span class="text-xs font-bold uppercase tracking-widest" style="color:#003087;">Talk to Us</span>
+        <h2 class="text-3xl font-black text-gray-900 mt-3 mb-5 leading-tight">How Can We<br>Help You?</h2>
+        <p class="text-gray-500 leading-relaxed mb-8">Whether you need a demo, custom pricing, API help, or just have questions — we're here to help. Fill the form and we'll get back to you ASAP.</p>
+
+        <div class="space-y-4">
+          <div class="flex items-center gap-4 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#003087,#009cde);"><i class="fas fa-calculator text-white text-sm"></i></div>
+            <div><p class="font-bold text-gray-900 text-sm">Need a Price Quote?</p><a href="calculator.html" class="text-xs font-semibold hover:underline" style="color:#003087;">Use our SMS calculator →</a></div>
+          </div>
+          <div class="flex items-center gap-4 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:linear-gradient(135deg,#059669,#10b981);"><i class="fas fa-question-circle text-white text-sm"></i></div>
+            <div><p class="font-bold text-gray-900 text-sm">Common Questions?</p><a href="faq.html" class="text-xs font-semibold hover:underline" style="color:#003087;">Browse our FAQ →</a></div>
+          </div>
+          <div class="flex items-center gap-4 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:#25d366;"><i class="fab fa-whatsapp text-white text-sm"></i></div>
+            <div><p class="font-bold text-gray-900 text-sm">Want Instant Reply?</p><a href="https://wa.me/8801XXXXXXXXX" class="text-xs font-semibold hover:underline" style="color:#059669;">Message us on WhatsApp →</a></div>
+          </div>
+        </div>
+
+        <!-- Office hours -->
+        <div class="mt-8 bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+          <h4 class="font-bold text-gray-900 mb-3 text-sm flex items-center gap-2"><i class="fas fa-business-time text-blue-600"></i>Office Hours</h4>
+          <div class="space-y-2 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">Saturday – Thursday</span><span class="font-semibold text-gray-900">9:00 AM – 9:00 PM</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Friday</span><span class="font-semibold text-gray-900">2:00 PM – 9:00 PM</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">Emergency Support</span><span class="font-semibold text-green-600">24/7 Available</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="lg:col-span-3 bg-white rounded-3xl p-8 border border-gray-100 shadow-lg">
+        <h3 class="font-bold text-gray-900 text-xl mb-6 flex items-center gap-3"><i class="fas fa-paper-plane" style="color:#003087;"></i>Send a Message</h3>
+        <form id="contact-form" onsubmit="submitForm(event)" class="space-y-5">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-2 block">Full Name *</label>
+              <input id="cf-name" type="text" required placeholder="Your name" class="w-full bg-white border border-gray-200 text-gray-900 rounded-xl px-4 py-3 text-sm">
+            </div>
+            <div>
+              <label class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-2 block">Phone *</label>
+              <input id="cf-phone" type="tel" required placeholder="+880 1XXXXXXXXX" class="w-full bg-white border border-gray-200 text-gray-900 rounded-xl px-4 py-3 text-sm">
+            </div>
+          </div>
+          <div>
+            <label class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-2 block">Email</label>
+            <input id="cf-email" type="email" placeholder="you@company.com" class="w-full bg-white border border-gray-200 text-gray-900 rounded-xl px-4 py-3 text-sm">
+          </div>
+          <div>
+            <label class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-2 block">Company Name</label>
+            <input id="cf-company" type="text" placeholder="Your company" class="w-full bg-white border border-gray-200 text-gray-900 rounded-xl px-4 py-3 text-sm">
+          </div>
+          <div>
+            <label class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-2 block">Inquiry Type</label>
+            <select id="cf-subject" class="w-full bg-white border border-gray-200 text-gray-900 rounded-xl px-4 py-3 text-sm">
+              <option>General Inquiry</option>
+              <option>Pricing &amp; Quote</option>
+              <option>API Integration</option>
+              <option>Technical Support</option>
+              <option>Enterprise / Custom</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="text-gray-500 text-xs font-semibold uppercase tracking-widest mb-2 block">Message *</label>
+            <textarea id="cf-message" rows="4" required placeholder="How can we help you?" class="w-full bg-white border border-gray-200 text-gray-900 rounded-xl px-4 py-3 text-sm resize-none"></textarea>
+          </div>
+          <button type="submit" id="submit-btn" class="w-full font-bold py-4 rounded-xl transition-all hover:opacity-90 flex items-center justify-center gap-2" style="background:#ffc439;color:#003087;">
+            <i class="fas fa-paper-plane"></i><span>Send Message</span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-14 relative overflow-hidden" style="background:linear-gradient(135deg,#003087 0%,#009cde 100%)">
+  <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+    <h2 class="text-3xl font-black text-white mb-4">Ready to Start?</h2>
+    <p class="text-blue-100 text-lg mb-8">Get your account set up in minutes.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="pricing.html" class="font-black px-8 py-4 rounded-2xl hover:opacity-90" style="background:#ffc439;color:#003087;">View Pricing</a>
+      <a href="calculator.html" class="border-2 border-white/40 hover:border-white text-white font-black px-8 py-4 rounded-2xl hover:bg-white/10"><i class="fas fa-calculator mr-2"></i>Calculate Cost</a>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-gray-950 text-gray-400 border-t border-gray-800"><div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-xs"></i></div><span class="text-white font-bold">Notify<span style="color:#009cde;">SMS</span></span></div><div class="flex flex-wrap gap-5 text-sm"><a href="index.html" class="hover:text-white">Home</a><a href="pricing.html" class="hover:text-white">Pricing</a><a href="faq.html" class="hover:text-white">FAQ</a><a href="contact.html" class="text-white font-semibold">Contact</a></div><p class="text-gray-600 text-sm">© 2025 NotifySMS. BTRC Licensed.</p></div></footer>
+
+<script src="cms.js"></script>
+<script>
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);});
+
+async function submitForm(e){
+  e.preventDefault();
+  const btn=document.getElementById('submit-btn');
+  const val=id=>(document.getElementById(id)?.value||'').trim();
+  const original=btn.innerHTML;
+  btn.innerHTML='<i class="fas fa-spinner fa-spin"></i><span>Sending...</span>';
+  btn.disabled=true;
+
+  const subject=val('cf-subject');
+  const payload={
+    name:val('cf-name'), phone:val('cf-phone'), email:val('cf-email'),
+    company:val('cf-company'),
+    message:(subject?('['+subject+'] '):'')+val('cf-message'),
+  };
+
+  try{
+    const res=await fetch((window.NOTIFY_API||'http://127.0.0.1:8000/api/v1')+'/contact',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload),
+    });
+    if(!res.ok) throw new Error('Request failed');
+    const toast=document.getElementById('toast');
+    toast.classList.add('show');
+    btn.innerHTML='<i class="fas fa-check-circle"></i><span>Message Sent!</span>';
+    btn.style.background='#22c55e';btn.style.color='white';
+    document.getElementById('contact-form').reset();
+    setTimeout(()=>{toast.classList.remove('show');btn.innerHTML=original;btn.disabled=false;btn.style.background='#ffc439';btn.style.color='#003087';},4000);
+  }catch(err){
+    btn.innerHTML='<i class="fas fa-triangle-exclamation"></i><span>Failed — try again</span>';
+    btn.style.background='#ef4444';btn.style.color='white';
+    setTimeout(()=>{btn.innerHTML=original;btn.disabled=false;btn.style.background='#ffc439';btn.style.color='#003087';},3000);
+  }
+}
+</script>
+</body></html>

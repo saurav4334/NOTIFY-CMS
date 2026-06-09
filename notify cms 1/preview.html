@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NotifySMS — Mobile Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',sans-serif;background:#0f172a;min-height:100vh;overflow-x:auto;}
+
+/* Top bar */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(15,23,42,.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:12px 24px;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  flex-wrap:wrap;
+}
+.topbar-logo{display:flex;align-items:center;gap:8px;}
+.topbar-logo-icon{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#009cde,#003087);display:flex;align-items:center;justify-content:center;}
+.topbar-title{font-size:15px;font-weight:800;color:white;}
+.topbar-title span{color:#009cde;}
+.topbar-badge{font-size:10px;font-weight:700;background:rgba(255,196,57,.2);color:#ffc439;border:1px solid rgba(255,196,57,.3);padding:2px 10px;border-radius:20px;}
+
+/* Device selector */
+.device-tabs{display:flex;gap:6px;}
+.device-btn{
+  padding:6px 14px;border-radius:8px;font-size:12px;font-weight:700;
+  cursor:pointer;border:none;transition:all .2s;
+  background:rgba(255,255,255,.07);color:rgba(255,255,255,.6);
+}
+.device-btn.active{background:#003087;color:white;}
+.device-btn:hover:not(.active){background:rgba(255,255,255,.12);color:white;}
+
+/* Page nav */
+.page-nav{display:flex;gap:6px;flex-wrap:wrap;}
+.page-btn{
+  padding:5px 12px;border-radius:8px;font-size:11px;font-weight:700;
+  cursor:pointer;border:1.5px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);
+  background:transparent;transition:all .2s;
+}
+.page-btn.active{background:rgba(0,156,222,.2);border-color:#009cde;color:#38bdf8;}
+.page-btn:hover:not(.active){border-color:rgba(255,255,255,.25);color:white;}
+
+/* Main preview area */
+.preview-area{
+  padding:32px 24px;
+  display:flex;
+  gap:32px;
+  align-items:flex-start;
+  justify-content:center;
+  min-height:calc(100vh - 120px);
+  flex-wrap:wrap;
+}
+
+/* Phone frame */
+.phone-wrap{display:flex;flex-direction:column;align-items:center;gap:12px;}
+.phone-label{font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;}
+.phone-frame{
+  position:relative;
+  background:#1e293b;
+  border-radius:44px;
+  padding:14px 8px;
+  box-shadow:
+    0 0 0 2px #334155,
+    0 0 0 4px #1e293b,
+    0 32px 80px rgba(0,0,0,.6),
+    inset 0 0 0 1px rgba(255,255,255,.05);
+  transition:all .3s ease;
+}
+.phone-frame.size-sm{width:280px;}
+.phone-frame.size-md{width:360px;}
+.phone-frame.size-lg{width:414px;}
+
+/* Notch */
+.phone-notch{
+  position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  width:100px;height:24px;background:#0f172a;border-radius:0 0 16px 16px;
+  z-index:10;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.notch-cam{width:8px;height:8px;background:#1e293b;border-radius:50%;border:2px solid #334155;}
+.notch-speaker{width:36px;height:4px;background:#334155;border-radius:4px;}
+
+/* Status bar */
+.phone-status{
+  position:absolute;top:6px;left:0;right:0;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;font-size:9px;font-weight:600;color:rgba(255,255,255,.5);
+  z-index:11;
+}
+.status-icons{display:flex;align-items:center;gap:4px;}
+
+/* Screen */
+.phone-screen{
+  border-radius:34px;
+  overflow:hidden;
+  background:#fff;
+  position:relative;
+}
+.phone-screen iframe{
+  display:block;
+  border:none;
+  width:100%;
+}
+.phone-frame.size-sm .phone-screen{height:580px;}
+.phone-frame.size-md .phone-screen{height:720px;}
+.phone-frame.size-lg .phone-screen{height:820px;}
+
+/* Home button bar */
+.phone-home{
+  margin-top:10px;
+  display:flex;justify-content:center;
+}
+.home-bar{width:120px;height:4px;background:rgba(255,255,255,.2);border-radius:4px;}
+
+/* Tablet frame */
+.tablet-frame{
+  background:#1e293b;
+  border-radius:24px;
+  padding:18px 14px;
+  box-shadow:0 0 0 2px #334155,0 0 0 4px #1e293b,0 32px 80px rgba(0,0,0,.6);
+  width:768px;
+  transition:all .3s;
+}
+.tablet-frame .phone-screen{border-radius:16px;height:1000px;}
+.tablet-frame .phone-screen iframe{width:768px;}
+.tablet-notch{
+  position:absolute;top:18px;right:30px;
+  width:10px;height:10px;background:#334155;border-radius:50%;
+  border:2px solid rgba(255,255,255,.1);
+}
+
+/* Page info bar */
+.page-info{
+  background:rgba(255,255,255,.04);
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:10px;
+  padding:8px 14px;
+  display:flex;align-items:center;gap:8px;
+  font-size:11px;color:rgba(255,255,255,.4);
+  max-width:280px;white-space:nowrap;overflow:hidden;
+}
+.page-info i{color:#009cde;font-size:10px;}
+
+/* Loading overlay */
+.screen-loading{
+  position:absolute;inset:0;
+  background:#f0f4f8;
+  display:flex;align-items:center;justify-content:center;
+  border-radius:34px;
+  z-index:5;transition:opacity .3s;
+}
+.loading-dots{display:flex;gap:6px;}
+.loading-dots span{
+  width:8px;height:8px;border-radius:50%;
+  background:#003087;opacity:.3;
+  animation:ldot .8s ease-in-out infinite;
+}
+.loading-dots span:nth-child(2){animation-delay:.15s;}
+.loading-dots span:nth-child(3){animation-delay:.3s;}
+@keyframes ldot{0%,80%,100%{opacity:.2;transform:scale(.8)}40%{opacity:1;transform:scale(1)}}
+
+/* Side-by-side mode */
+.side-by-side .preview-area{gap:20px;}
+.side-by-side .phone-frame.size-sm{width:240px;}
+.side-by-side .phone-frame.size-sm .phone-screen{height:500px;}
+.side-by-side .phone-frame.size-sm .phone-screen iframe{transform-origin:top left;transform:scale(.85);width:118%;height:118%;}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;height:6px;}
+::-webkit-scrollbar-track{background:rgba(255,255,255,.04);}
+::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:6px;}
+
+/* Info strip */
+.info-strip{
+  text-align:center;padding:12px;
+  font-size:11px;color:rgba(255,255,255,.25);
+  border-top:1px solid rgba(255,255,255,.05);
+}
+.info-strip a{color:#009cde;text-decoration:none;}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">
+    <div class="topbar-logo-icon"><i class="fas fa-comment-sms text-white" style="font-size:13px;"></i></div>
+    <span class="topbar-title">Notify<span>SMS</span></span>
+    <span class="topbar-badge">📱 Mobile Preview</span>
+  </div>
+
+  <!-- Device size -->
+  <div class="device-tabs">
+    <button class="device-btn active" onclick="setDevice('sm')" id="btn-sm">
+      <i class="fas fa-mobile-screen-button mr-1"></i>375px
+    </button>
+    <button class="device-btn" onclick="setDevice('md')" id="btn-md">
+      <i class="fas fa-mobile mr-1"></i>390px
+    </button>
+    <button class="device-btn" onclick="setDevice('lg')" id="btn-lg">
+      <i class="fas fa-tablet-screen-button mr-1"></i>414px
+    </button>
+    <button class="device-btn" onclick="setDevice('tablet')" id="btn-tablet">
+      <i class="fas fa-tablet mr-1"></i>Tablet
+    </button>
+    <button class="device-btn" onclick="toggleSideBySide()" id="btn-sbs" style="background:rgba(255,196,57,.1);color:#ffc439;border:1px solid rgba(255,196,57,.2);">
+      <i class="fas fa-columns mr-1"></i>All Pages
+    </button>
+  </div>
+
+  <!-- Page selector -->
+  <div class="page-nav" id="page-nav">
+    <button class="page-btn active" onclick="loadPage('index.html','Home')" id="pbn-0">🏠 Home</button>
+    <button class="page-btn" onclick="loadPage('about.html','About')" id="pbn-1">ℹ️ About</button>
+    <button class="page-btn" onclick="loadPage('services.html','Services')" id="pbn-2">🛠 Services</button>
+    <button class="page-btn" onclick="loadPage('pricing.html','Pricing')" id="pbn-3">💰 Pricing</button>
+    <button class="page-btn" onclick="loadPage('calculator.html','Calculator')" id="pbn-4">🧮 Calculator</button>
+    <button class="page-btn" onclick="loadPage('faq.html','FAQ')" id="pbn-5">❓ FAQ</button>
+    <button class="page-btn" onclick="loadPage('contact.html','Contact')" id="pbn-6">📞 Contact</button>
+    <button class="page-btn" onclick="loadPage('admin.html','Admin')" id="pbn-7" style="border-color:rgba(255,196,57,.3);color:#ffc439;">🔐 Admin</button>
+  </div>
+</div>
+
+<!-- PREVIEW AREA -->
+<div class="preview-area" id="preview-area">
+  <!-- Single phone mode -->
+  <div id="single-view">
+    <div class="phone-wrap">
+      <div class="phone-label" id="current-label">Home Page</div>
+      <div class="phone-frame size-sm" id="main-frame">
+        <div class="phone-notch">
+          <div class="notch-cam"></div>
+          <div class="notch-speaker"></div>
+          <div class="notch-cam"></div>
+        </div>
+        <div class="phone-status">
+          <span>9:41</span>
+          <div class="status-icons">
+            <i class="fas fa-signal" style="font-size:8px;"></i>
+            <i class="fas fa-wifi" style="font-size:8px;"></i>
+            <i class="fas fa-battery-three-quarters" style="font-size:8px;"></i>
+          </div>
+        </div>
+        <div class="phone-screen">
+          <div class="screen-loading" id="loading-overlay">
+            <div class="loading-dots"><span></span><span></span><span></span></div>
+          </div>
+          <iframe id="main-iframe" src="index.html" width="375" height="580"
+            onload="hideLoading()" style="width:375px;height:580px;"></iframe>
+        </div>
+        <div class="phone-home"><div class="home-bar"></div></div>
+      </div>
+      <div class="page-info">
+        <i class="fas fa-link"></i>
+        <span id="url-display">index.html</span>
+      </div>
+      <!-- Quick nav -->
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;justify-content:center;">
+        <button onclick="scrollTop()" style="padding:6px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);border-radius:8px;font-size:11px;cursor:pointer;" title="Scroll to top">
+          <i class="fas fa-arrow-up mr-1"></i>Top
+        </button>
+        <button onclick="reloadFrame()" style="padding:6px 12px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6);border-radius:8px;font-size:11px;cursor:pointer;">
+          <i class="fas fa-rotate-right mr-1"></i>Reload
+        </button>
+        <button onclick="openInBrowser()" style="padding:6px 14px;background:rgba(0,48,135,.4);border:1px solid rgba(0,156,222,.3);color:#38bdf8;border-radius:8px;font-size:11px;cursor:pointer;font-weight:700;">
+          <i class="fas fa-external-link-alt mr-1"></i>Full View
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- All pages side-by-side mode (hidden by default) -->
+  <div id="sbs-view" style="display:none;width:100%;">
+    <div style="display:flex;gap:20px;align-items:flex-start;justify-content:center;flex-wrap:wrap;padding-bottom:32px;">
+      <!-- Will be generated by JS -->
+    </div>
+  </div>
+</div>
+
+<div class="info-strip">
+  📱 Mobile preview — আসল phone-এ দেখতে: Chrome-এ open করে F12 → 📱 icon → device select করো &nbsp;|&nbsp;
+  <a href="index.html" target="_blank">Open in Browser ↗</a>
+</div>
+
+<script>
+const PAGES = [
+  { file:'index.html',    label:'🏠 Home',       emoji:'🏠' },
+  { file:'about.html',    label:'ℹ️ About',       emoji:'ℹ️' },
+  { file:'services.html', label:'🛠 Services',    emoji:'🛠' },
+  { file:'pricing.html',  label:'💰 Pricing',     emoji:'💰' },
+  { file:'calculator.html',label:'🧮 Calc',       emoji:'🧮' },
+  { file:'faq.html',      label:'❓ FAQ',          emoji:'❓' },
+  { file:'contact.html',  label:'📞 Contact',     emoji:'📞' },
+  { file:'admin.html',    label:'🔐 Admin',        emoji:'🔐' },
+];
+
+let currentDevice = 'sm';
+let currentPage = 'index.html';
+let sbsMode = false;
+
+const DEVICE_SIZES = {
+  sm:     { frameClass:'size-sm', iframeW:375, iframeH:580 },
+  md:     { frameClass:'size-md', iframeW:390, iframeH:720 },
+  lg:     { frameClass:'size-lg', iframeW:414, iframeH:820 },
+  tablet: { frameClass:'size-lg', iframeW:768, iframeH:1000, isTablet:true },
+};
+
+function setDevice(dev){
+  currentDevice = dev;
+  document.querySelectorAll('.device-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('btn-'+dev).classList.add('active');
+  applyDevice();
+}
+
+function applyDevice(){
+  const d = DEVICE_SIZES[currentDevice];
+  const frame = document.getElementById('main-frame');
+  const iframe = document.getElementById('main-iframe');
+
+  // Reset classes
+  frame.className = 'phone-frame ' + d.frameClass;
+  if(d.isTablet){
+    frame.style.width = '800px';
+    document.querySelector('.phone-screen').style.height = '1000px';
+  } else {
+    frame.style.width = '';
+    document.querySelector('.phone-screen').style.height = '';
+  }
+  iframe.style.width = d.iframeW + 'px';
+  iframe.style.height = d.iframeH + 'px';
+}
+
+function loadPage(file, label){
+  currentPage = file;
+  showLoading();
+  document.getElementById('main-iframe').src = file;
+  document.getElementById('current-label').textContent = label + ' Page';
+  document.getElementById('url-display').textContent = file;
+  // Update active button
+  document.querySelectorAll('.page-btn').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function hideLoading(){
+  setTimeout(()=>{
+    document.getElementById('loading-overlay').style.opacity = '0';
+    setTimeout(()=>document.getElementById('loading-overlay').style.display='none', 300);
+  }, 400);
+}
+function showLoading(){
+  const ol = document.getElementById('loading-overlay');
+  ol.style.display='flex';ol.style.opacity='1';
+}
+function reloadFrame(){
+  showLoading();
+  const f=document.getElementById('main-iframe');
+  f.src=f.src;
+}
+function scrollTop(){
+  try{document.getElementById('main-iframe').contentWindow.scrollTo({top:0,behavior:'smooth'});}catch(e){}
+}
+function openInBrowser(){
+  window.open(currentPage,'_blank');
+}
+
+function toggleSideBySide(){
+  sbsMode = !sbsMode;
+  const btn = document.getElementById('btn-sbs');
+  const single = document.getElementById('single-view');
+  const sbs = document.getElementById('sbs-view');
+  const pageNav = document.getElementById('page-nav');
+
+  if(sbsMode){
+    btn.style.background='rgba(255,196,57,.3)';
+    btn.style.color='#ffc439';
+    single.style.display='none';
+    sbs.style.display='block';
+    pageNav.style.display='none';
+    buildSideBySide();
+  } else {
+    btn.style.background='rgba(255,196,57,.1)';
+    single.style.display='block';
+    sbs.style.display='none';
+    pageNav.style.display='flex';
+  }
+}
+
+function buildSideBySide(){
+  const container = document.querySelector('#sbs-view > div');
+  container.innerHTML = PAGES.map(p=>`
+    <div style="display:flex;flex-direction:column;align-items:center;gap:10px;">
+      <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.4);text-transform:uppercase;letter-spacing:.8px;">${p.label}</div>
+      <div style="position:relative;background:#1e293b;border-radius:36px;padding:12px 7px;box-shadow:0 0 0 2px #334155,0 24px 60px rgba(0,0,0,.6);">
+        <div style="position:absolute;top:12px;left:50%;transform:translateX(-50%);width:80px;height:18px;background:#0f172a;border-radius:0 0 12px 12px;z-index:10;display:flex;align-items:center;justify-content:center;gap:6px;">
+          <div style="width:6px;height:6px;background:#1e293b;border-radius:50%;border:1.5px solid #334155;"></div>
+          <div style="width:28px;height:3px;background:#334155;border-radius:3px;"></div>
+        </div>
+        <div style="border-radius:28px;overflow:hidden;width:220px;height:460px;background:#fff;">
+          <iframe src="${p.file}" style="width:375px;height:780px;border:none;transform-origin:top left;transform:scale(${220/375});" loading="lazy"></iframe>
+        </div>
+        <div style="margin-top:8px;display:flex;justify-content:center;">
+          <div style="width:80px;height:3px;background:rgba(255,255,255,.15);border-radius:3px;"></div>
+        </div>
+      </div>
+      <button onclick="window.open('${p.file}','_blank')" style="padding:5px 12px;background:rgba(0,156,222,.15);border:1px solid rgba(0,156,222,.3);color:#38bdf8;border-radius:8px;font-size:10px;font-weight:700;cursor:pointer;">
+        <i class="fas fa-external-link-alt mr-1"></i>Open
+      </button>
+    </div>
+  `).join('');
+}
+
+// Init
+applyDevice();
+</script>
+</body>
+</html>

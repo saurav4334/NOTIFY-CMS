@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>NotifySMS – #1 Bulk SMS Platform Bangladesh</title>
+<script src="cms.js"></script>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="_common.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+<style>
+/* ===== PayPal Color Concept ===== */
+:root{--pp-navy:#003087;--pp-blue:#009cde;--pp-gold:#ffc439;--pp-light:#f5f8ff;--pp-cream:#fafbff;}
+
+/* Hero: Light/Cream background */
+.gradient-hero{
+  background:
+    radial-gradient(ellipse at 15% 60%, rgba(0,156,222,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 20%, rgba(255,196,57,0.07) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 100%, rgba(0,48,135,0.06) 0%, transparent 50%),
+    linear-gradient(160deg, #ffffff 0%, #f0f7ff 40%, #e8f3fd 70%, #f5f9ff 100%);
+}
+.gradient-text{background:linear-gradient(90deg,#003087,#009cde,#ffc439);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.mesh-bg{background-color:#f5f8ff;background-image:radial-gradient(at 40% 20%,hsla(213,80%,90%,.4) 0,transparent 50%),radial-gradient(at 80% 0%,hsla(205,100%,92%,.35) 0,transparent 50%);}
+.grid-pattern{background-image:linear-gradient(rgba(0,48,135,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,48,135,.03) 1px,transparent 1px);background-size:48px 48px;}
+.feat-card{transition:all .3s ease;}.feat-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,48,135,.1);}
+.feat-icon{transition:all .3s;}.feat-card:hover .feat-icon{transform:scale(1.12) rotate(-6deg);}
+/* Navbar — white on light hero, dark on scroll */
+#navbar{transition:all .3s ease;background:rgba(255,255,255,0.92) !important;backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,48,135,.08);box-shadow:0 1px 16px rgba(0,48,135,.06);}
+#navbar.scrolled{background:rgba(0,48,135,.97)!important;border-bottom:none;box-shadow:0 2px 24px rgba(0,0,0,.2);}
+#navbar.scrolled .nav-link{color:rgba(255,255,255,.85)!important;}
+#navbar.scrolled .nav-link:hover{color:#fff!important;}
+#navbar.scrolled .nav-active{color:#fff!important;border-color:#ffc439!important;}
+#navbar.scrolled .login-btn{color:rgba(255,255,255,.85)!important;}
+#navbar.scrolled .login-btn:hover{background:rgba(255,255,255,.1)!important;color:#fff!important;}
+#navbar.scrolled .menu-icon{color:white!important;}
+#mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s ease;}#mobile-menu.open{max-height:520px;}
+.vat-badge{display:inline-flex;align-items:center;gap:4px;background:linear-gradient(90deg,rgba(255,196,57,.18),rgba(0,156,222,.10));border:1px solid rgba(255,196,57,.5);color:#92400e;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap;}
+.vat-badge i{color:#f59e0b;}
+.pricing-pop{transform:scale(1.05);background:linear-gradient(135deg,#003087 0%,#0072b5 100%)!important;}
+@media(max-width:768px){.pricing-pop{transform:scale(1);}}
+#scrollTop{position:fixed;bottom:28px;right:28px;z-index:999;width:44px;height:44px;background:linear-gradient(135deg,#003087,#009cde);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 4px 20px rgba(0,48,135,.4);}
+#scrollTop.visible{opacity:1;pointer-events:all;}#scrollTop:hover{transform:translateY(-3px);}
+#waBtn{position:fixed;bottom:82px;right:28px;z-index:999;width:44px;height:44px;background:#25d366;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 4px 20px rgba(37,211,102,.45);text-decoration:none;}
+#waBtn:hover{transform:translateY(-3px);}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}.float-anim{animation:float 3.5s ease-in-out infinite;}
+/* dashboard */
+.dash-wrap{width:100%;max-width:480px;background:rgba(5,15,40,.85);border:1px solid rgba(0,156,222,.25);border-radius:20px;overflow:hidden;backdrop-filter:blur(16px);box-shadow:0 32px 80px rgba(0,20,80,.6);}
+.dash-topbar{background:rgba(0,10,35,.9);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06);}
+.dash-logo{display:flex;align-items:center;gap:7px;}
+.dash-logo-icon{width:24px;height:24px;background:linear-gradient(135deg,#009cde,#003087);border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:10px;color:white;}
+@keyframes livePulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.8)}}.live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:livePulse 1.5s infinite;}
+.live-badge{display:flex;align-items:center;gap:5px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.3);padding:3px 9px;border-radius:20px;font-size:10px;font-weight:700;color:#4ade80;}
+.dash-nav-tabs{display:flex;gap:2px;padding:8px 12px 0;background:rgba(0,10,35,.7);border-bottom:1px solid rgba(255,255,255,.05);}
+.dash-tab{padding:6px 12px;font-size:9.5px;font-weight:700;border-radius:8px 8px 0 0;cursor:default;color:#475569;}
+.dash-tab.active{background:rgba(0,156,222,.15);color:#38bdf8;border-bottom:2px solid #009cde;}
+.dash-body{padding:14px;display:flex;flex-direction:column;gap:10px;}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;}
+.kpi-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:8px 7px;text-align:center;}
+.kpi-val{font-size:16px;font-weight:900;line-height:1;}.kpi-lbl{font-size:7.5px;color:#334155;text-transform:uppercase;letter-spacing:.4px;margin-top:3px;}
+.prog-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;}
+.prog-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
+.prog-title{font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
+.prog-pct{font-size:11px;font-weight:900;color:white;}
+.prog-track{height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;}
+.prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,#009cde,#3b82f6,#22c55e);transition:width .15s linear;}
+.prog-meta{display:flex;justify-content:space-between;margin-top:5px;font-size:8px;color:#334155;}
+.chart-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:10px 12px;}
+.chart-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+.chart-bars{display:flex;align-items:flex-end;gap:3px;height:40px;}
+.chart-bar{flex:1;border-radius:3px 3px 0 0;transition:height .4s ease;}
+.feed-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:8px 10px;}
+.feed-title{font-size:9px;color:#64748b;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:flex;justify-content:space-between;}
+.feed-item{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:8.5px;}
+.feed-item:last-child{border-bottom:none;padding-bottom:0;}
+.feed-num{color:#94a3b8;}.feed-time{color:#334155;}
+.feed-badge{font-size:7.5px;font-weight:700;padding:2px 7px;border-radius:4px;}
+.badge-sent{background:rgba(34,197,94,.12);color:#4ade80;}.badge-pend{background:rgba(245,158,11,.12);color:#fbbf24;}.badge-fail{background:rgba(239,68,68,.12);color:#f87171;}
+@keyframes feedIn{from{opacity:0;transform:translateX(6px)}to{opacity:1;transform:translateX(0)}}.feed-item{animation:feedIn .25s ease forwards;}
+.dash-footer{background:rgba(0,10,35,.6);border-top:1px solid rgba(255,255,255,.05);padding:7px 14px;display:flex;align-items:center;justify-content:space-between;font-size:8px;color:#334155;}
+.op-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:3px;}
+.compose-section{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:10px;padding:8px 10px;}
+.compose-field{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:5px 8px;margin-bottom:5px;font-size:8.5px;color:#94a3b8;}
+.compose-field .lbl{font-size:7px;color:#334155;margin-bottom:1px;}.compose-field .val{color:#e2e8f0;font-weight:600;}
+.compose-msg{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:6px;padding:6px 8px;font-size:8px;color:#94a3b8;min-height:34px;margin-bottom:5px;line-height:1.5;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}.cursor{animation:blink .8s infinite;color:#009cde;font-weight:900;}
+.send-btn{width:100%;background:linear-gradient(90deg,#003087,#009cde);border:none;border-radius:6px;padding:6px 0;color:white;font-size:9px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:4px;cursor:default;}
+/* ===== CLIENT MARQUEE — single row, bigger ===== */
+.marquee-outer{overflow:hidden;position:relative;}
+.marquee-outer::before,.marquee-outer::after{content:'';position:absolute;top:0;bottom:0;width:160px;z-index:2;pointer-events:none;}
+.marquee-outer::before{left:0;background:linear-gradient(to right,#fff 0%,transparent 100%);}
+.marquee-outer::after{right:0;background:linear-gradient(to left,#fff 0%,transparent 100%);}
+.marquee-track{display:flex;align-items:center;gap:0;width:max-content;}
+@keyframes marquee-left{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.marquee-track{animation:marquee-left 40s linear infinite;}
+.marquee-outer:hover .marquee-track{animation-play-state:paused;}
+.logo-card{
+  display:flex;align-items:center;gap:14px;
+  padding:18px 32px;margin:0 10px;
+  background:white;
+  border:1.5px solid #e8eef8;
+  border-radius:20px;
+  white-space:nowrap;
+  transition:all .3s cubic-bezier(.22,.68,0,1.2);
+  cursor:default;
+  box-shadow:0 2px 16px rgba(0,48,135,.06);
+  min-width:160px;
+}
+.logo-card:hover{border-color:rgba(0,48,135,.25);box-shadow:0 10px 32px rgba(0,48,135,.13);transform:translateY(-5px) scale(1.03);}
+.logo-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.logo-icon i{font-size:18px;}
+.logo-icon svg{width:22px;height:22px;}
+.logo-name{font-size:15px;font-weight:800;letter-spacing:-.4px;color:#1e293b;}
+.stat-card{background:linear-gradient(135deg,rgba(0,156,222,.08),rgba(0,48,135,.08));border:1px solid rgba(0,156,222,.18);}
+</style>
+</head>
+<body class="font-sans antialiased" data-page="home">
+
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-white text-sm"></i></div>
+<a id="waBtn" href="https://wa.me/8801XXXXXXXXX" target="_blank"><i class="fab fa-whatsapp text-white text-xl"></i></a>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4 bg-transparent">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center shadow-lg" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-sm"></i></div>
+      <span class="font-bold text-xl" style="color:#003087;">Notify<span style="color:#009cde;">SMS</span></span>
+    </a>
+    <div class="hidden lg:flex items-center gap-7">
+      <a href="index.html" class="nav-link nav-active text-sm font-semibold border-b-2 pb-0.5" style="color:#003087;border-color:#ffc439;">Home</a>
+      <a href="about.html" class="nav-link text-sm font-medium transition-colors hover:opacity-70" style="color:#003087;">About</a>
+      <a href="services.html" class="nav-link text-sm font-medium transition-colors hover:opacity-70" style="color:#003087;">Services</a>
+      <a href="pricing.html" class="nav-link text-sm font-medium transition-colors hover:opacity-70" style="color:#003087;">Pricing</a>
+      <a href="calculator.html" class="nav-link text-sm font-medium transition-colors hover:opacity-70" style="color:#003087;">Calculator</a>
+      <a href="faq.html" class="nav-link text-sm font-medium transition-colors hover:opacity-70" style="color:#003087;">FAQ</a>
+      <a href="contact.html" class="nav-link text-sm font-medium transition-colors hover:opacity-70" style="color:#003087;">Contact</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-3">
+      <a href="#" class="login-btn text-sm font-medium px-4 py-2 rounded-lg transition-colors" style="color:#003087;" onmouseover="this.style.background='rgba(0,48,135,.07)'" onmouseout="this.style.background='transparent'"><i class="fas fa-sign-in-alt mr-1.5 text-xs"></i>Login</a>
+      <a href="contact.html" class="text-sm font-bold px-5 py-2.5 rounded-xl hover:opacity-90 shadow-md" style="background:#003087;color:white;">Get Started Free</a>
+    </div>
+    <button onclick="toggleMenu()" class="lg:hidden menu-icon p-2 rounded-lg" style="color:#003087;"><i class="fas fa-bars text-lg"></i></button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden">
+    <div class="max-w-7xl mx-auto mt-3 bg-slate-800/95 backdrop-blur rounded-2xl p-5 flex flex-col gap-1">
+      <a href="index.html" class="text-white text-sm font-semibold py-2.5 px-3 rounded-xl bg-white/5">Home</a>
+      <a href="about.html" class="text-gray-300 hover:text-white text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">About</a>
+      <a href="services.html" class="text-gray-300 hover:text-white text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">Services</a>
+      <a href="pricing.html" class="text-gray-300 hover:text-white text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">Pricing</a>
+      <a href="calculator.html" class="text-gray-300 hover:text-white text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">Calculator</a>
+      <a href="faq.html" class="text-gray-300 hover:text-white text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">FAQ</a>
+      <a href="contact.html" class="text-gray-300 hover:text-white text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">Contact</a>
+      <div class="flex gap-3 mt-3 pt-3 border-t border-white/10">
+        <a href="#" class="flex-1 border border-white/20 text-white text-sm font-semibold py-3 rounded-xl text-center hover:bg-white/10">Login</a>
+        <a href="contact.html" class="flex-1 text-sm font-semibold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="gradient-hero min-h-screen flex items-center relative overflow-hidden pt-20">
+  <canvas id="sms-canvas" style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;"></canvas>
+  <div class="absolute inset-0 grid-pattern" style="z-index:2;"></div>
+  <div class="absolute top-16 left-0 w-80 h-80 rounded-full blur-3xl" style="z-index:2;background:rgba(0,156,222,0.07);"></div>
+  <div class="absolute bottom-10 right-0 w-96 h-96 rounded-full blur-3xl" style="z-index:2;background:rgba(255,196,57,0.06);"></div>
+  <div class="absolute top-1/3 left-1/3 w-56 h-56 rounded-full blur-3xl" style="z-index:2;background:rgba(0,48,135,0.05);"></div>
+
+  <div class="max-w-7xl mx-auto px-4 py-20 relative w-full" style="z-index:10;">
+    <div class="grid lg:grid-cols-2 gap-14 items-center">
+      <div>
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-full mb-7" style="background:rgba(0,48,135,.06);border:1px solid rgba(0,48,135,.15);color:#003087;">
+          <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span><span id="cms-hero-badge">#1 Bulk SMS Platform in Bangladesh</span>
+        </div>
+        <!-- Headline -->
+        <h1 class="text-5xl lg:text-6xl font-black leading-[1.1] mb-6 tracking-tight" style="color:#003087;">
+          <span id="cms-hero-line1">Send Millions of</span><br><span class="gradient-text" id="cms-hero-line2">SMS Messages</span><br><span id="cms-hero-line3">Instantly</span>
+        </h1>
+        <p class="text-lg leading-relaxed mb-9 max-w-lg" style="color:#475569;" id="cms-hero-subtitle">Bangladesh's most reliable bulk SMS service. Promotional, transactional, masking &amp; API SMS — all in one platform with real-time delivery reports.</p>
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-4 mb-10">
+          <a id="cms-hero-btn1" href="contact.html" class="font-bold px-8 py-4 rounded-2xl flex items-center gap-2.5 text-base hover:opacity-90 transition-all" style="background:#ffc439;color:#003087;box-shadow:0 8px 28px rgba(255,196,57,.4);"><i class="fas fa-rocket text-sm mr-1"></i>Get Started Free</a>
+          <a id="cms-hero-btn2" href="calculator.html" class="font-semibold px-8 py-4 rounded-2xl flex items-center gap-2.5 text-base border-2 transition-all hover:bg-blue-50" style="border-color:#003087;color:#003087;"><i class="fas fa-calculator text-sm mr-1"></i>Calculate Price</a>
+        </div>
+        <!-- Stats -->
+        <div class="flex flex-wrap items-center gap-8">
+          <div><div class="text-2xl font-black" style="color:#003087;" id="cms-stat1-num">500M+</div><div class="text-xs uppercase tracking-widest mt-0.5" style="color:#94a3b8;" id="cms-stat1-label">SMS Delivered</div></div>
+          <div class="w-px h-10 bg-blue-100"></div>
+          <div><div class="text-2xl font-black" style="color:#003087;" id="cms-stat2-num">10K+</div><div class="text-xs uppercase tracking-widest mt-0.5" style="color:#94a3b8;" id="cms-stat2-label">Active Clients</div></div>
+          <div class="w-px h-10 bg-blue-100"></div>
+          <div><div class="text-2xl font-black" style="color:#003087;" id="cms-stat3-num">99.9%</div><div class="text-xs uppercase tracking-widest mt-0.5" style="color:#94a3b8;" id="cms-stat3-label">Uptime SLA</div></div>
+        </div>
+      </div>
+
+      <!-- Live Dashboard -->
+      <div class="flex justify-center items-center">
+        <div class="dash-wrap float-anim" style="font-family:Inter,sans-serif;">
+          <div class="dash-topbar">
+            <div class="dash-logo"><div class="dash-logo-icon"><i class="fas fa-comment-sms" style="font-size:9px;"></i></div><span style="font-size:12px;font-weight:800;color:white;">Notify<span style="color:#009cde;">SMS</span> Panel</span></div>
+            <div class="live-badge"><div class="live-dot"></div>LIVE</div>
+          </div>
+          <div class="dash-nav-tabs">
+            <div class="dash-tab active">Dashboard</div><div class="dash-tab">Campaigns</div><div class="dash-tab">Contacts</div><div class="dash-tab">Reports</div>
+          </div>
+          <div class="dash-body">
+            <div class="kpi-row">
+              <div class="kpi-card"><div class="kpi-val" style="color:#22c55e;" id="kpi-sent">0</div><div class="kpi-lbl">Sent</div></div>
+              <div class="kpi-card"><div class="kpi-val" style="color:#38bdf8;" id="kpi-dlvd">0</div><div class="kpi-lbl">Delivered</div></div>
+              <div class="kpi-card"><div class="kpi-val" style="color:#fbbf24;" id="kpi-pend">0</div><div class="kpi-lbl">Pending</div></div>
+              <div class="kpi-card"><div class="kpi-val" style="color:#f87171;" id="kpi-fail">0</div><div class="kpi-lbl">Failed</div></div>
+            </div>
+            <div class="prog-section">
+              <div class="prog-header"><span class="prog-title">Eid Campaign 2025</span><span class="prog-pct" id="prog-pct">0%</span></div>
+              <div class="prog-track"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+              <div class="prog-meta"><span id="prog-done">0 sent</span><span>50,000 total</span></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+              <div class="chart-section">
+                <div class="chart-header"><span style="font-size:8px;color:#64748b;font-weight:700;text-transform:uppercase;">Delivery/Hour</span><span style="font-size:8px;color:#4ade80;font-weight:700;">▲ 12%</span></div>
+                <div class="chart-bars" id="chart-bars"></div>
+                <div style="font-size:7px;color:#334155;margin-top:4px;text-align:center;">Last 8 hours</div>
+              </div>
+              <div class="compose-section">
+                <div style="font-size:8.5px;font-weight:700;color:#475569;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">Compose SMS</div>
+                <div class="compose-field"><div class="lbl">Sender ID</div><div class="val">NotifySMS</div></div>
+                <div class="compose-field"><div class="lbl">Recipients</div><div class="val">50,000 contacts</div></div>
+                <div class="compose-msg"><span id="dash-typing"></span><span class="cursor">|</span><div style="font-size:7px;color:#334155;margin-top:3px;" id="dash-chars">0 / 160 chars</div></div>
+                <button class="send-btn"><i class="fas fa-paper-plane" style="font-size:7px;"></i>Send Campaign</button>
+              </div>
+            </div>
+            <div class="feed-section">
+              <div class="feed-title"><span>Live Delivery Feed</span><span style="color:#22c55e;font-size:7.5px;" id="feed-cpm">—/min</span></div>
+              <div id="feed-list"></div>
+            </div>
+          </div>
+          <div class="dash-footer">
+            <div style="display:flex;gap:12px;">
+              <span><span class="op-dot" style="background:#00a650;"></span>GP</span>
+              <span><span class="op-dot" style="background:#e2001a;"></span>Robi</span>
+              <span><span class="op-dot" style="background:#f60;"></span>BL</span>
+              <span><span class="op-dot" style="background:#005ca5;"></span>TT</span>
+            </div>
+            <span style="color:#4ade80;font-size:8px;font-weight:700;">All networks active</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="absolute bottom-0 left-0 right-0">
+    <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 60L1440 60L1440 20C1080 55 720 0 360 25C180 37 0 20 0 20L0 60Z" fill="#f5f8ff"/></svg>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section class="border-b py-14" style="background:#f5f8ff;border-color:#e8eef8;">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+      <div class="text-center"><div class="text-4xl font-black text-gray-900 mb-1">500M+</div><div class="text-gray-400 text-sm">SMS Delivered</div></div>
+      <div class="text-center"><div class="text-4xl font-black mb-1" style="color:#003087;">10K+</div><div class="text-gray-400 text-sm">Happy Clients</div></div>
+      <div class="text-center"><div class="text-4xl font-black text-gray-900 mb-1">99.9%</div><div class="text-gray-400 text-sm">Uptime Guaranteed</div></div>
+      <div class="text-center"><div class="text-4xl font-black mb-1" style="color:#ffc439;">24/7</div><div class="text-gray-400 text-sm">Expert Support</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED CLIENTS MARQUEE — single row -->
+<section class="bg-white py-12 border-b" style="border-color:#e8eef8;">
+  <div class="max-w-7xl mx-auto px-4 mb-10">
+    <div class="flex items-center gap-4">
+      <div class="flex-1 h-px bg-gradient-to-r from-transparent to-blue-100"></div>
+      <p class="text-center font-bold text-xs uppercase tracking-widest px-4" style="color:#003087;letter-spacing:.12em;">
+        <i class="fas fa-handshake mr-2 opacity-70"></i>Trusted by 10,000+ businesses across Bangladesh
+      </p>
+      <div class="flex-1 h-px bg-gradient-to-l from-transparent to-blue-100"></div>
+    </div>
+  </div>
+
+  <!-- SINGLE ROW — all logos merged, scrolls left -->
+  <div class="marquee-outer">
+    <div class="marquee-track" id="cms-marquee-track">
+
+      <!-- === SET 1 === -->
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="white" stroke-width="2"/><path d="M16 10a4 4 0 01-8 0" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="logo-name" style="color:#ea580c;">Daraz</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#16a34a,#15803d);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <span class="logo-name" style="color:#15803d;">Chaldal</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#dc2626,#b91c1c);">
+          <i class="fas fa-motorcycle text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#dc2626;">Pathao</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#e91e8c,#c2185b);">
+          <i class="fas fa-mobile-screen-button text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#c2185b;">bKash</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);">
+          <i class="fas fa-coins text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#d97706;">Nagad</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#003087,#0046b8);">
+          <i class="fas fa-university text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#003087;">Bangladesh Bank</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);">
+          <i class="fas fa-car text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#0284c7;">Shohoz</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626);">
+          <i class="fas fa-utensils text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#dc2626;">HungryNaki</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);">
+          <i class="fas fa-store text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#6d28d9;">ShopUp</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490);">
+          <i class="fas fa-hospital text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#0e7490;">LabAid</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#059669,#047857);">
+          <i class="fas fa-graduation-cap text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#047857;">10 Minute School</span>
+      </div>
+
+      <div class="logo-card">
+        <div class="logo-icon" style="background:linear-gradient(135deg,#003087,#009cde);">
+          <i class="fas fa-tag text-white text-sm"></i>
+        </div>
+        <span class="logo-name" style="color:#003087;">Bikroy</span>
+      </div>
+
+      <!-- === SET 2 — all 24 brands merged (duplicate for seamless loop) === -->
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#0f172a,#1e293b);"><i class="fas fa-landmark text-white"></i></div><span class="logo-name" style="color:#1e293b;">DBBL</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#16a34a,#15803d);"><i class="fas fa-leaf text-white"></i></div><span class="logo-name" style="color:#15803d;">Shajgoj</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);"><i class="fas fa-briefcase text-white"></i></div><span class="logo-name" style="color:#1d4ed8;">iPay</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#d97706,#b45309);"><i class="fas fa-truck text-white"></i></div><span class="logo-name" style="color:#b45309;">RedX</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);"><i class="fas fa-stethoscope text-white"></i></div><span class="logo-name" style="color:#5b21b6;">Square Hospital</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#0369a1,#075985);"><i class="fas fa-newspaper text-white"></i></div><span class="logo-name" style="color:#075985;">Prothom Alo</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#dc2626,#9f1239);"><i class="fas fa-plane text-white"></i></div><span class="logo-name" style="color:#9f1239;">Biman BD</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#059669,#065f46);"><i class="fas fa-globe text-white"></i></div><span class="logo-name" style="color:#065f46;">BRAC</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#0284c7,#0c4a6e);"><i class="fas fa-tv text-white"></i></div><span class="logo-name" style="color:#0c4a6e;">Robi Axiata</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#16a34a,#14532d);"><i class="fas fa-signal text-white"></i></div><span class="logo-name" style="color:#14532d;">Grameenphone</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#ea580c,#9a3412);"><i class="fas fa-fire text-white"></i></div><span class="logo-name" style="color:#9a3412;">Banglalink</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#7e22ce,#581c87);"><i class="fas fa-shopping-bag text-white"></i></div><span class="logo-name" style="color:#581c87;">AmarShop</span></div>
+
+      <!-- === SET 3 — repeat set 1 for truly seamless infinite === -->
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#f97316,#ea580c);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><line x1="3" y1="6" x2="21" y2="6" stroke="white" stroke-width="2"/><path d="M16 10a4 4 0 01-8 0" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="logo-name" style="color:#ea580c;">Daraz</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#16a34a,#15803d);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="logo-name" style="color:#15803d;">Chaldal</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#dc2626,#b91c1c);"><i class="fas fa-motorcycle text-white"></i></div><span class="logo-name" style="color:#dc2626;">Pathao</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#e91e8c,#c2185b);"><i class="fas fa-mobile-screen-button text-white"></i></div><span class="logo-name" style="color:#c2185b;">bKash</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#f59e0b,#d97706);"><i class="fas fa-coins text-white"></i></div><span class="logo-name" style="color:#d97706;">Nagad</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#003087,#0046b8);"><i class="fas fa-university text-white"></i></div><span class="logo-name" style="color:#003087;">Bangladesh Bank</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#0ea5e9,#0284c7);"><i class="fas fa-car text-white"></i></div><span class="logo-name" style="color:#0284c7;">Shohoz</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#ef4444,#dc2626);"><i class="fas fa-utensils text-white"></i></div><span class="logo-name" style="color:#dc2626;">HungryNaki</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#7c3aed,#6d28d9);"><i class="fas fa-store text-white"></i></div><span class="logo-name" style="color:#6d28d9;">ShopUp</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#0891b2,#0e7490);"><i class="fas fa-hospital text-white"></i></div><span class="logo-name" style="color:#0e7490;">LabAid</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#059669,#047857);"><i class="fas fa-graduation-cap text-white"></i></div><span class="logo-name" style="color:#047857;">10 Minute School</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#003087,#009cde);"><i class="fas fa-tag text-white"></i></div><span class="logo-name" style="color:#003087;">Bikroy</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#0f172a,#1e293b);"><i class="fas fa-landmark text-white"></i></div><span class="logo-name" style="color:#1e293b;">DBBL</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#16a34a,#15803d);"><i class="fas fa-leaf text-white"></i></div><span class="logo-name" style="color:#15803d;">Shajgoj</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);"><i class="fas fa-briefcase text-white"></i></div><span class="logo-name" style="color:#1d4ed8;">iPay</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#d97706,#b45309);"><i class="fas fa-truck text-white"></i></div><span class="logo-name" style="color:#b45309;">RedX</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#7c3aed,#5b21b6);"><i class="fas fa-stethoscope text-white"></i></div><span class="logo-name" style="color:#5b21b6;">Square Hospital</span></div>
+      <div class="logo-card"><div class="logo-icon" style="background:linear-gradient(135deg,#0369a1,#075985);"><i class="fas fa-newspaper text-white"></i></div><span class="logo-name" style="color:#075985;">Prothom Alo</span></div>
+    </div>
+  </div>
+
+  <!-- Counter strip -->
+  <div class="max-w-7xl mx-auto px-4 mt-8">
+    <div class="flex items-center justify-center gap-8 flex-wrap">
+      <div class="flex items-center gap-2 text-sm" style="color:#64748b;">
+        <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+        <span class="font-bold" style="color:#003087;">10,000+</span> active clients
+      </div>
+      <div class="w-1 h-1 rounded-full bg-gray-300"></div>
+      <div class="flex items-center gap-2 text-sm" style="color:#64748b;">
+        <span class="font-bold" style="color:#003087;">30+</span> industries served
+      </div>
+      <div class="w-1 h-1 rounded-full bg-gray-300"></div>
+      <div class="flex items-center gap-2 text-sm" style="color:#64748b;">
+        <span class="font-bold" style="color:#003087;">8</span> divisions of Bangladesh
+      </div>
+      <div class="w-1 h-1 rounded-full bg-gray-300"></div>
+      <div class="flex items-center gap-2 text-sm" style="color:#64748b;">
+        <i class="fas fa-star text-yellow-400 text-xs"></i>
+        <span class="font-bold" style="color:#003087;">4.9/5</span> average rating
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section id="why-us" class="py-24 relative overflow-hidden" style="background:linear-gradient(160deg,#f5f8ff 0%,#fff 40%,#f0f7ff 100%);">
+
+  <!-- decorative blobs -->
+  <div class="absolute top-0 left-0 w-72 h-72 rounded-full blur-3xl pointer-events-none" style="background:rgba(0,48,135,.05);transform:translate(-40%,-40%);"></div>
+  <div class="absolute bottom-0 right-0 w-96 h-96 rounded-full blur-3xl pointer-events-none" style="background:rgba(0,156,222,.06);transform:translate(30%,30%);"></div>
+
+  <div class="max-w-7xl mx-auto px-4 relative z-10">
+
+    <!-- Heading -->
+    <div class="text-center mb-16">
+      <span class="text-xs font-bold uppercase tracking-widest" style="color:#009cde;">Why Choose Us</span>
+      <h2 class="text-4xl lg:text-5xl font-black mt-3 mb-4 leading-tight" style="color:#003087;">
+        The Smartest Way to<br><span style="background:linear-gradient(90deg,#003087,#009cde);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Send Bulk SMS</span>
+      </h2>
+      <div class="flex items-center justify-center gap-2 mb-4">
+        <div class="h-1 w-12 rounded-full" style="background:#ffc439;"></div>
+        <div class="h-1 w-4 rounded-full" style="background:#009cde;"></div>
+        <div class="h-1 w-2 rounded-full" style="background:#003087;"></div>
+      </div>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">Bangladesh's most trusted SMS platform — built for speed, reliability, and growth.</p>
+    </div>
+
+    <!-- 8 feature cards grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <!-- 1 Cheap SMS Rates -->
+      <div class="why-card group relative bg-white rounded-3xl p-7 border border-blue-50 shadow-sm overflow-hidden cursor-default"
+           data-delay="0">
+        <div class="why-bg-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+             style="background:linear-gradient(135deg,rgba(0,48,135,.04),rgba(0,156,222,.04));"></div>
+        <div class="why-icon-wrap w-16 h-16 rounded-2xl flex items-center justify-center mb-5 relative transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+             style="background:linear-gradient(135deg,#003087,#0055cc);">
+          <i class="fas fa-tags text-white text-xl"></i>
+          <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+               style="background:radial-gradient(circle at 70% 30%,rgba(255,196,57,.4),transparent 60%);"></div>
+        </div>
+        <h3 class="font-black text-lg mb-2 transition-colors group-hover:text-blue-700" style="color:#1e293b;">Cheap SMS Rates</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Bangladesh's lowest rates — starting at just <strong style="color:#003087;">৳0.26/SMS</strong> including all taxes. No hidden charges.</p>
+        <div class="flex items-center gap-2 text-xs font-bold" style="color:#009cde;">
+          <span class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(0,156,222,.1);"><i class="fas fa-arrow-down text-xs"></i></span>
+          Starting ৳0.26/SMS
+        </div>
+      </div>
+
+      <!-- 2 Location Based SMS -->
+      <div class="why-card group relative bg-white rounded-3xl p-7 border border-blue-50 shadow-sm overflow-hidden cursor-default"
+           data-delay="100">
+        <div class="why-bg-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+             style="background:linear-gradient(135deg,rgba(5,150,105,.04),rgba(16,185,129,.04));"></div>
+        <div class="why-icon-wrap w-16 h-16 rounded-2xl flex items-center justify-center mb-5 relative transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+             style="background:linear-gradient(135deg,#059669,#10b981);">
+          <i class="fas fa-location-dot text-white text-xl"></i>
+          <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+               style="background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.3),transparent 60%);"></div>
+        </div>
+        <h3 class="font-black text-lg mb-2 transition-colors group-hover:text-green-700" style="color:#1e293b;">Location Based SMS</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Target customers by division, district or radius. Hyper-local campaigns from <strong style="color:#059669;">500m to 50km</strong>.</p>
+        <div class="flex items-center gap-2 text-xs font-bold" style="color:#059669;">
+          <span class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(5,150,105,.1);"><i class="fas fa-map-pin text-xs"></i></span>
+          64 Districts covered
+        </div>
+      </div>
+
+      <!-- 3 24/7 Support -->
+      <div class="why-card group relative bg-white rounded-3xl p-7 border border-blue-50 shadow-sm overflow-hidden cursor-default"
+           data-delay="200">
+        <div class="why-bg-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+             style="background:linear-gradient(135deg,rgba(124,58,237,.04),rgba(139,92,246,.04));"></div>
+        <div class="why-icon-wrap w-16 h-16 rounded-2xl flex items-center justify-center mb-5 relative transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+             style="background:linear-gradient(135deg,#7c3aed,#8b5cf6);">
+          <i class="fas fa-headset text-white text-xl"></i>
+          <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+               style="background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.3),transparent 60%);"></div>
+        </div>
+        <h3 class="font-black text-lg mb-2 transition-colors group-hover:text-violet-700" style="color:#1e293b;">24×7 Live Support</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Expert support team available around the clock. Average response time <strong style="color:#7c3aed;">under 1 hour</strong>.</p>
+        <div class="flex items-center gap-2 text-xs font-bold" style="color:#7c3aed;">
+          <span class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(124,58,237,.1);">
+            <span class="w-1.5 h-1.5 bg-violet-500 rounded-full animate-pulse"></span>
+          </span>
+          Always online
+        </div>
+      </div>
+
+      <!-- 4 Two-way SMS -->
+      <div class="why-card group relative bg-white rounded-3xl p-7 border border-blue-50 shadow-sm overflow-hidden cursor-default"
+           data-delay="300">
+        <div class="why-bg-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+             style="background:linear-gradient(135deg,rgba(249,115,22,.04),rgba(251,146,60,.04));"></div>
+        <div class="why-icon-wrap w-16 h-16 rounded-2xl flex items-center justify-center mb-5 relative transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+             style="background:linear-gradient(135deg,#f97316,#fb923c);">
+          <i class="fas fa-arrows-left-right text-white text-xl"></i>
+          <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+               style="background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.3),transparent 60%);"></div>
+        </div>
+        <h3 class="font-black text-lg mb-2 transition-colors group-hover:text-orange-600" style="color:#1e293b;">Two-way SMS</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Send and receive SMS in real time. Enable customer replies, opt-out commands and live conversations.</p>
+        <div class="flex items-center gap-2 text-xs font-bold" style="color:#f97316;">
+          <span class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(249,115,22,.1);"><i class="fas fa-reply text-xs"></i></span>
+          Send &amp; Receive
+        </div>
+      </div>
+
+      <!-- 5 Instant Delivery -->
+      <div class="why-card group relative bg-white rounded-3xl p-7 border border-blue-50 shadow-sm overflow-hidden cursor-default"
+           data-delay="400">
+        <div class="why-bg-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+             style="background:linear-gradient(135deg,rgba(6,182,212,.04),rgba(14,165,233,.04));"></div>
+        <div class="why-icon-wrap w-16 h-16 rounded-2xl flex items-center justify-center mb-5 relative transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+             style="background:linear-gradient(135deg,#06b6d4,#0ea5e9);">
+          <i class="fas fa-bolt text-white text-xl"></i>
+          <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+               style="background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.3),transparent 60%);"></div>
+        </div>
+        <h3 class="font-black text-lg mb-2 transition-colors group-hover:text-cyan-600" style="color:#1e293b;">Instant Delivery</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">1,000 SMS delivered in under <strong style="color:#0ea5e9;">3 seconds</strong> with real-time tracking dashboard and delivery receipts.</p>
+        <div class="flex items-center gap-2 text-xs font-bold" style="color:#0ea5e9;">
+          <span class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(6,182,212,.1);"><i class="fas fa-stopwatch text-xs"></i></span>
+          &lt;3 seconds delivery
+        </div>
+      </div>
+
+      <!-- 6 BTRC Certified -->
+      <div class="why-card group relative bg-white rounded-3xl p-7 border border-blue-50 shadow-sm overflow-hidden cursor-default"
+           data-delay="500">
+        <div class="why-bg-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+             style="background:linear-gradient(135deg,rgba(16,185,129,.04),rgba(5,150,105,.04));"></div>
+        <div class="why-icon-wrap w-16 h-16 rounded-2xl flex items-center justify-center mb-5 relative transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+             style="background:linear-gradient(135deg,#10b981,#059669);">
+          <i class="fas fa-shield-halved text-white text-xl"></i>
+          <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+               style="background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.3),transparent 60%);"></div>
+        </div>
+        <h3 class="font-black text-lg mb-2 transition-colors group-hover:text-emerald-700" style="color:#1e293b;">BTRC Certified</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Fully licensed by Bangladesh Telecommunication Regulatory Commission. <strong style="color:#10b981;">100% compliant</strong> and secure.</p>
+        <div class="flex items-center gap-2 text-xs font-bold" style="color:#10b981;">
+          <span class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(16,185,129,.1);"><i class="fas fa-check text-xs"></i></span>
+          Licensed &amp; Verified
+        </div>
+      </div>
+
+      <!-- 7 REST API -->
+      <div class="why-card group relative bg-white rounded-3xl p-7 border border-blue-50 shadow-sm overflow-hidden cursor-default"
+           data-delay="600">
+        <div class="why-bg-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+             style="background:linear-gradient(135deg,rgba(99,102,241,.04),rgba(139,92,246,.04));"></div>
+        <div class="why-icon-wrap w-16 h-16 rounded-2xl flex items-center justify-center mb-5 relative transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+             style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">
+          <i class="fas fa-code text-white text-xl"></i>
+          <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+               style="background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.3),transparent 60%);"></div>
+        </div>
+        <h3 class="font-black text-lg mb-2 transition-colors group-hover:text-indigo-600" style="color:#1e293b;">Simple REST API</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Integrate in minutes with our REST API. SDKs for <strong style="color:#6366f1;">PHP, Python, Node.js</strong>, Java and more.</p>
+        <div class="flex items-center gap-2 text-xs font-bold" style="color:#6366f1;">
+          <span class="w-5 h-5 rounded-full flex items-center justify-center" style="background:rgba(99,102,241,.1);"><i class="fas fa-plug text-xs"></i></span>
+          REST API v2
+        </div>
+      </div>
+
+      <!-- 8 All Operators -->
+      <div class="why-card group relative bg-white rounded-3xl p-7 border border-blue-50 shadow-sm overflow-hidden cursor-default"
+           data-delay="700">
+        <div class="why-bg-glow absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"
+             style="background:linear-gradient(135deg,rgba(255,196,57,.06),rgba(251,146,60,.04));"></div>
+        <div class="why-icon-wrap w-16 h-16 rounded-2xl flex items-center justify-center mb-5 relative transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3"
+             style="background:linear-gradient(135deg,#f59e0b,#ffc439);">
+          <i class="fas fa-signal text-white text-xl"></i>
+          <div class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"
+               style="background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.3),transparent 60%);"></div>
+        </div>
+        <h3 class="font-black text-lg mb-2 transition-colors group-hover:text-amber-600" style="color:#1e293b;">All 4 Operators</h3>
+        <p class="text-gray-500 text-sm leading-relaxed mb-4">Covers <strong style="color:#f59e0b;">GP, Robi, Banglalink &amp; Teletalk</strong>. Automatic failover routing ensures 99.9% delivery rate.</p>
+        <div class="flex items-center gap-1.5 text-xs font-bold mt-1">
+          <span class="px-2 py-0.5 rounded-md text-white text-xs font-bold" style="background:#00a650;">GP</span>
+          <span class="px-2 py-0.5 rounded-md text-white text-xs font-bold" style="background:#e2001a;">Robi</span>
+          <span class="px-2 py-0.5 rounded-md text-white text-xs font-bold" style="background:#f60;">BL</span>
+          <span class="px-2 py-0.5 rounded-md text-white text-xs font-bold" style="background:#005ca5;">TT</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats row at the bottom -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mt-14">
+      <div class="why-stat-card rounded-2xl p-6 text-center border" style="background:linear-gradient(135deg,rgba(0,48,135,.05),rgba(0,156,222,.04));border-color:rgba(0,48,135,.1);">
+        <div class="text-4xl font-black mb-1 counter" data-target="500" data-suffix="M+" style="color:#003087;">0</div>
+        <div class="text-gray-500 text-sm font-medium">SMS Delivered</div>
+      </div>
+      <div class="why-stat-card rounded-2xl p-6 text-center border" style="background:linear-gradient(135deg,rgba(5,150,105,.05),rgba(16,185,129,.04));border-color:rgba(5,150,105,.12);">
+        <div class="text-4xl font-black mb-1 counter" data-target="10" data-suffix="K+" style="color:#059669;">0</div>
+        <div class="text-gray-500 text-sm font-medium">Active Clients</div>
+      </div>
+      <div class="why-stat-card rounded-2xl p-6 text-center border" style="background:linear-gradient(135deg,rgba(124,58,237,.05),rgba(139,92,246,.04));border-color:rgba(124,58,237,.12);">
+        <div class="text-4xl font-black mb-1 counter" data-target="99" data-suffix=".9%" style="color:#7c3aed;">0</div>
+        <div class="text-gray-500 text-sm font-medium">Delivery Rate</div>
+      </div>
+      <div class="why-stat-card rounded-2xl p-6 text-center border" style="background:linear-gradient(135deg,rgba(249,115,22,.05),rgba(251,146,60,.04));border-color:rgba(249,115,22,.12);">
+        <div class="text-4xl font-black mb-1 counter" data-target="24" data-suffix="/7" style="color:#f97316;">0</div>
+        <div class="text-gray-500 text-sm font-medium">Expert Support</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+/* Why Choose Us card animations */
+.why-card{
+  transition:all .35s cubic-bezier(.22,.68,0,1.2);
+  opacity:0;
+  transform:translateY(40px);
+}
+.why-card.visible{
+  opacity:1;
+  transform:translateY(0);
+}
+.why-card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 24px 60px rgba(0,48,135,.12);
+  border-color:rgba(0,48,135,.15)!important;
+}
+.why-stat-card{
+  opacity:0;
+  transform:translateY(30px);
+  transition:all .5s ease;
+}
+.why-stat-card.visible{opacity:1;transform:translateY(0);}
+</style>
+
+<script>
+/* ===== Why Choose Us — scroll animation ===== */
+(function(){
+  const observer=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target;
+        const delay=parseInt(el.dataset.delay||0);
+        setTimeout(()=>el.classList.add('visible'),delay);
+        observer.unobserve(el);
+      }
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.why-card,.why-stat-card').forEach(el=>observer.observe(el));
+
+  /* Counter animation */
+  const counterObs=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const el=e.target;
+        const target=parseInt(el.dataset.target);
+        const suffix=el.dataset.suffix||'';
+        const duration=1800;
+        const start=performance.now();
+        (function tick(now){
+          const p=Math.min((now-start)/duration,1);
+          const ease=1-Math.pow(1-p,3);
+          const val=Math.round(target*ease);
+          el.textContent=val+suffix;
+          if(p<1)requestAnimationFrame(tick);
+        })(start);
+        counterObs.unobserve(el);
+      }
+    });
+  },{threshold:.4});
+  document.querySelectorAll('.counter').forEach(el=>counterObs.observe(el));
+})();
+</script>
+
+<!-- FEATURES OVERVIEW -->
+<section class="bg-white py-24 border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <span style="color:#003087;" class="text-xs font-bold uppercase tracking-widest">Platform Features</span>
+      <h2 class="text-4xl font-black text-gray-900 mt-3 mb-4">Everything You Need to Scale</h2>
+      <p class="text-gray-500 text-lg max-w-2xl mx-auto">Powerful features built for high-volume campaigns and enterprise-grade reliability.</p>
+    </div>
+    <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-5">
+      <div class="feat-card bg-white border border-gray-100 rounded-2xl p-6 shadow-sm"><div class="feat-icon w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-font text-blue-600 text-lg"></i></div><h3 class="font-bold text-gray-900 mb-2">Bangla Unicode SMS</h3><p class="text-gray-500 text-sm leading-relaxed">Full Unicode support for Bangla script campaigns.</p><div class="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-blue-600 bg-blue-50 px-2.5 py-1 rounded-lg">বাংলা SMS ✓</div></div>
+      <div class="feat-card bg-white border border-gray-100 rounded-2xl p-6 shadow-sm"><div class="feat-icon w-12 h-12 bg-indigo-100 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-code text-indigo-600 text-lg"></i></div><h3 class="font-bold text-gray-900 mb-2">REST API</h3><p class="text-gray-500 text-sm leading-relaxed">SDKs for PHP, Python, Node.js, Java and more.</p><div class="mt-3 inline-flex text-xs font-semibold text-indigo-600 bg-indigo-100 px-2.5 py-1 rounded-lg">REST API v2</div></div>
+      <div class="feat-card bg-white border border-gray-100 rounded-2xl p-6 shadow-sm"><div class="feat-icon w-12 h-12 bg-yellow-100 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-key text-yellow-600 text-lg"></i></div><h3 class="font-bold text-gray-900 mb-2">OTP / Transactional</h3><p class="text-gray-500 text-sm leading-relaxed">Sub-2-second OTP delivery guaranteed every time.</p><div class="mt-3 inline-flex text-xs font-semibold text-yellow-600 bg-yellow-50 px-2.5 py-1 rounded-lg">&lt;2s delivery</div></div>
+      <div class="feat-card bg-white border border-gray-100 rounded-2xl p-6 shadow-sm"><div class="feat-icon w-12 h-12 bg-violet-100 rounded-xl flex items-center justify-center mb-4"><i class="fas fa-chart-line text-violet-600 text-lg"></i></div><h3 class="font-bold text-gray-900 mb-2">Real-time Reports</h3><p class="text-gray-500 text-sm leading-relaxed">Live delivery tracking dashboard with full analytics.</p><div class="mt-3 inline-flex text-xs font-semibold text-violet-600 bg-violet-100 px-2.5 py-1 rounded-lg">Live dashboard</div></div>
+    </div>
+    <div class="text-center mt-10"><a href="services.html" class="inline-flex items-center gap-2 font-semibold px-8 py-3.5 rounded-xl border-2 transition-all hover:text-white" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'">View All Features &amp; Services <i class="fas fa-arrow-right text-sm"></i></a></div>
+  </div>
+</section>
+
+<!-- PRICING PREVIEW -->
+<section class="mesh-bg py-24">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-16">
+      <span style="color:#003087;" class="text-xs font-bold uppercase tracking-widest">Pricing</span>
+      <h2 class="text-4xl font-black text-gray-900 mt-3 mb-4">Simple, Transparent Pricing</h2>
+      <p class="text-gray-500 text-lg">No hidden fees. Pay only for what you send.</p>
+    </div>
+    <div class="grid md:grid-cols-4 gap-5 items-center">
+      <!-- Starter -->
+      <div class="bg-white rounded-3xl p-7 shadow-sm hover:shadow-xl transition-all border border-gray-100">
+        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Starter</div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-4xl font-black text-gray-900">৳0.35</span><span class="text-gray-400 text-sm">/SMS</span></div>
+        <p class="text-gray-400 text-xs mb-3">5,000 – 10,000 SMS</p>
+        <div class="mb-5"><span class="vat-badge"><i class="fas fa-check-circle"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <a href="pricing.html" class="block w-full border-2 font-bold py-3 rounded-2xl text-center transition-all hover:text-white" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'">Get Started</a>
+      </div>
+      <!-- Business -->
+      <div class="rounded-3xl p-7 shadow-2xl pricing-pop relative">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-gray-900 text-xs font-black px-5 py-1.5 rounded-full uppercase tracking-widest shadow-lg" style="background:#ffc439;">Popular</div>
+        <div class="text-xs font-bold text-blue-200 uppercase tracking-widest mb-4">Business</div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-4xl font-black text-white">৳0.30</span><span class="text-blue-200 text-sm">/SMS</span></div>
+        <p class="text-blue-200 text-xs mb-3">11,000 – 20,000 SMS</p>
+        <div class="mb-5"><span class="vat-badge"><i class="fas fa-check-circle"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <a href="pricing.html" class="block w-full bg-white font-black py-3 rounded-2xl text-center transition-all hover:bg-blue-50" style="color:#003087;">Get Started</a>
+      </div>
+      <!-- Enterprise -->
+      <div class="bg-white rounded-3xl p-7 shadow-sm hover:shadow-xl transition-all border border-gray-100">
+        <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Enterprise</div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-4xl font-black text-gray-900">৳0.28</span><span class="text-gray-400 text-sm">/SMS</span></div>
+        <p class="text-gray-400 text-xs mb-3">40,000 – 99,999 SMS</p>
+        <div class="mb-5"><span class="vat-badge"><i class="fas fa-check-circle"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <a href="pricing.html" class="block w-full border-2 font-bold py-3 rounded-2xl text-center transition-all hover:text-white" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'">Get Started</a>
+      </div>
+      <!-- Elite 100K+ -->
+      <div class="rounded-3xl p-7 shadow-xl hover:shadow-2xl transition-all border-2" style="background:linear-gradient(135deg,#001a3f,#002d6b);border-color:rgba(0,156,222,.4);">
+        <div class="text-xs font-bold uppercase tracking-widest mb-4" style="color:#ffc439;">Elite 🏆</div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-4xl font-black text-white">৳0.26</span><span class="text-blue-300 text-sm">/SMS</span></div>
+        <p class="text-blue-300 text-xs mb-3">100,000+ SMS</p>
+        <div class="mb-5"><span class="vat-badge"><i class="fas fa-check-circle"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <a href="pricing.html" class="block w-full font-black py-3 rounded-2xl text-center transition-all hover:opacity-90" style="background:#ffc439;color:#003087;">Contact Sales</a>
+      </div>
+    </div>
+    <div class="text-center mt-8">
+      <a href="pricing.html" class="text-sm font-semibold hover:underline" style="color:#003087;">View full pricing details <i class="fas fa-arrow-right ml-1"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="bg-white py-24">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="text-center mb-14">
+      <span style="color:#003087;" class="text-xs font-bold uppercase tracking-widest">Testimonials</span>
+      <h2 class="text-4xl font-black text-gray-900 mt-3 mb-4">Trusted by 10,000+ Businesses</h2>
+    </div>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="bg-gray-50 rounded-2xl p-7 hover:shadow-lg transition-all">
+        <div class="flex gap-1 mb-4"><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i></div>
+        <p class="text-gray-700 text-sm leading-relaxed mb-6 italic">"NotifySMS transformed our marketing. The delivery rate is exceptional and pricing is very competitive in Bangladesh."</p>
+        <div class="flex items-center gap-3"><div class="w-10 h-10 bg-blue-200 rounded-full flex items-center justify-center"><span style="color:#003087;" class="font-bold text-sm">AR</span></div><div><p class="font-bold text-gray-900 text-sm">Ahmed Rahman</p><p class="text-gray-400 text-xs">CEO, TechBD Solutions</p></div></div>
+      </div>
+      <div class="rounded-2xl p-7 hover:shadow-xl transition-all" style="background:linear-gradient(135deg,#003087,#009cde)">
+        <div class="flex gap-1 mb-4"><i class="fas fa-star text-yellow-300 text-sm"></i><i class="fas fa-star text-yellow-300 text-sm"></i><i class="fas fa-star text-yellow-300 text-sm"></i><i class="fas fa-star text-yellow-300 text-sm"></i><i class="fas fa-star text-yellow-300 text-sm"></i></div>
+        <p class="text-blue-100 text-sm leading-relaxed mb-6 italic">"API integration was seamless. Within 2 hours we had SMS running. Support team is incredibly responsive!"</p>
+        <div class="flex items-center gap-3"><div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center"><span class="text-white font-bold text-sm">FK</span></div><div><p class="font-bold text-white text-sm">Farhan Khan</p><p class="text-blue-200 text-xs">CTO, ShopBD.com</p></div></div>
+      </div>
+      <div class="bg-gray-50 rounded-2xl p-7 hover:shadow-lg transition-all">
+        <div class="flex gap-1 mb-4"><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i><i class="fas fa-star text-yellow-400 text-sm"></i></div>
+        <p class="text-gray-700 text-sm leading-relaxed mb-6 italic">"We send OTP for our banking app. NotifySMS delivers in under 2 seconds every time. Never let us down."</p>
+        <div class="flex items-center gap-3"><div class="w-10 h-10 bg-purple-200 rounded-full flex items-center justify-center"><span class="text-purple-700 font-bold text-sm">TI</span></div><div><p class="font-bold text-gray-900 text-sm">Tahmina Islam</p><p class="text-gray-400 text-xs">VP Technology, FinTech BD</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-20 relative overflow-hidden" style="background:linear-gradient(135deg,#003087 0%,#009cde 100%)">
+  <div class="absolute inset-0 grid-pattern opacity-30"></div>
+  <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+    <h2 class="text-4xl md:text-5xl font-black text-white mb-5">Ready to Send Your First Campaign?</h2>
+    <p class="text-blue-100 text-xl mb-10 max-w-xl mx-auto">Join 10,000+ businesses. Set up in minutes, send in seconds.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="contact.html" class="font-black px-10 py-4 rounded-2xl hover:opacity-90 text-lg" style="background:#ffc439;color:#003087;">Start Free Today</a>
+      <a href="contact.html" class="border-2 border-white/40 hover:border-white text-white font-black px-10 py-4 rounded-2xl text-lg hover:bg-white/10">Talk to Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-950 text-gray-400">
+  <div class="max-w-7xl mx-auto px-4 py-16">
+    <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2 mb-5"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-sm"></i></div><span class="text-white font-bold text-xl">Notify<span style="color:#009cde;">SMS</span></span></div>
+        <p class="text-gray-500 text-sm leading-relaxed mb-6 max-w-xs">Bangladesh's most reliable bulk SMS platform. Enterprise-grade infrastructure with competitive pricing.</p>
+        <div class="flex gap-2.5">
+          <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-600 rounded-xl flex items-center justify-center transition-colors"><i class="fab fa-facebook-f text-sm"></i></a>
+          <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-blue-500 rounded-xl flex items-center justify-center transition-colors"><i class="fab fa-linkedin-in text-sm"></i></a>
+          <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-green-600 rounded-xl flex items-center justify-center transition-colors"><i class="fab fa-whatsapp text-sm"></i></a>
+          <a href="#" class="w-9 h-9 bg-gray-800 hover:bg-red-600 rounded-xl flex items-center justify-center transition-colors"><i class="fab fa-youtube text-sm"></i></a>
+        </div>
+      </div>
+      <div><h4 class="text-white font-semibold mb-5 text-xs uppercase tracking-widest">Company</h4><ul class="space-y-3 text-sm"><li><a href="about.html" class="hover:text-white transition-colors">About Us</a></li><li><a href="services.html" class="hover:text-white transition-colors">Services</a></li><li><a href="pricing.html" class="hover:text-white transition-colors">Pricing</a></li><li><a href="#" class="hover:text-white transition-colors">Blog</a></li></ul></div>
+      <div><h4 class="text-white font-semibold mb-5 text-xs uppercase tracking-widest">Support</h4><ul class="space-y-3 text-sm"><li><a href="faq.html" class="hover:text-white transition-colors">FAQ</a></li><li><a href="contact.html" class="hover:text-white transition-colors">Contact Us</a></li><li><a href="calculator.html" class="hover:text-white transition-colors">SMS Calculator</a></li><li><a href="#" class="hover:text-white transition-colors">Privacy Policy</a></li><li><a href="#" class="hover:text-white transition-colors">Terms &amp; Conditions</a></li></ul></div>
+      <div><h4 class="text-white font-semibold mb-5 text-xs uppercase tracking-widest">Contact</h4><ul class="space-y-3.5 text-sm"><li class="flex items-start gap-2.5"><i class="fas fa-phone mt-0.5 text-xs" style="color:#009cde;"></i><span>+880 1XXXXXXXXX</span></li><li class="flex items-start gap-2.5"><i class="fas fa-envelope mt-0.5 text-xs" style="color:#009cde;"></i><span>info@notifysms.com.bd</span></li><li class="flex items-start gap-2.5"><i class="fas fa-location-dot mt-0.5 text-xs" style="color:#009cde;"></i><span>Dhaka, Bangladesh</span></li><li class="pt-2"><a href="#" class="inline-flex items-center gap-2 text-white px-4 py-2.5 rounded-xl text-xs font-bold" style="background:linear-gradient(90deg,#003087,#009cde);"><i class="fas fa-sign-in-alt"></i>Customer Login</a></li></ul></div>
+    </div>
+  </div>
+  <div class="border-t border-gray-800"><div class="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-between gap-3"><p class="text-gray-600 text-sm">© 2025 NotifySMS. All rights reserved.</p><p class="text-gray-700 text-xs">BTRC Licensed &nbsp;|&nbsp; Powered by NotifySMS Bangladesh</p></div></div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+});
+// ===== PAPER PLANE + PARTICLE CANVAS ANIMATION =====
+(function(){
+  const c=document.getElementById('sms-canvas');
+  if(!c)return;
+  const ctx=c.getContext('2d');
+  let W,H;
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
+  resize();window.addEventListener('resize',resize);
+
+  /* ---- Background shimmer particles ---- */
+  class Dot{
+    constructor(){this.reset(true);}
+    reset(init){
+      this.x=init?Math.random()*W:-20;
+      this.y=Math.random()*H;
+      this.r=Math.random()*1.8+.4;
+      this.vx=(Math.random()-.5)*.25;
+      this.vy=(Math.random()-.5)*.25;
+      this.a=Math.random()*.25+.05;
+    }
+    update(){
+      this.x+=this.vx;this.y+=this.vy;
+      if(this.x<0||this.x>W)this.vx*=-1;
+      if(this.y<0||this.y>H)this.vy*=-1;
+    }
+    draw(){
+      ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(0,80,200,${this.a*0.5})`;ctx.fill();
+    }
+  }
+  const dots=[];for(let i=0;i<70;i++)dots.push(new Dot());
+
+  /* ---- Paper Plane class ---- */
+  class Plane{
+    constructor(init){this.reset(init);}
+    reset(init){
+      if(init){
+        this.x=Math.random()*W;
+        this.y=Math.random()*H;
+      } else {
+        // spawn from left or bottom-left
+        const side=Math.random()>.3?'left':'bottom';
+        if(side==='left'){this.x=-60;this.y=Math.random()*H*.85+H*.05;}
+        else{this.x=Math.random()*W*.4;this.y=H+60;}
+      }
+      this.angle=init?Math.random()*Math.PI*2:(Math.random()*0.5-0.1); // mostly right
+      this.speed=Math.random()*2.2+1.2;
+      this.size=Math.random()*14+7;
+      this.alpha=Math.random()*.55+.35;
+      this.trail=[];
+      this.maxTrail=26;
+      this.wobble=0;
+      this.wobbleSpeed=(Math.random()-.5)*.025;
+      this.tint=Math.random()>.4?'navy':'blue'; // navy or blue on light bg
+      // burst effect
+      this.burstTimer=Math.floor(Math.random()*180+80);
+      this.bursting=false;
+      this.burstParts=[];
+    }
+    drawPlane(x,y,sz,ang,al){
+      ctx.save();
+      ctx.translate(x,y);ctx.rotate(ang);
+      ctx.globalAlpha=al;
+      const col=this.tint==='navy'?'rgba(0,20,80,0.95)':'rgba(0,60,160,0.90)';
+      // Body triangle
+      ctx.beginPath();
+      ctx.moveTo(sz,0);
+      ctx.lineTo(-sz*.65,-sz*.48);
+      ctx.lineTo(-sz*.18,0);
+      ctx.lineTo(-sz*.65,sz*.48);
+      ctx.closePath();
+      ctx.fillStyle=col;
+      ctx.fill();
+      // Inner crease line
+      ctx.beginPath();
+      ctx.moveTo(sz*.3,0);ctx.lineTo(-sz*.18,0);
+      ctx.strokeStyle=this.tint==='navy'?'rgba(0,100,200,0.7)':'rgba(255,140,0,0.7)';
+      ctx.lineWidth=sz*.08;ctx.stroke();
+      // Tiny glow
+      ctx.beginPath();
+      ctx.arc(sz*.7,0,sz*.22,0,Math.PI*2);
+      ctx.fillStyle=this.tint==='navy'?'rgba(0,80,200,0.45)':'rgba(255,140,0,0.40)';
+      ctx.fill();
+      ctx.restore();
+    }
+    update(){
+      this.wobble+=this.wobbleSpeed;
+      this.angle+=Math.sin(this.wobble)*.008;
+      this.trail.unshift({x:this.x,y:this.y});
+      if(this.trail.length>this.maxTrail)this.trail.pop();
+      this.x+=Math.cos(this.angle)*this.speed;
+      this.y+=Math.sin(this.angle)*this.speed;
+      // burst
+      this.burstTimer--;
+      if(this.burstTimer<=0&&!this.bursting){
+        this.bursting=true;
+        for(let i=0;i<8;i++){
+          const ba=Math.random()*Math.PI*2;
+          const bs=Math.random()*3+1;
+          this.burstParts.push({x:this.x,y:this.y,vx:Math.cos(ba)*bs,vy:Math.sin(ba)*bs,life:1,r:Math.random()*2+1});
+        }
+        this.speed+=.5;
+      }
+      if(this.bursting){
+        this.burstParts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.life-=.04;p.vx*=.92;p.vy*=.92;});
+        this.burstParts=this.burstParts.filter(p=>p.life>0);
+        if(this.burstParts.length===0)this.bursting=false;
+      }
+      if(this.x>W+100||this.y>H+100||this.y<-100)this.reset(false);
+    }
+    draw(){
+      // Dotted trail
+      this.trail.forEach((t,i)=>{
+        if(i%2!==0)return;
+        const ta=(1-i/this.maxTrail)*this.alpha*.5;
+        const r=(1-i/this.maxTrail)*2.5;
+        ctx.beginPath();ctx.arc(t.x,t.y,r,0,Math.PI*2);
+        ctx.fillStyle=this.tint==='navy'?`rgba(0,20,80,${ta*0.85})`:`rgba(0,60,160,${ta*0.75})`;
+        ctx.fill();
+      });
+      // Connect trail with faint line
+      if(this.trail.length>2){
+        ctx.beginPath();ctx.moveTo(this.trail[0].x,this.trail[0].y);
+        for(let i=1;i<Math.min(this.trail.length,10);i++){
+          ctx.lineTo(this.trail[i].x,this.trail[i].y);
+        }
+        ctx.strokeStyle=this.tint==='navy'?`rgba(0,20,80,${this.alpha*.25})`:`rgba(0,60,160,${this.alpha*.20})`;
+        ctx.lineWidth=1.5;ctx.stroke();
+      }
+      // Burst particles
+      this.burstParts.forEach(p=>{
+        ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(0,60,160,${p.life*.7})`;ctx.fill();
+      });
+      this.drawPlane(this.x,this.y,this.size,this.angle,this.alpha);
+    }
+  }
+
+  // Create planes (stagger init)
+  const planes=[];
+  for(let i=0;i<14;i++)planes.push(new Plane(true));
+
+  /* ---- Shooting "SMS packet" stars ---- */
+  class SMSShot{
+    constructor(){this.reset();}
+    reset(){
+      this.x=Math.random()*W*.3;
+      this.y=Math.random()*H;
+      this.vx=Math.random()*6+4;
+      this.vy=(Math.random()-.5)*2;
+      this.life=1;
+      this.alpha=Math.random()*.6+.3;
+      this.len=Math.random()*40+20;
+    }
+    update(){
+      this.x+=this.vx;this.y+=this.vy;this.life-=.016;
+      if(this.life<=0||this.x>W+50)this.reset();
+    }
+    draw(){
+      const al=this.life*this.alpha;
+      const grad=ctx.createLinearGradient(this.x-this.len,this.y,this.x+8,this.y);
+      grad.addColorStop(0,'rgba(0,20,80,0)');
+      grad.addColorStop(1,`rgba(0,50,160,${al*0.7})`);
+      ctx.beginPath();ctx.moveTo(this.x-this.len,this.y);ctx.lineTo(this.x,this.y);
+      ctx.strokeStyle=grad;ctx.lineWidth=1.5;ctx.stroke();
+      ctx.beginPath();ctx.arc(this.x,this.y,2.5,0,Math.PI*2);
+      ctx.fillStyle=`rgba(0,48,135,${al*0.8})`;ctx.fill();
+    }
+  }
+  const shots=[];for(let i=0;i<18;i++){const s=new SMSShot();s.x=Math.random()*W;shots.push(s);}
+
+  /* ---- Main loop ---- */
+  function loop(){
+    ctx.clearRect(0,0,W,H);
+    // Dot particles
+    dots.forEach(d=>{d.update();d.draw();});
+    // Particle network
+    for(let i=0;i<dots.length;i++)for(let j=i+1;j<dots.length;j++){
+      const dx=dots[i].x-dots[j].x,dy=dots[i].y-dots[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<110){
+        ctx.beginPath();ctx.moveTo(dots[i].x,dots[i].y);ctx.lineTo(dots[j].x,dots[j].y);
+        ctx.strokeStyle=`rgba(0,80,180,${.03*(1-d/110)})`;ctx.lineWidth=.5;ctx.stroke();
+      }
+    }
+    // SMS shots
+    shots.forEach(s=>{s.update();s.draw();});
+    // Paper planes (on top)
+    planes.forEach(p=>{p.update();p.draw();});
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+// Dashboard
+(function(){let st=0,dl=0,pe=0,fa=0,pv=0;const MAX=50000;const PHONES=['01711-XXXXXX','01812-XXXXXX','01913-XXXXXX','01618-XXXXXX','01521-XXXXXX'];const ST=[{cls:'badge-sent',txt:'Delivered'},{cls:'badge-sent',txt:'Delivered'},{cls:'badge-sent',txt:'Delivered'},{cls:'badge-pend',txt:'Pending'},{cls:'badge-fail',txt:'Failed'}];
+function animN(id,v){const el=document.getElementById(id);if(el)el.textContent=v>=1000?(v/1000).toFixed(1)+'K':v;}
+function upProg(){pv+=Math.floor(Math.random()*180+60);if(pv>MAX)pv=0;const pct=Math.round((pv/MAX)*100);const f=document.getElementById('prog-fill'),pe=document.getElementById('prog-pct'),pd=document.getElementById('prog-done');if(f)f.style.width=pct+'%';if(pe)pe.textContent=pct+'%';if(pd)pd.textContent=pv.toLocaleString()+' sent';}
+function addFeed(){const list=document.getElementById('feed-list');if(!list)return;const ph=PHONES[Math.floor(Math.random()*PHONES.length)],s=ST[Math.floor(Math.random()*ST.length)];const t=new Date().toLocaleTimeString('en-BD',{hour:'2-digit',minute:'2-digit',second:'2-digit'});const item=document.createElement('div');item.className='feed-item';item.innerHTML=`<span class="feed-num">${ph}</span><span class="feed-time">${t}</span><span class="feed-badge ${s.cls}">${s.txt}</span>`;list.insertBefore(item,list.firstChild);if(list.children.length>5)list.removeChild(list.lastChild);st+=Math.floor(Math.random()*12+3);dl=Math.floor(st*.985);pe=Math.floor(st*.01);fa=st-dl-pe;animN('kpi-sent',st);animN('kpi-dlvd',dl);animN('kpi-pend',pe);animN('kpi-fail',fa<0?0:fa);const cp=document.getElementById('feed-cpm');if(cp)cp.textContent=(Math.floor(Math.random()*200+1200)).toLocaleString()+'/min';}
+function buildChart(){const c=document.getElementById('chart-bars');if(!c)return;c.innerHTML='';const h=[55,70,45,80,60,90,75,85],cl=['rgba(0,156,222,.35)','rgba(0,156,222,.45)','rgba(0,156,222,.35)','rgba(0,156,222,.6)','rgba(0,156,222,.5)','rgba(34,197,94,.7)','rgba(0,156,222,.55)','rgba(34,197,94,.8)'];h.forEach((v,i)=>{const b=document.createElement('div');b.className='chart-bar';b.style.cssText=`background:${cl[i]};height:0%;transition:height .5s ease ${i*80}ms;`;c.appendChild(b);setTimeout(()=>{b.style.height=v+'%';},200);});}
+const MSGS=["Eid Special! 30% OFF. Shop now: notifysms.com.bd","Your OTP: 8421. Valid 5 mins.","Payment ৳2,500 received. Ref: #INV2025","Flash Sale! 50% OFF today only!","আপনার অর্ডার confirm হয়েছে।"];
+let mi=0,ci=0;function runType(){const el=document.getElementById('dash-typing'),cl=document.getElementById('dash-chars');if(!el)return;const msg=MSGS[mi%MSGS.length];if(ci<=msg.length){el.textContent=msg.substring(0,ci);if(cl)cl.textContent=ci+' / 160 chars';ci++;setTimeout(runType,50+Math.random()*25);}else{setTimeout(()=>{el.textContent='';ci=0;mi++;setTimeout(runType,400);},2500);}}
+buildChart();runType();addFeed();setInterval(addFeed,1400);setInterval(upProg,900);setInterval(buildChart,6000);})();
+</script>
+</body></html>

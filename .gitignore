@@ -1,0 +1,8 @@
+# OS / editor cruft
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Backend ignores are handled by notify-backend/.gitignore
+# (vendor/, .env, node_modules/, storage, *.sqlite, etc.)

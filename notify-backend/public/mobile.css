@@ -1,0 +1,570 @@
+/**
+ * NotifySMS — Global Mobile Responsive Styles
+ * Breakpoints: sm=480, md=768, lg=1024
+ */
+
+/* ─── BASE RESET ─── */
+*,*::before,*::after{box-sizing:border-box;}
+img,video,canvas,svg{max-width:100%;}
+input,textarea,select,button{font-family:inherit;}
+
+/* ─── SMOOTH SCROLL ─── */
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+
+/* ─── VIEWPORT FIX (prevent horizontal scroll) ─── */
+body{overflow-x:hidden;width:100%;}
+
+/* ══════════════════════════════════════════
+   NAVBAR — all pages
+══════════════════════════════════════════ */
+#navbar{padding:10px 16px !important;}
+
+@media(max-width:768px){
+  #navbar{padding:10px 14px !important;}
+  .topbar-preview{display:none !important;}
+}
+
+/* ══════════════════════════════════════════
+   HERO SECTION
+══════════════════════════════════════════ */
+@media(max-width:1023px){
+  /* Stack hero grid */
+  .gradient-hero .grid{
+    grid-template-columns:1fr !important;
+    gap:40px !important;
+    text-align:center;
+  }
+  /* Center hero content */
+  .gradient-hero h1{font-size:2.6rem !important;line-height:1.15 !important;}
+  .gradient-hero p.text-lg{font-size:1rem !important;}
+  /* Center badge and buttons */
+  .gradient-hero .inline-flex,
+  .gradient-hero .flex.flex-wrap{justify-content:center !important;}
+  /* Hide live dashboard on tablet — show below md */
+  .dash-wrap{max-width:420px !important;margin:0 auto;}
+}
+
+@media(max-width:767px){
+  /* Smaller headline */
+  .gradient-hero h1{font-size:2rem !important;line-height:1.2 !important;}
+  .gradient-hero .text-5xl,.gradient-hero .text-6xl{font-size:2rem !important;}
+  /* Hero stats — smaller */
+  .gradient-hero .text-2xl.font-black{font-size:1.25rem !important;}
+  /* Hide dashboard on small phones, show a simpler teaser */
+  .dash-wrap{
+    max-width:100% !important;
+    font-size:10px !important;
+  }
+  .dash-body{padding:10px !important;gap:8px !important;}
+  .kpi-val{font-size:13px !important;}
+  /* Hero buttons full width */
+  .gradient-hero .flex.flex-wrap > a{
+    width:100%;justify-content:center;
+  }
+  /* Float animation too bouncy on mobile — tone down */
+  .float-anim{animation:none !important;}
+}
+
+@media(max-width:479px){
+  .gradient-hero{padding-top:72px !important;}
+  .gradient-hero h1{font-size:1.75rem !important;}
+  /* Simpler hero on very small screens */
+  .gradient-hero .py-20{padding-top:40px !important;padding-bottom:40px !important;}
+}
+
+/* ══════════════════════════════════════════
+   PAGE HERO BANNERS (inner pages)
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  .page-hero{padding:80px 0 40px !important;}
+  .page-hero h1{font-size:1.85rem !important;line-height:1.2 !important;}
+  .page-hero p{font-size:0.95rem !important;}
+}
+
+/* ══════════════════════════════════════════
+   STATS BAR
+══════════════════════════════════════════ */
+@media(max-width:479px){
+  .stats-bar-grid{grid-template-columns:1fr 1fr !important;}
+}
+
+/* ══════════════════════════════════════════
+   TRUSTED CLIENTS MARQUEE
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  .logo-card{
+    padding:12px 18px !important;
+    margin:0 6px !important;
+    min-width:130px !important;
+    border-radius:14px !important;
+  }
+  .logo-icon{width:36px !important;height:36px !important;}
+  .logo-name{font-size:12px !important;}
+  .marquee-outer::before,.marquee-outer::after{width:60px !important;}
+}
+
+/* ══════════════════════════════════════════
+   WHY CHOOSE US — 2 columns on all mobile
+══════════════════════════════════════════ */
+@media(max-width:1023px){
+  #why-us .grid{grid-template-columns:repeat(2,1fr) !important;}
+}
+/* Keep 2 cols even on small phones */
+@media(max-width:599px){
+  #why-us .grid{grid-template-columns:repeat(2,1fr) !important;}
+  #why-us .why-stat-card .text-4xl{font-size:1.5rem !important;}
+}
+@media(max-width:399px){
+  #why-us .grid{grid-template-columns:repeat(2,1fr) !important;}
+}
+/* Why cards compact on mobile */
+@media(max-width:599px){
+  .why-card{padding:16px !important;}
+  .why-card .why-icon-wrap{width:44px !important;height:44px !important;margin-bottom:12px !important;}
+  .why-card h3{font-size:13px !important;}
+  .why-card p{font-size:12px !important;line-height:1.5 !important;}
+  .why-card > div:last-child{display:none;} /* hide tag on mobile */
+}
+
+/* ══════════════════════════════════════════
+   FEATURES GRID — 2 columns on mobile
+══════════════════════════════════════════ */
+@media(max-width:1023px){
+  .features-grid,.md\:grid-cols-3.lg\:grid-cols-4{
+    grid-template-columns:repeat(2,1fr) !important;
+  }
+}
+/* Keep 2 cols on small phones too */
+@media(max-width:599px){
+  .features-grid{grid-template-columns:repeat(2,1fr) !important;}
+}
+/* Feature cards compact */
+@media(max-width:599px){
+  .feat-card{padding:14px !important;}
+  .feat-card h3{font-size:13px !important;}
+  .feat-card p{font-size:11.5px !important;line-height:1.5 !important;}
+  .feat-icon{width:40px !important;height:40px !important;margin-bottom:10px !important;}
+}
+
+/* ══════════════════════════════════════════
+   SERVICES GRID — 2 columns on mobile
+══════════════════════════════════════════ */
+@media(max-width:1023px){
+  #services .grid{grid-template-columns:repeat(2,1fr) !important;}
+}
+/* Keep 2 cols on phones */
+@media(max-width:599px){
+  #services .grid{grid-template-columns:repeat(2,1fr) !important;}
+}
+/* Service cards compact */
+@media(max-width:599px){
+  .svc-card{padding:14px !important;}
+  .svc-card h3{font-size:14px !important;}
+  .svc-card p{font-size:12px !important;}
+  .svc-card ul{display:none;} /* hide bullet list on small screens */
+}
+
+/* ══════════════════════════════════════════
+   CALCULATOR — Split layout
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  #calculator-grid,
+  .calc-grid{grid-template-columns:1fr !important;}
+  #calculator h2{font-size:1.75rem !important;}
+  #calc-qty{font-size:1.75rem !important;padding:12px 16px !important;}
+  .calc-total{font-size:2.5rem !important;}
+}
+
+/* ══════════════════════════════════════════
+   PRICING PLANS — 2 columns on mobile
+══════════════════════════════════════════ */
+@media(max-width:1023px){
+  #plans-nm,#plans-m{grid-template-columns:repeat(2,1fr) !important;}
+  .pricing-pop{transform:scale(1) !important;margin-top:0 !important;}
+}
+/* Keep 2 cols on small phones */
+@media(max-width:639px){
+  #plans-nm,#plans-m{
+    grid-template-columns:repeat(2,1fr) !important;
+  }
+  .plan-card{padding:18px !important;}
+  .plan-card .feat-li{font-size:11px !important;padding:4px 0 !important;}
+  .plan-card .text-5xl{font-size:1.75rem !important;}
+  .ctable-wrapper{overflow-x:auto !important;-webkit-overflow-scrolling:touch;}
+  .ctable{min-width:500px !important;}
+}
+/* Type toggle */
+@media(max-width:479px){
+  .type-tab{padding:9px 12px !important;font-size:12px !important;}
+  .type-tab i{display:none !important;}
+}
+
+/* ══════════════════════════════════════════
+   TESTIMONIALS — 2 columns on mobile
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  /* testimonials grid */
+  .testi-grid{grid-template-columns:repeat(2,1fr) !important;}
+  /* md:grid-cols-3 testimonials */
+  .md\:grid-cols-3{grid-template-columns:repeat(2,1fr) !important;}
+}
+@media(max-width:479px){
+  .testi-grid{grid-template-columns:repeat(2,1fr) !important;}
+}
+/* Testimonial card compact */
+@media(max-width:599px){
+  .testi-grid > div,.md\:grid-cols-3 > div{padding:16px !important;}
+  .testi-grid p,.md\:grid-cols-3 p{font-size:12px !important;-webkit-line-clamp:4;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden;}
+}
+
+/* ══════════════════════════════════════════
+   FAQ — stays single col (accordion)
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  .faq-item button{padding:14px 16px !important;}
+  .faq-item button span{font-size:0.875rem !important;}
+}
+
+/* ══════════════════════════════════════════
+   CONTACT PAGE — 2 columns
+══════════════════════════════════════════ */
+@media(max-width:1023px){
+  .contact-layout{grid-template-columns:1fr !important;}
+}
+@media(max-width:767px){
+  .contact-cards{grid-template-columns:repeat(2,1fr) !important;}
+}
+/* Keep 2 cols even on small phones */
+@media(max-width:479px){
+  .contact-cards{grid-template-columns:repeat(2,1fr) !important;}
+  .contact-card{padding:14px !important;}
+  .contact-card .w-12{width:40px !important;height:40px !important;}
+  .contact-form-grid{grid-template-columns:1fr !important;}
+}
+
+/* ══════════════════════════════════════════
+   ABOUT PAGE — 2 columns stats/values
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  /* About stat cards grid */
+  .grid.grid-cols-2{grid-template-columns:repeat(2,1fr) !important;}
+  /* Values grid */
+  .val-card-grid,.md\:grid-cols-2.lg\:grid-cols-4{
+    grid-template-columns:repeat(2,1fr) !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   STATS BAR — 2 columns
+══════════════════════════════════════════ */
+@media(max-width:639px){
+  .grid.grid-cols-2.md\:grid-cols-4,
+  .grid-cols-2{grid-template-columns:repeat(2,1fr) !important;}
+}
+
+/* ══════════════════════════════════════════
+   GLOBAL — ALL grids 2 cols on mobile
+   (catches any remaining grid layouts)
+══════════════════════════════════════════ */
+@media(max-width:599px){
+  /* Any 4-col or 3-col grid → 2 cols */
+  .grid.md\:grid-cols-3,
+  .grid.lg\:grid-cols-4,
+  .grid.md\:grid-cols-4{
+    grid-template-columns:repeat(2,1fr) !important;
+  }
+  /* Generic card padding reduction */
+  .rounded-2xl.p-7,.rounded-2xl.p-8{padding:14px !important;}
+  .rounded-3xl.p-8{padding:18px !important;}
+}
+
+/* ══════════════════════════════════════════
+   CTA SECTION
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  .cta-section h2{font-size:1.75rem !important;}
+  .cta-section .flex.flex-wrap > a{
+    width:100%;justify-content:center;text-align:center;
+  }
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  .footer-grid{
+    grid-template-columns:1fr !important;
+    gap:24px !important;
+  }
+  .footer-grid .lg\:col-span-2{grid-column:span 1 !important;}
+}
+
+/* ══════════════════════════════════════════
+   SCROLL TO TOP + WHATSAPP BUTTONS
+══════════════════════════════════════════ */
+@media(max-width:479px){
+  #scrollTop{bottom:16px !important;right:16px !important;width:40px !important;height:40px !important;}
+  #waBtn{bottom:68px !important;right:16px !important;width:40px !important;height:40px !important;}
+}
+
+/* ══════════════════════════════════════════
+   ADMIN PANEL — Mobile Sidebar
+══════════════════════════════════════════ */
+@media(max-width:1023px){
+  /* Sidebar becomes overlay */
+  .sidebar{
+    position:fixed !important;
+    left:-260px !important;
+    top:0 !important;bottom:0 !important;
+    z-index:1000 !important;
+    transition:left .3s ease !important;
+    box-shadow:4px 0 24px rgba(0,0,0,.3);
+  }
+  .sidebar.open{left:0 !important;}
+  .layout{flex-direction:column !important;}
+  .main{width:100% !important;}
+  /* Topbar gets hamburger */
+  #admin-menu-btn{display:flex !important;}
+  /* Admin forms */
+  .form-grid{grid-template-columns:1fr !important;}
+  .form-grid.cols3{grid-template-columns:1fr !important;}
+  .dash-grid{grid-template-columns:1fr 1fr !important;}
+  .quick-actions{grid-template-columns:1fr 1fr !important;}
+  /* Tables scroll */
+  .data-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .data-table{min-width:500px;}
+  /* Content padding */
+  .content{padding:16px !important;}
+  .topbar{padding:0 16px !important;}
+}
+@media(max-width:599px){
+  .dash-grid{grid-template-columns:1fr !important;}
+  .quick-actions{grid-template-columns:1fr 1fr !important;}
+  .client-grid{grid-template-columns:1fr !important;}
+  .topbar-title{font-size:14px !important;}
+  .card-body{padding:14px !important;}
+}
+
+/* ══════════════════════════════════════════
+   PRICING & COMPARE TABLE (admin)
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  .pricing-compare-table{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .pricing-compare-table table{min-width:480px;}
+}
+
+/* ══════════════════════════════════════════
+   MOBILE OVERLAY (admin sidebar backdrop)
+══════════════════════════════════════════ */
+#sidebar-backdrop{
+  display:none;
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.5);
+  z-index:999;
+}
+#sidebar-backdrop.show{display:block;}
+
+/* ══════════════════════════════════════════
+   GENERAL UTILITY
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  /* Reduce section padding */
+  .py-24{padding-top:3.5rem !important;padding-bottom:3.5rem !important;}
+  .py-20{padding-top:3rem !important;padding-bottom:3rem !important;}
+  .py-16{padding-top:2.5rem !important;padding-bottom:2.5rem !important;}
+  /* Large headings */
+  .text-4xl{font-size:1.75rem !important;}
+  .text-5xl{font-size:2rem !important;}
+  /* Side padding */
+  .max-w-7xl.mx-auto,.max-w-6xl.mx-auto,.max-w-5xl.mx-auto,
+  .max-w-4xl.mx-auto,.max-w-3xl.mx-auto{padding-left:16px !important;padding-right:16px !important;}
+}
+@media(max-width:479px){
+  .text-4xl{font-size:1.5rem !important;}
+  .text-5xl{font-size:1.75rem !important;}
+  .py-24{padding-top:2.5rem !important;padding-bottom:2.5rem !important;}
+}
+
+/* ══════════════════════════════════════════
+   TOUCH IMPROVEMENTS
+══════════════════════════════════════════ */
+@media(hover:none){
+  /* Bigger tap targets */
+  .btn,.nav-item,.logo-card,
+  .faq-item button,.qty-btn,.type-tab{min-height:44px;}
+  /* Disable hover transforms on touch */
+  .why-card:hover{transform:none !important;}
+  .feat-card:hover{transform:none !important;}
+  .logo-card:hover{transform:none !important;}
+}
+
+
+/* ══════════════════════════════════════════
+   ADMIN — Hamburger button show/hide
+══════════════════════════════════════════ */
+#admin-menu-btn { display: none; }
+
+@media(max-width:1023px){
+  #admin-menu-btn { display: flex !important; align-items:center; justify-content:center; }
+
+  /* Sidebar as slide-in overlay */
+  .sidebar {
+    position: fixed !important;
+    left: -270px !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    z-index: 1001 !important;
+    transition: left .3s cubic-bezier(.4,0,.2,1) !important;
+    box-shadow: none;
+  }
+  .sidebar.open {
+    left: 0 !important;
+    box-shadow: 8px 0 32px rgba(0,0,0,.35) !important;
+  }
+
+  /* Backdrop */
+  #sidebar-backdrop {
+    display: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    z-index: 1000;
+  }
+  #sidebar-backdrop.show { display: block; }
+
+  /* Main takes full width */
+  .layout { flex-direction: row !important; }
+  .main { width: 100% !important; flex: 1 !important; }
+
+  /* Topbar */
+  .topbar { padding: 0 14px !important; gap: 8px; }
+  .topbar-title { font-size: 15px !important; }
+  .btn-gold.btn-sm span { display: none; }
+
+  /* Admin content padding */
+  .content { padding: 14px !important; }
+
+  /* Admin grids */
+  .dash-grid { grid-template-columns: 1fr 1fr !important; gap: 12px !important; }
+  .quick-actions { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+  .form-grid { grid-template-columns: 1fr !important; }
+  .form-grid.cols3 { grid-template-columns: 1fr !important; }
+  .client-grid { grid-template-columns: 1fr 1fr !important; }
+
+  /* Table horizontal scroll */
+  .card-body table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}
+
+@media(max-width:599px){
+  .dash-grid { grid-template-columns: 1fr 1fr !important; }
+  .quick-actions { grid-template-columns: 1fr 1fr !important; }
+  .client-grid { grid-template-columns: 1fr !important; }
+  .login-box { padding: 32px 24px !important; margin: 16px; }
+  .topbar-title span { display: none; }
+  .btn-gold { padding: 7px 12px !important; font-size: 11px !important; }
+}
+
+/* ══════════════════════════════════════════
+   INDEX HERO — Mobile specific
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  /* Dashboard mockup takes full width */
+  .dash-wrap {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+  /* Dashboard body smaller */
+  .kpi-row { gap: 4px !important; }
+  .kpi-card { padding: 6px 4px !important; }
+  .prog-section, .chart-section, .compose-section, .feed-section {
+    padding: 8px !important;
+  }
+  /* Dash nav tabs smaller */
+  .dash-nav-tabs { padding: 6px 8px 0 !important; gap: 1px !important; }
+  .dash-tab { padding: 5px 8px !important; font-size: 8.5px !important; }
+  /* Hero wave separator */
+  .gradient-hero .absolute.bottom-0 { display: none; }
+}
+
+@media(max-width:480px){
+  /* On very small phones — hide dashboard, show just stats */
+  .dash-body > div:last-child { display: none !important; } /* hide feed */
+  .dash-body > div:nth-child(3) { display: none !important; } /* hide chart/compose row */
+}
+
+/* ══════════════════════════════════════════
+   WHY CHOOSE US stats row — mobile
+══════════════════════════════════════════ */
+@media(max-width:479px){
+  #why-us .grid-cols-4 {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   MARQUEE — prevent layout break
+══════════════════════════════════════════ */
+.marquee-track { will-change: transform; }
+@media(max-width:479px){
+  .marquee-track { animation-duration: 25s !important; }
+  .logo-card { min-width: 120px !important; padding: 10px 14px !important; }
+  .logo-name { font-size: 11px !important; }
+  .logo-icon { width: 30px !important; height: 30px !important; border-radius: 8px !important; }
+  .logo-icon i { font-size: 13px !important; }
+}
+
+/* ══════════════════════════════════════════
+   PRICING CARDS — mobile single column
+══════════════════════════════════════════ */
+@media(max-width:639px){
+  #plans-nm, #plans-m {
+    grid-template-columns: 1fr !important;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .plan-card { padding: 24px !important; }
+  .plan-pop { margin-top: 0 !important; transform: none !important; }
+  .plan-elite { margin-top: 0 !important; }
+  .type-tab { padding: 10px 16px !important; font-size: 13px !important; }
+}
+
+/* ══════════════════════════════════════════
+   CONTACT PAGE — mobile stack
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  .contact-layout { grid-template-columns: 1fr !important; }
+  .contact-cards-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media(max-width:479px){
+  .contact-cards-grid { grid-template-columns: 1fr !important; }
+  .contact-form-inner { grid-template-columns: 1fr !important; }
+  #toast { right: 12px !important; left: 12px !important; top: 16px !important; }
+}
+
+/* ══════════════════════════════════════════
+   FOOTER — mobile
+══════════════════════════════════════════ */
+@media(max-width:767px){
+  footer .grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 20px !important;
+  }
+  footer .lg\:col-span-2 {
+    grid-column: span 2 !important;
+  }
+}
+@media(max-width:479px){
+  footer .grid {
+    grid-template-columns: 1fr !important;
+  }
+  footer .lg\:col-span-2 {
+    grid-column: span 1 !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   GENERAL — fix overflow issues
+══════════════════════════════════════════ */
+.grid { min-width: 0; }
+.grid > * { min-width: 0; }
+img { max-width: 100%; height: auto; }
+pre, code { overflow-x: auto; }

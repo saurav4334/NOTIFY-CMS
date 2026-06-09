@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SMS Price Calculator – NotifySMS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="mobile.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+<style>
+:root{--navy:#003087;--blue:#009cde;--gold:#ffc439;}
+.grid-pattern{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;}
+#navbar{transition:all .3s;}#navbar.scrolled{background:rgba(15,23,42,.96)!important;backdrop-filter:blur(12px);box-shadow:0 1px 30px rgba(0,0,0,.3);}
+#mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s;}#mobile-menu.open{max-height:520px;}
+#scrollTop{position:fixed;bottom:28px;right:28px;z-index:999;width:44px;height:44px;background:linear-gradient(135deg,#003087,#009cde);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 4px 20px rgba(0,48,135,.4);}
+#scrollTop.visible{opacity:1;pointer-events:all;}#scrollTop:hover{transform:translateY(-3px);}
+#waBtn{position:fixed;bottom:82px;right:28px;z-index:999;width:44px;height:44px;background:#25d366;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .3s;box-shadow:0 4px 20px rgba(37,211,102,.45);text-decoration:none;}
+#waBtn:hover{transform:translateY(-3px);}
+.page-hero{background:linear-gradient(135deg,#001030 0%,#001e6e 50%,#001030 100%);padding:100px 0 60px;position:relative;overflow:hidden;}
+.page-hero .grid-pattern{position:absolute;inset:0;opacity:.5;}
+.vat-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(90deg,rgba(255,196,57,.18),rgba(0,156,222,.12));border:1px solid rgba(255,196,57,.55);color:#92400e;font-size:10.5px;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;}
+.vat-badge i{color:#f59e0b;}
+/* slab highlight */
+.slab-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);}
+.slab-row:last-child{border-bottom:none;}
+.slab-active{background:rgba(0,156,222,.12);border:1px solid rgba(0,156,222,.3);border-radius:12px;padding:10px 14px;margin:-2px -14px;}
+/* range input */
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:rgba(255,255,255,.1);outline:none;}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:linear-gradient(135deg,#003087,#009cde);cursor:pointer;box-shadow:0 2px 8px rgba(0,48,135,.5);}
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-white text-sm"></i></div>
+<a id="waBtn" href="https://wa.me/8801XXXXXXXXX" target="_blank"><i class="fab fa-whatsapp text-white text-xl"></i></a>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4" style="background:rgba(0,10,40,.95);">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-sm"></i></div>
+      <span class="text-white font-bold text-xl">Notify<span style="color:#009cde;">SMS</span></span>
+    </a>
+    <div class="hidden lg:flex items-center gap-7">
+      <a href="index.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Home</a>
+      <a href="about.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">About</a>
+      <a href="services.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Services</a>
+      <a href="pricing.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Pricing</a>
+      <a href="calculator.html" class="text-white text-sm font-semibold border-b-2 pb-0.5" style="border-color:#ffc439;">Calculator</a>
+      <a href="faq.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">FAQ</a>
+      <a href="contact.html" class="text-gray-300 hover:text-white text-sm font-medium transition-colors">Contact</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-3">
+      <a href="#" class="text-gray-300 hover:text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-white/10"><i class="fas fa-sign-in-alt mr-1.5 text-xs"></i>Login</a>
+      <a href="contact.html" class="text-sm font-semibold px-5 py-2.5 rounded-xl hover:opacity-90" style="background:#ffc439;color:#003087;">Get Started Free</a>
+    </div>
+    <button onclick="toggleMenu()" class="lg:hidden text-white p-2 rounded-lg hover:bg-white/10"><i class="fas fa-bars text-lg"></i></button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden">
+    <div class="max-w-7xl mx-auto mt-3 bg-slate-800/95 backdrop-blur rounded-2xl p-5 flex flex-col gap-1">
+      <a href="index.html" class="text-gray-300 text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">Home</a>
+      <a href="about.html" class="text-gray-300 text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">About</a>
+      <a href="services.html" class="text-gray-300 text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">Services</a>
+      <a href="pricing.html" class="text-gray-300 text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">Pricing</a>
+      <a href="calculator.html" class="text-white text-sm font-semibold py-2.5 px-3 rounded-xl bg-white/10">Calculator</a>
+      <a href="faq.html" class="text-gray-300 text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">FAQ</a>
+      <a href="contact.html" class="text-gray-300 text-sm font-medium py-2.5 px-3 rounded-xl hover:bg-white/5">Contact</a>
+      <div class="flex gap-3 mt-3 pt-3 border-t border-white/10">
+        <a href="#" class="flex-1 border border-white/20 text-white text-sm font-semibold py-3 rounded-xl text-center">Login</a>
+        <a href="contact.html" class="flex-1 text-sm font-semibold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="grid-pattern"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4" style="background:rgba(0,156,222,.15);border:1px solid rgba(0,156,222,.3);color:#009cde;"><i class="fas fa-calculator mr-2"></i>SMS Price Calculator</span>
+    <h1 class="text-5xl font-black text-white mb-4">Calculate Your SMS Cost</h1>
+    <p class="text-gray-400 text-xl max-w-xl mx-auto mb-6">Instant price estimate — no signup required. All prices include VAT, TAX &amp; Dipping.</p>
+    <div class="inline-block"><span class="vat-badge"><i class="fas fa-shield-halved"></i>All prices include VAT, TAX &amp; Dipping charges</span></div>
+  </div>
+</div>
+
+<!-- CALCULATOR SECTION -->
+<section class="py-16 relative" style="background:linear-gradient(135deg,#001030 0%,#001e6e 50%,#001030 100%);">
+  <div class="absolute top-0 left-0 w-full h-full grid-pattern opacity-30 pointer-events-none"></div>
+  <div class="absolute top-10 left-10 w-72 h-72 rounded-full blur-3xl pointer-events-none" style="background:rgba(0,48,135,.3);"></div>
+  <div class="absolute bottom-10 right-10 w-96 h-96 rounded-full blur-3xl pointer-events-none" style="background:rgba(0,156,222,.15);"></div>
+
+  <div class="max-w-5xl mx-auto px-4 relative z-10">
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+
+      <!-- INPUT SIDE -->
+      <div class="bg-white/5 backdrop-blur border border-white/10 rounded-3xl p-8">
+        <h3 class="text-white font-bold text-xl mb-6 flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#003087,#009cde);"><i class="fas fa-sliders text-white text-sm"></i></div>
+          Configure Your SMS
+        </h3>
+
+        <div class="space-y-6">
+
+          <!-- SMS TYPE TOGGLE -->
+          <div>
+            <label class="text-gray-400 text-sm font-medium mb-3 block">SMS Type</label>
+            <div class="grid grid-cols-2 gap-3">
+              <button id="btn-nm" onclick="setSMSType('nm')"
+                class="flex items-center gap-3 px-4 py-3.5 rounded-xl border-2 transition-all text-left"
+                style="background:rgba(0,48,135,.25);border-color:#009cde;color:white;">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(0,156,222,.25);">
+                  <i class="fas fa-satellite-dish text-blue-300 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-sm">Non-Masking</div>
+                  <div class="text-xs text-gray-400">Numeric sender ID</div>
+                </div>
+                <i class="fas fa-check-circle ml-auto text-blue-400 text-sm" id="check-nm"></i>
+              </button>
+              <button id="btn-m" onclick="setSMSType('m')"
+                class="flex items-center gap-3 px-4 py-3.5 rounded-xl border-2 transition-all text-left"
+                style="background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:#94a3b8;">
+                <div class="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style="background:rgba(255,255,255,.06);">
+                  <i class="fas fa-id-badge text-gray-400 text-sm"></i>
+                </div>
+                <div>
+                  <div class="font-bold text-sm">Masking</div>
+                  <div class="text-xs text-gray-500">Brand sender ID</div>
+                </div>
+                <i class="fas fa-check-circle ml-auto text-sm opacity-0" id="check-m"></i>
+              </button>
+            </div>
+            <!-- Type info -->
+            <div id="type-info-nm" class="mt-2 text-xs px-3 py-2 rounded-lg" style="background:rgba(0,156,222,.1);color:#7dd3fc;">
+              <i class="fas fa-info-circle mr-1"></i>Non-Masking: ৳0.35 – ৳0.26 depending on volume
+            </div>
+            <div id="type-info-m" class="mt-2 text-xs px-3 py-2 rounded-lg" style="background:rgba(255,196,57,.1);color:#fde68a;display:none;">
+              <i class="fas fa-id-badge mr-1"></i>Masking: ৳0.55 – ৳0.48 depending on volume (Brand name as sender)
+            </div>
+          </div>
+
+          <!-- Quantity Input -->
+          <div>
+            <label class="text-gray-400 text-sm font-medium mb-2.5 block">Number of SMS</label>
+            <input type="number" id="calc-qty" value="10000" min="1" max="1000000"
+              class="w-full bg-white/5 border border-white/15 text-white text-4xl font-black rounded-2xl px-5 py-4 focus:outline-none focus:border-blue-400 transition-all"
+              oninput="calcSMS()" style="color:white;">
+            <p class="text-gray-600 text-xs mt-2 flex items-center gap-1">
+              <i class="fas fa-info-circle" style="color:#009cde;"></i>Minimum order: 5,000 SMS
+            </p>
+          </div>
+
+          <!-- Slider -->
+          <div>
+            <label class="text-gray-400 text-sm font-medium mb-3 block">Drag to Adjust Quantity</label>
+            <input type="range" id="qty-slider" min="5000" max="500000" step="1000" value="10000" oninput="sliderChange(this.value)" class="w-full">
+            <div class="flex justify-between text-gray-600 text-xs mt-2">
+              <span>5K</span><span>50K</span><span>100K</span><span>250K</span><span>500K</span>
+            </div>
+          </div>
+
+          <!-- Quick Select -->
+          <div>
+            <label class="text-gray-400 text-sm font-medium mb-3 block">Quick Select</label>
+            <div class="grid grid-cols-3 gap-2">
+              <button onclick="setCalcQty(5000)"   class="qty-btn bg-white/5 hover:bg-blue-900/40 border border-white/10 hover:border-blue-500 text-gray-300 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-all">5K</button>
+              <button onclick="setCalcQty(10000)"  class="qty-btn bg-white/5 hover:bg-blue-900/40 border border-white/10 hover:border-blue-500 text-gray-300 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-all">10K</button>
+              <button onclick="setCalcQty(20000)"  class="qty-btn bg-white/5 hover:bg-blue-900/40 border border-white/10 hover:border-blue-500 text-gray-300 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-all">20K</button>
+              <button onclick="setCalcQty(40000)"  class="qty-btn bg-white/5 hover:bg-blue-900/40 border border-white/10 hover:border-blue-500 text-gray-300 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-all">40K</button>
+              <button onclick="setCalcQty(100000)" class="qty-btn bg-white/5 hover:bg-blue-900/40 border border-white/10 hover:border-blue-500 text-gray-300 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-all">100K</button>
+              <button onclick="setCalcQty(200000)" class="qty-btn bg-white/5 hover:bg-blue-900/40 border border-white/10 hover:border-blue-500 text-gray-300 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-all">200K</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- OUTPUT SIDE -->
+      <div class="space-y-5">
+
+        <!-- Total cost card -->
+        <div class="rounded-3xl p-8 relative overflow-hidden" style="background:linear-gradient(135deg,#003087 0%,#009cde 100%)">
+          <div class="absolute top-0 right-0 w-40 h-40 rounded-full blur-2xl" style="background:rgba(255,255,255,.05);transform:translate(30%,-30%);"></div>
+          <p class="text-blue-200 text-sm font-medium mb-2">Total Estimated Cost</p>
+          <div class="text-6xl font-black text-white mb-3" id="calc-total">৳3,500</div>
+          <div id="calc-msg" class="text-blue-200 text-sm flex items-center gap-1.5">
+            <i class="fas fa-check-circle text-green-400"></i>Rate: ৳0.35/SMS for 5,000–10,000 SMS
+          </div>
+          <div class="mt-4 pt-4 border-t border-white/15">
+            <span class="vat-badge" style="background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.25);color:white;"><i class="fas fa-shield-halved" style="color:#fbbf24;"></i>Price includes VAT, TAX &amp; Dipping</span>
+          </div>
+        </div>
+
+        <!-- Rate & Qty -->
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p class="text-gray-500 text-xs uppercase tracking-widest mb-2">Per SMS Rate</p>
+            <p class="text-3xl font-black text-white" id="calc-rate">৳0.35</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p class="text-gray-500 text-xs uppercase tracking-widest mb-2">Quantity</p>
+            <p class="text-3xl font-black text-white" id="calc-qty-show">10,000</p>
+          </div>
+        </div>
+
+        <!-- Pricing slabs table -->
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <p class="text-gray-400 text-xs font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
+            <i class="fas fa-table" style="color:#009cde;"></i>Pricing Slabs
+            <span id="slab-type-label" class="ml-auto text-xs font-bold px-3 py-1 rounded-full" style="background:rgba(0,156,222,.2);color:#7dd3fc;">Non-Masking</span>
+          </p>
+          <p class="text-gray-600 text-xs mb-4">Click a row to use that quantity</p>
+          <div id="slabs-table">
+            <div class="slab-row cursor-pointer" id="slab-0" onclick="setCalcQty(5000)">
+              <span class="text-gray-400 text-sm">5,000 – 10,000</span>
+              <div class="flex items-center gap-2">
+                <span class="text-white font-bold text-sm bg-blue-900/40 px-2.5 py-1 rounded-lg" id="slab-0-rate">৳0.35/SMS</span>
+              </div>
+            </div>
+            <div class="slab-row cursor-pointer" id="slab-1" onclick="setCalcQty(11000)">
+              <span class="text-gray-400 text-sm">11,000 – 20,000</span>
+              <div class="flex items-center gap-2">
+                <span class="text-white font-bold text-sm bg-blue-900/40 px-2.5 py-1 rounded-lg" id="slab-1-rate">৳0.30/SMS</span>
+              </div>
+            </div>
+            <div class="slab-row" id="slab-contact">
+              <span class="text-gray-400 text-sm">20,001 – 39,999</span>
+              <span class="text-yellow-400 font-bold text-sm bg-yellow-400/10 px-2.5 py-1 rounded-lg">Contact Sales</span>
+            </div>
+            <div class="slab-row cursor-pointer" id="slab-2" onclick="setCalcQty(40000)">
+              <span class="text-gray-400 text-sm">40,000 – 99,999</span>
+              <div class="flex items-center gap-2">
+                <span class="text-white font-bold text-sm bg-blue-900/40 px-2.5 py-1 rounded-lg" id="slab-2-rate">৳0.28/SMS</span>
+              </div>
+            </div>
+            <!-- NEW 100K+ SLAB -->
+            <div class="slab-row" id="slab-3" style="padding-top:12px;">
+              <div>
+                <span class="text-gray-300 text-sm font-semibold">100,000+</span>
+                <div class="mt-1"><span class="vat-badge" style="font-size:9px;padding:2px 8px;"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+              </div>
+              <div class="text-right">
+                <span class="font-black text-sm px-3 py-1.5 rounded-lg" style="background:linear-gradient(90deg,rgba(255,196,57,.2),rgba(0,156,222,.2));color:#fcd34d;border:1px solid rgba(255,196,57,.3);">৳0.26/SMS</span>
+                <div class="text-green-400 text-xs font-bold mt-1">Best Rate 🏆</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="contact.html" class="block w-full font-black py-4 rounded-2xl text-center transition-all hover:opacity-90 text-lg" style="background:linear-gradient(90deg,#003087,#009cde);color:white;">
+          Order Now <i class="fas fa-arrow-right ml-2"></i>
+        </a>
+      </div>
+    </div>
+
+    <!-- Savings calculator -->
+    <div class="mt-12 bg-white/5 border border-white/10 rounded-3xl p-8">
+      <h3 class="text-white font-bold text-xl mb-6 flex items-center gap-3"><i class="fas fa-piggy-bank text-yellow-400"></i>Savings vs. Standard Rate</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div class="bg-white/5 rounded-2xl p-5 text-center">
+          <div class="text-gray-400 text-xs uppercase tracking-widest mb-2">Your Rate</div>
+          <div class="text-3xl font-black text-white" id="your-rate">৳0.35</div>
+        </div>
+        <div class="bg-white/5 rounded-2xl p-5 text-center">
+          <div class="text-gray-400 text-xs uppercase tracking-widest mb-2">Standard Rate</div>
+          <div class="text-3xl font-black text-gray-400">৳0.50</div>
+        </div>
+        <div class="rounded-2xl p-5 text-center" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);">
+          <div class="text-green-400 text-xs uppercase tracking-widest mb-2">You Save / SMS</div>
+          <div class="text-3xl font-black text-green-400" id="save-per">৳0.15</div>
+        </div>
+        <div class="rounded-2xl p-5 text-center" style="background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);">
+          <div class="text-green-400 text-xs uppercase tracking-widest mb-2">Total Savings</div>
+          <div class="text-3xl font-black text-green-400" id="save-total">৳1,500</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ QUICK -->
+<section class="bg-gray-950 py-14">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h3 class="text-2xl font-black text-white mb-3">Have questions about pricing?</h3>
+    <p class="text-gray-400 mb-7">Check our full FAQ or talk to our sales team directly.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="faq.html" class="font-semibold px-7 py-3 rounded-xl border-2 border-white/20 text-white hover:bg-white/10 transition-all"><i class="fas fa-question-circle mr-2"></i>View FAQ</a>
+      <a href="contact.html" class="font-semibold px-7 py-3 rounded-xl text-gray-900 hover:opacity-90 transition-all" style="background:#ffc439;"><i class="fas fa-phone mr-2"></i>Talk to Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-950 text-gray-400 border-t border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 py-10">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-xs"></i></div><span class="text-white font-bold">Notify<span style="color:#009cde;">SMS</span></span></div>
+      <div class="flex flex-wrap gap-5 text-sm"><a href="index.html" class="hover:text-white">Home</a><a href="pricing.html" class="hover:text-white">Pricing</a><a href="faq.html" class="hover:text-white">FAQ</a><a href="contact.html" class="hover:text-white">Contact</a></div>
+      <p class="text-gray-600 text-sm">© 2025 NotifySMS. BTRC Licensed.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="cms.js"></script>
+<script>
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);});
+
+/* ===== SMS TYPE ===== */
+let currentType='nm';
+// Fallback slabs — overwritten by live rates from the backend on load.
+let slabsNM=[
+  {min:5000,   max:10000,  rate:0.35, label:"5,000–10,000 SMS",  slabId:'slab-0'},
+  {min:11000,  max:20000,  rate:0.30, label:"11,000–20,000 SMS", slabId:'slab-1'},
+  {min:40000,  max:99999,  rate:0.28, label:"40,000–99,999 SMS", slabId:'slab-2'},
+  {min:100000, max:Infinity,rate:0.26,label:"100,000+ SMS",      slabId:'slab-3'},
+];
+let slabsM=[
+  {min:5000,   max:10000,  rate:0.55, label:"5,000–10,000 SMS",  slabId:'slab-0'},
+  {min:11000,  max:20000,  rate:0.52, label:"11,000–20,000 SMS", slabId:'slab-1'},
+  {min:40000,  max:99999,  rate:0.50, label:"40,000–99,999 SMS", slabId:'slab-2'},
+  {min:100000, max:Infinity,rate:0.48,label:"100,000+ SMS",      slabId:'slab-3'},
+];
+function getSlabs(){return currentType==='nm'?slabsNM:slabsM;}
+
+// Build calculator slabs from API rate rows.
+function _mapRates(rows){
+  return rows.map((r,i)=>{
+    const min=r.min_qty, max=(r.max_qty==null?Infinity:r.max_qty);
+    const label=(max===Infinity)
+      ? min.toLocaleString('en-BD')+'+ SMS'
+      : min.toLocaleString('en-BD')+'–'+max.toLocaleString('en-BD')+' SMS';
+    return {min, max, rate:parseFloat(r.price), label, slabId:'slab-'+i};
+  });
+}
+async function loadLiveRates(){
+  try{
+    const res=await fetch((window.NOTIFY_API||'http://127.0.0.1:8000/api/v1')+'/sms-rates',{headers:{Accept:'application/json'}});
+    if(!res.ok) return;
+    const d=await res.json();
+    if(d.non_masking&&d.non_masking.length) slabsNM=_mapRates(d.non_masking);
+    if(d.masking&&d.masking.length)         slabsM=_mapRates(d.masking);
+    setSMSType(currentType); // refresh slab displays + totals with live data
+  }catch(e){ /* keep fallback slabs */ }
+}
+const STD_RATE_NM=0.50, STD_RATE_M=0.75;
+function getStdRate(){return currentType==='nm'?STD_RATE_NM:STD_RATE_M;}
+
+function setSMSType(type){
+  currentType=type;
+  const btnNM=document.getElementById('btn-nm');
+  const btnM=document.getElementById('btn-m');
+  const checkNM=document.getElementById('check-nm');
+  const checkM=document.getElementById('check-m');
+  const infoNM=document.getElementById('type-info-nm');
+  const infoM=document.getElementById('type-info-m');
+  const label=document.getElementById('slab-type-label');
+  if(type==='nm'){
+    btnNM.style.cssText='background:rgba(0,48,135,.25);border-color:#009cde;color:white;';
+    btnM.style.cssText='background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:#94a3b8;';
+    checkNM.style.opacity='1';checkM.style.opacity='0';
+    infoNM.style.display='block';infoM.style.display='none';
+    label.textContent='Non-Masking';label.style.cssText='background:rgba(0,156,222,.2);color:#7dd3fc;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;';
+  } else {
+    btnM.style.cssText='background:rgba(255,196,57,.12);border-color:#ffc439;color:white;';
+    btnNM.style.cssText='background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.12);color:#94a3b8;';
+    checkM.style.opacity='1';checkNM.style.opacity='0';
+    infoM.style.display='block';infoNM.style.display='none';
+    label.textContent='Masking';label.style.cssText='background:rgba(255,196,57,.2);color:#fde68a;font-size:10px;font-weight:700;padding:3px 12px;border-radius:20px;';
+  }
+  // Update slab rate displays
+  const slabs=getSlabs();
+  document.getElementById('slab-0-rate').textContent='৳'+slabs[0].rate.toFixed(2)+'/SMS';
+  document.getElementById('slab-1-rate').textContent='৳'+slabs[1].rate.toFixed(2)+'/SMS';
+  document.getElementById('slab-2-rate').textContent='৳'+slabs[2].rate.toFixed(2)+'/SMS';
+  const s3rate=document.querySelector('#slab-3 .font-black.text-sm');
+  if(s3rate)s3rate.textContent='৳'+slabs[3].rate.toFixed(2)+'/SMS';
+  calcSMS();
+}
+const slabs=slabsNM; // initial — overridden by getSlabs()
+const STD_RATE=STD_RATE_NM;
+
+function getSlab(q){return getSlabs().find(s=>q>=s.min&&q<=s.max);}
+function fmt(n){return n.toLocaleString('en-BD');}
+
+function calcSMS(){
+  const q=parseInt(document.getElementById('calc-qty').value)||0;
+  document.getElementById('qty-slider').value=Math.min(q,500000);
+  const rateEl=document.getElementById('calc-rate');
+  const totalEl=document.getElementById('calc-total');
+  const msgEl=document.getElementById('calc-msg');
+  const qtyEl=document.getElementById('calc-qty-show');
+  const yrEl=document.getElementById('your-rate');
+  const sPerEl=document.getElementById('save-per');
+  const sTotEl=document.getElementById('save-total');
+
+  qtyEl.textContent=fmt(q);
+
+  // Reset slab highlights
+  getSlabs().forEach(s=>{const el=document.getElementById(s.slabId);if(el)el.classList.remove('slab-active');});
+  document.getElementById('slab-contact')?.classList.remove('slab-active');
+
+  if(q<5000){
+    rateEl.textContent='—';totalEl.textContent='—';
+    msgEl.innerHTML='<i class="fas fa-exclamation-circle text-yellow-400 mr-1.5"></i><span class="text-yellow-300">Minimum order quantity is 5,000 SMS.</span>';
+    yrEl.textContent='—';sPerEl.textContent='—';sTotEl.textContent='—';return;
+  }
+  if(q>=20001&&q<=39999){
+    rateEl.textContent='?';totalEl.textContent='—';
+    msgEl.innerHTML='<i class="fas fa-phone text-blue-300 mr-1.5"></i>Please contact our sales team for custom pricing for this range.';
+    document.getElementById('slab-contact')?.classList.add('slab-active');
+    yrEl.textContent='Custom';sPerEl.textContent='—';sTotEl.textContent='—';return;
+  }
+  const slab=getSlab(q);
+  if(slab){
+    rateEl.textContent='৳'+slab.rate.toFixed(2);
+    totalEl.textContent='৳'+fmt(q*slab.rate);
+    msgEl.innerHTML='<i class="fas fa-check-circle text-green-400 mr-1.5"></i>Rate: ৳'+slab.rate.toFixed(2)+'/SMS — '+slab.label;
+    // Highlight active slab
+    const activeEl=document.getElementById(slab.slabId);
+    if(activeEl)activeEl.classList.add('slab-active');
+    // Savings
+    const save=getStdRate()-slab.rate;
+    yrEl.textContent='৳'+slab.rate.toFixed(2);
+    sPerEl.textContent='৳'+save.toFixed(2);
+    sTotEl.textContent='৳'+fmt(q*save);
+  } else {
+    rateEl.textContent='?';totalEl.textContent='—';
+    msgEl.innerHTML='<i class="fas fa-phone text-blue-300 mr-1.5"></i>Please contact sales for custom pricing.';
+    yrEl.textContent='—';sPerEl.textContent='—';sTotEl.textContent='—';
+  }
+}
+function setCalcQty(q){document.getElementById('calc-qty').value=q;calcSMS();}
+function sliderChange(v){document.getElementById('calc-qty').value=v;calcSMS();}
+calcSMS();
+loadLiveRates(); // pull live pricing from the backend
+</script>
+</body></html>

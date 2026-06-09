@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pricing – NotifySMS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="mobile.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+<style>
+:root{--navy:#003087;--blue:#009cde;--gold:#ffc439;--light:#f5f8ff;--cream:#fafbff;}
+body{background:#fff;}
+
+/* Navbar */
+#navbar{transition:all .3s;background:rgba(255,255,255,.95)!important;backdrop-filter:blur(12px);border-bottom:1px solid rgba(0,48,135,.08);box-shadow:0 1px 16px rgba(0,48,135,.06);}
+#navbar.scrolled{background:rgba(0,48,135,.97)!important;border-bottom:none;}
+#navbar.scrolled .nav-link{color:rgba(255,255,255,.85)!important;}
+#navbar.scrolled .nav-active{color:#fff!important;border-color:#ffc439!important;}
+#navbar.scrolled .login-btn{color:rgba(255,255,255,.85)!important;}
+#navbar.scrolled .menu-icon{color:#fff!important;}
+#mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s;}#mobile-menu.open{max-height:520px;}
+
+/* Page hero — PayPal blue */
+.page-hero{background:linear-gradient(135deg,#003087 0%,#0046b8 40%,#0055d4 70%,#002d8a 100%);padding:96px 0 56px;position:relative;overflow:hidden;}
+.page-hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;opacity:.5;}
+
+/* Type toggle */
+.type-tab{padding:10px 28px;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;transition:all .25s;border:2px solid transparent;user-select:none;}
+.type-tab.active-nm{background:#003087;color:white;box-shadow:0 4px 16px rgba(0,48,135,.3);}
+.type-tab.active-m{background:#003087;color:white;box-shadow:0 4px 16px rgba(0,48,135,.3);}
+.type-tab.inactive{background:white;color:#475569;border-color:#e2e8f0;}
+.type-tab.inactive:hover{border-color:#003087;color:#003087;}
+
+/* VAT badge */
+.vat-badge{display:inline-flex;align-items:center;gap:5px;background:linear-gradient(90deg,rgba(255,196,57,.18),rgba(0,156,222,.10));border:1px solid rgba(255,196,57,.55);color:#92400e;font-size:10.5px;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;}
+.vat-badge i{color:#f59e0b;}
+.vat-badge-white{display:inline-flex;align-items:center;gap:5px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.35);color:#fff;font-size:10.5px;font-weight:800;padding:4px 12px;border-radius:20px;white-space:nowrap;}
+.vat-badge-white i{color:#fcd34d;}
+
+/* Plans */
+.plan-card{background:#fff;border:1.5px solid #e8eef8;border-radius:24px;padding:32px;transition:all .3s;position:relative;}
+.plan-card:hover{transform:translateY(-6px);box-shadow:0 24px 60px rgba(0,48,135,.12);border-color:rgba(0,48,135,.2);}
+.plan-pop{background:linear-gradient(145deg,#003087,#0060c8)!important;border-color:transparent!important;color:white;}
+.plan-pop:hover{box-shadow:0 24px 60px rgba(0,48,135,.35)!important;}
+.plan-elite{background:linear-gradient(145deg,#001a50,#003087)!important;border:2px solid rgba(0,156,222,.4)!important;}
+
+/* Features list — same for all */
+.feat-li{display:flex;align-items:flex-start;gap:9px;padding:6px 0;font-size:13px;}
+.feat-li i{margin-top:2px;flex-shrink:0;}
+
+/* Compare table */
+.ctable th{background:#f5f8ff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#64748b;padding:12px 14px;text-align:center;}
+.ctable th:first-child{text-align:left;}
+.ctable td{padding:11px 14px;font-size:13px;border-bottom:1px solid #f1f5f9;text-align:center;}
+.ctable td:first-child{text-align:left;font-weight:500;color:#334155;}
+.ctable tr:last-child td{border-bottom:none;}
+.ctable .ck{color:#22c55e;font-weight:700;font-size:15px;}
+.ctable .cx{color:#d1d5db;}
+.ctable .nm-col{background:#f0f8ff;}
+.ctable .m-col{background:#fffbeb;}
+
+#scrollTop{position:fixed;bottom:28px;right:28px;z-index:999;width:44px;height:44px;background:linear-gradient(135deg,#003087,#009cde);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .3s;box-shadow:0 4px 20px rgba(0,48,135,.4);}
+#scrollTop.visible{opacity:1;pointer-events:all;}#scrollTop:hover{transform:translateY(-3px);}
+#waBtn{position:fixed;bottom:82px;right:28px;z-index:999;width:44px;height:44px;background:#25d366;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none;box-shadow:0 4px 16px rgba(37,211,102,.4);}
+#waBtn:hover{transform:translateY(-3px);}
+</style>
+</head>
+<body class="font-sans antialiased">
+
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-white text-sm"></i></div>
+<a id="waBtn" href="https://wa.me/8801XXXXXXXXX" target="_blank"><i class="fab fa-whatsapp text-white text-xl"></i></a>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-sm"></i></div>
+      <span class="font-bold text-xl" style="color:#003087;">Notify<span style="color:#009cde;">SMS</span></span>
+    </a>
+    <div class="hidden lg:flex items-center gap-7">
+      <a href="index.html" class="nav-link text-sm font-medium hover:opacity-70 transition-colors" style="color:#003087;">Home</a>
+      <a href="about.html" class="nav-link text-sm font-medium hover:opacity-70 transition-colors" style="color:#003087;">About</a>
+      <a href="services.html" class="nav-link text-sm font-medium hover:opacity-70 transition-colors" style="color:#003087;">Services</a>
+      <a href="pricing.html" class="nav-link nav-active text-sm font-semibold border-b-2 pb-0.5" style="color:#003087;border-color:#ffc439;">Pricing</a>
+      <a href="calculator.html" class="nav-link text-sm font-medium hover:opacity-70 transition-colors" style="color:#003087;">Calculator</a>
+      <a href="faq.html" class="nav-link text-sm font-medium hover:opacity-70 transition-colors" style="color:#003087;">FAQ</a>
+      <a href="contact.html" class="nav-link text-sm font-medium hover:opacity-70 transition-colors" style="color:#003087;">Contact</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-3">
+      <a href="#" class="login-btn text-sm font-medium px-4 py-2 rounded-lg transition-colors" style="color:#003087;" onmouseover="this.style.background='rgba(0,48,135,.07)'" onmouseout="this.style.background='transparent'"><i class="fas fa-sign-in-alt mr-1.5 text-xs"></i>Login</a>
+      <a href="contact.html" class="text-sm font-bold px-5 py-2.5 rounded-xl hover:opacity-90 shadow-md" style="background:#003087;color:white;">Get Started Free</a>
+    </div>
+    <button onclick="toggleMenu()" class="lg:hidden menu-icon p-2 rounded-lg" style="color:#003087;"><i class="fas fa-bars text-lg"></i></button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden">
+    <div class="max-w-7xl mx-auto mt-3 bg-slate-800/95 backdrop-blur rounded-2xl p-5 flex flex-col gap-1">
+      <a href="index.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Home</a>
+      <a href="about.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">About</a>
+      <a href="services.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Services</a>
+      <a href="pricing.html" class="text-white text-sm font-semibold py-2.5 px-3 rounded-xl bg-white/10">Pricing</a>
+      <a href="calculator.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Calculator</a>
+      <a href="faq.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">FAQ</a>
+      <a href="contact.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Contact</a>
+      <div class="flex gap-3 mt-3 pt-3 border-t border-white/10">
+        <a href="#" class="flex-1 border border-white/20 text-white text-sm font-semibold py-3 rounded-xl text-center">Login</a>
+        <a href="contact.html" class="flex-1 text-sm font-semibold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get Started</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4" style="background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);">Pricing Plans</span>
+    <h1 class="text-5xl font-black text-white mb-4">Simple, Transparent Pricing</h1>
+    <p class="text-blue-200 text-xl max-w-xl mx-auto">All prices include <strong class="text-white">VAT, TAX &amp; Dipping</strong> — no surprise charges.</p>
+  </div>
+</div>
+
+<!-- PRICING SECTION -->
+<section style="background:#f5f8ff;" class="py-16">
+  <div class="max-w-7xl mx-auto px-4">
+
+    <!-- VAT notice -->
+    <div class="max-w-3xl mx-auto mb-10 flex items-center gap-4 bg-white border rounded-2xl p-5" style="border-color:#fde68a;box-shadow:0 2px 16px rgba(251,191,36,.12);">
+      <div class="w-12 h-12 flex-shrink-0 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);"><i class="fas fa-shield-halved text-white text-lg"></i></div>
+      <div>
+        <p class="font-bold text-amber-900 text-sm mb-0.5">100% Transparent Pricing</p>
+        <p class="text-amber-700 text-sm">All prices listed below <strong>fully include VAT, TAX &amp; Dipping</strong> charges. What you see is exactly what you pay.</p>
+      </div>
+    </div>
+
+    <!-- TYPE TOGGLE -->
+    <div class="flex items-center justify-center mb-12">
+      <div class="bg-white rounded-2xl p-2 shadow-sm border flex gap-2" style="border-color:#e8eef8;">
+        <div class="type-tab active-nm" id="tab-nm" onclick="switchType('nm')">
+          <i class="fas fa-satellite-dish mr-2"></i>Non-Masking SMS
+        </div>
+        <div class="type-tab inactive" id="tab-m" onclick="switchType('m')">
+          <i class="fas fa-id-badge mr-2"></i>Masking SMS
+        </div>
+      </div>
+    </div>
+
+    <!-- TYPE DESCRIPTION -->
+    <div class="max-w-2xl mx-auto text-center mb-10" id="type-desc">
+      <div id="desc-nm">
+        <p class="text-gray-500 text-sm">Numeric sender ID (e.g. 01711XXXXXX). Best for high-volume promotional campaigns at the lowest cost.</p>
+      </div>
+      <div id="desc-m" style="display:none;">
+        <p class="text-gray-500 text-sm">Your brand name as sender ID (e.g. "NotifySMS"). Higher open rates &amp; brand recognition — premium service.</p>
+      </div>
+    </div>
+
+    <!-- NON-MASKING PLANS -->
+    <div id="plans-nm" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
+
+      <!-- Starter NM -->
+      <div class="plan-card">
+        <div class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2" style="color:#64748b;">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs" style="background:#64748b;">S</span>Starter
+        </div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-5xl font-black" style="color:#003087;">৳0.35</span><span class="text-gray-400 text-sm">/SMS</span></div>
+        <p class="text-gray-400 text-xs mb-4">5,000 – 10,000 SMS</p>
+        <div class="mb-6"><span class="vat-badge"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <ul class="mb-8 space-y-0.5">
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Non-Masking SMS</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Real-time delivery reports</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>REST API access</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>CSV/Excel contact upload</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Campaign scheduler</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>OTP SMS support</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>bKash / Nagad payment</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Standard support</li>
+        </ul>
+        <a href="contact.html" class="block w-full border-2 font-bold py-3.5 rounded-2xl text-center transition-all hover:text-white" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'">Get Started</a>
+      </div>
+
+      <!-- Business NM — POPULAR -->
+      <div class="plan-card plan-pop" style="margin-top:-20px;">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-gray-900 text-xs font-black px-5 py-1.5 rounded-full uppercase tracking-widest shadow-lg" style="background:#ffc439;">Most Popular</div>
+        <div class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2 text-blue-200">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs bg-white/20">B</span>Business
+        </div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-5xl font-black text-white">৳0.30</span><span class="text-blue-200 text-sm">/SMS</span></div>
+        <p class="text-blue-200 text-xs mb-4">11,000 – 20,000 SMS</p>
+        <div class="mb-6"><span class="vat-badge-white"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <ul class="mb-8 space-y-0.5">
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>Non-Masking SMS</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>Real-time delivery reports</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>REST API access</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>CSV/Excel contact upload</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>Campaign scheduler</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>OTP SMS support</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>bKash / Nagad payment</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>Priority support</li>
+        </ul>
+        <a href="contact.html" class="block w-full bg-white font-black py-3.5 rounded-2xl text-center transition-all hover:bg-yellow-50 shadow-lg" style="color:#003087;">Get Started</a>
+      </div>
+
+      <!-- Enterprise NM -->
+      <div class="plan-card">
+        <div class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2" style="color:#64748b;">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs" style="background:#009cde;">E</span>Enterprise
+        </div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-5xl font-black" style="color:#003087;">৳0.28</span><span class="text-gray-400 text-sm">/SMS</span></div>
+        <p class="text-gray-400 text-xs mb-4">40,000 – 99,999 SMS</p>
+        <div class="mb-6"><span class="vat-badge"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <ul class="mb-8 space-y-0.5">
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Non-Masking SMS</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Real-time delivery reports</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>REST API access</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>CSV/Excel contact upload</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Campaign scheduler</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>OTP SMS support</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>bKash / Nagad payment</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Dedicated account manager</li>
+        </ul>
+        <a href="contact.html" class="block w-full border-2 font-bold py-3.5 rounded-2xl text-center transition-all hover:text-white" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'">Contact Sales</a>
+      </div>
+
+      <!-- Elite NM 100K+ -->
+      <div class="plan-card plan-elite">
+        <div class="absolute -top-3 right-5 text-xs font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg" style="background:linear-gradient(90deg,#ffc439,#ff9500);color:#003087;">Best Value 🏆</div>
+        <div class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2 mt-2" style="color:#009cde;">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs" style="background:linear-gradient(135deg,#ffc439,#ff9500);color:#003087;">★</span>Elite
+        </div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-5xl font-black text-white">৳0.26</span><span class="text-blue-300 text-sm">/SMS</span></div>
+        <p class="text-blue-300 text-xs mb-4">100,000+ SMS</p>
+        <div class="mb-6"><span class="vat-badge-white"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <ul class="mb-8 space-y-0.5">
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>Non-Masking SMS</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>Real-time delivery reports</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>REST API access</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>CSV/Excel contact upload</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>Campaign scheduler</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>OTP SMS support</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>bKash / Nagad payment</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>VIP 24/7 support</li>
+        </ul>
+        <a href="contact.html" class="block w-full font-black py-3.5 rounded-2xl text-center transition-all hover:opacity-90 shadow-lg" style="background:linear-gradient(90deg,#ffc439,#ff9500);color:#003087;">Contact Sales</a>
+      </div>
+    </div>
+
+    <!-- MASKING PLANS (hidden by default) -->
+    <div id="plans-m" style="display:none;" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 items-end">
+
+      <!-- Starter M -->
+      <div class="plan-card" style="border-color:#fde68a;">
+        <div class="absolute top-4 right-4"><span class="text-xs font-bold px-3 py-1 rounded-full" style="background:rgba(251,191,36,.15);color:#b45309;border:1px solid rgba(251,191,36,.4);">Masking</span></div>
+        <div class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2" style="color:#64748b;">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs" style="background:#64748b;">S</span>Starter
+        </div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-5xl font-black" style="color:#003087;">৳0.55</span><span class="text-gray-400 text-sm">/SMS</span></div>
+        <p class="text-gray-400 text-xs mb-4">5,000 – 10,000 SMS</p>
+        <div class="mb-6"><span class="vat-badge"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <ul class="mb-8 space-y-0.5">
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i><span><strong>Masking SMS</strong> (Brand Sender ID)</span></li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Real-time delivery reports</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>REST API access</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>CSV/Excel contact upload</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Campaign scheduler</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>OTP SMS support</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>bKash / Nagad payment</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Standard support</li>
+        </ul>
+        <a href="contact.html" class="block w-full border-2 font-bold py-3.5 rounded-2xl text-center transition-all hover:text-white" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'">Get Started</a>
+      </div>
+
+      <!-- Business M — POPULAR -->
+      <div class="plan-card plan-pop" style="margin-top:-20px;">
+        <div class="absolute -top-4 left-1/2 -translate-x-1/2 text-gray-900 text-xs font-black px-5 py-1.5 rounded-full uppercase tracking-widest shadow-lg" style="background:#ffc439;">Most Popular</div>
+        <div class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2 text-blue-200">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs bg-white/20">B</span>Business
+        </div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-5xl font-black text-white">৳0.52</span><span class="text-blue-200 text-sm">/SMS</span></div>
+        <p class="text-blue-200 text-xs mb-4">11,000 – 20,000 SMS</p>
+        <div class="mb-6"><span class="vat-badge-white"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <ul class="mb-8 space-y-0.5">
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i><span><strong>Masking SMS</strong> (Brand Sender ID)</span></li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>Real-time delivery reports</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>REST API access</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>CSV/Excel contact upload</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>Campaign scheduler</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>OTP SMS support</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>bKash / Nagad payment</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-green-300 text-xs"></i>Priority support</li>
+        </ul>
+        <a href="contact.html" class="block w-full bg-white font-black py-3.5 rounded-2xl text-center transition-all hover:bg-yellow-50 shadow-lg" style="color:#003087;">Get Started</a>
+      </div>
+
+      <!-- Enterprise M -->
+      <div class="plan-card" style="border-color:#fde68a;">
+        <div class="absolute top-4 right-4"><span class="text-xs font-bold px-3 py-1 rounded-full" style="background:rgba(251,191,36,.15);color:#b45309;border:1px solid rgba(251,191,36,.4);">Masking</span></div>
+        <div class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2" style="color:#64748b;">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-white text-xs" style="background:#009cde;">E</span>Enterprise
+        </div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-5xl font-black" style="color:#003087;">৳0.50</span><span class="text-gray-400 text-sm">/SMS</span></div>
+        <p class="text-gray-400 text-xs mb-4">40,000 – 99,999 SMS</p>
+        <div class="mb-6"><span class="vat-badge"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <ul class="mb-8 space-y-0.5">
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i><span><strong>Masking SMS</strong> (Brand Sender ID)</span></li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Real-time delivery reports</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>REST API access</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>CSV/Excel contact upload</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Campaign scheduler</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>OTP SMS support</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>bKash / Nagad payment</li>
+          <li class="feat-li text-gray-700"><i class="fas fa-check-circle text-green-500 text-xs"></i>Dedicated account manager</li>
+        </ul>
+        <a href="contact.html" class="block w-full border-2 font-bold py-3.5 rounded-2xl text-center transition-all hover:text-white" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'">Contact Sales</a>
+      </div>
+
+      <!-- Elite M 100K+ -->
+      <div class="plan-card plan-elite">
+        <div class="absolute -top-3 right-5 text-xs font-black px-4 py-1.5 rounded-full shadow-lg" style="background:linear-gradient(90deg,#ffc439,#ff9500);color:#003087;">Best Rate 🏆</div>
+        <div class="text-xs font-bold uppercase tracking-widest mb-4 flex items-center gap-2 mt-2" style="color:#009cde;">
+          <span class="w-6 h-6 rounded-lg flex items-center justify-center text-xs" style="background:linear-gradient(135deg,#ffc439,#ff9500);color:#003087;">★</span>Elite
+        </div>
+        <div class="flex items-baseline gap-1 mb-1"><span class="text-5xl font-black text-white">৳0.48</span><span class="text-blue-300 text-sm">/SMS</span></div>
+        <p class="text-blue-300 text-xs mb-4">100,000+ SMS</p>
+        <div class="mb-6"><span class="vat-badge-white"><i class="fas fa-shield-halved"></i>Incl. VAT, TAX &amp; Dipping</span></div>
+        <ul class="mb-8 space-y-0.5">
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i><span><strong>Masking SMS</strong> (Brand Sender ID)</span></li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>Real-time delivery reports</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>REST API access</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>CSV/Excel contact upload</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>Campaign scheduler</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>OTP SMS support</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>bKash / Nagad payment</li>
+          <li class="feat-li text-white"><i class="fas fa-check-circle text-yellow-400 text-xs"></i>VIP 24/7 support</li>
+        </ul>
+        <a href="contact.html" class="block w-full font-black py-3.5 rounded-2xl text-center transition-all hover:opacity-90 shadow-lg" style="background:linear-gradient(90deg,#ffc439,#ff9500);color:#003087;">Contact Sales</a>
+      </div>
+    </div>
+
+    <!-- Custom range note -->
+    <p class="text-center text-gray-400 text-sm mt-10">
+      <i class="fas fa-info-circle mr-1 text-yellow-500"></i>
+      Need 20,001–39,999 SMS? <a href="contact.html" class="font-semibold hover:underline" style="color:#003087;">Contact sales for custom pricing</a>
+    </p>
+  </div>
+</section>
+
+<!-- PRICE COMPARISON TABLE -->
+<section class="bg-white py-16">
+  <div class="max-w-5xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <h2 class="text-3xl font-black mb-3" style="color:#003087;">Non-Masking vs Masking — Quick Compare</h2>
+      <p class="text-gray-500">See the rate difference at each volume tier</p>
+    </div>
+    <div class="overflow-x-auto rounded-2xl border shadow-sm" style="border-color:#e8eef8;">
+      <div class="overflow-x-auto rounded-2xl"><table class="w-full ctable" style="min-width:500px;" style="border-collapse:collapse;">
+        <thead>
+          <tr>
+            <th style="text-align:left;">Volume</th>
+            <th class="nm-col">Non-Masking Rate</th>
+            <th class="m-col">Masking Rate</th>
+            <th>Difference</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>5,000 – 10,000</strong></td>
+            <td class="nm-col font-black" style="color:#003087;">৳0.35</td>
+            <td class="m-col font-black" style="color:#b45309;">৳0.55</td>
+            <td class="text-gray-500">+৳0.20</td>
+          </tr>
+          <tr>
+            <td><strong>11,000 – 20,000</strong></td>
+            <td class="nm-col font-black" style="color:#003087;">৳0.30</td>
+            <td class="m-col font-black" style="color:#b45309;">৳0.52</td>
+            <td class="text-gray-500">+৳0.22</td>
+          </tr>
+          <tr>
+            <td><span class="text-yellow-600 font-semibold">20,001 – 39,999</span></td>
+            <td class="nm-col text-yellow-600 font-semibold">Contact Sales</td>
+            <td class="m-col text-yellow-600 font-semibold">Contact Sales</td>
+            <td class="text-gray-400">Custom</td>
+          </tr>
+          <tr>
+            <td><strong>40,000 – 99,999</strong></td>
+            <td class="nm-col font-black" style="color:#003087;">৳0.28</td>
+            <td class="m-col font-black" style="color:#b45309;">৳0.50</td>
+            <td class="text-gray-500">+৳0.22</td>
+          </tr>
+          <tr>
+            <td><strong>100,000+</strong> <span class="text-xs font-bold text-green-600 bg-green-50 px-2 py-0.5 rounded-lg ml-1">Best</span></td>
+            <td class="nm-col font-black" style="color:#003087;">৳0.26</td>
+            <td class="m-col font-black" style="color:#b45309;">৳0.48</td>
+            <td class="text-gray-500">+৳0.22</td>
+          </tr>
+          <tr>
+            <td class="text-gray-500 italic" colspan="1">VAT, TAX &amp; Dipping</td>
+            <td class="nm-col"><span class="ck">✓ Included</span></td>
+            <td class="m-col"><span class="ck">✓ Included</span></td>
+            <td class="ck">✓ Both</td>
+          </tr>
+        </tbody>
+      </table></div>
+    <div class="text-center mt-8">
+      <a href="calculator.html" class="inline-flex items-center gap-2 font-bold px-8 py-3.5 rounded-xl text-white hover:opacity-90 transition-all shadow-md" style="background:#003087;"><i class="fas fa-calculator"></i>Calculate Your Exact Cost</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16" style="background:linear-gradient(135deg,#003087 0%,#009cde 100%)">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h2 class="text-4xl font-black text-white mb-4">Not sure which plan?</h2>
+    <p class="text-blue-100 text-lg mb-8 max-w-lg mx-auto">Use our calculator to get an exact quote, or talk to our team.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="calculator.html" class="font-black px-10 py-4 rounded-2xl hover:opacity-90 text-lg flex items-center gap-2" style="background:#ffc439;color:#003087;"><i class="fas fa-calculator"></i>Try Calculator</a>
+      <a href="contact.html" class="border-2 border-white/40 hover:border-white text-white font-black px-10 py-4 rounded-2xl text-lg hover:bg-white/10">Talk to Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-950 text-gray-400 border-t border-gray-800">
+  <div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2"><div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-xs"></i></div><span class="text-white font-bold">Notify<span style="color:#009cde;">SMS</span></span></div>
+    <div class="flex flex-wrap gap-5 text-sm"><a href="index.html" class="hover:text-white">Home</a><a href="pricing.html" class="text-white font-semibold">Pricing</a><a href="calculator.html" class="hover:text-white">Calculator</a><a href="faq.html" class="hover:text-white">FAQ</a><a href="contact.html" class="hover:text-white">Contact</a></div>
+    <p class="text-gray-600 text-sm">© 2025 NotifySMS. BTRC Licensed.</p>
+  </div>
+</footer>
+
+<script>
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);
+  document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);
+});
+
+function switchType(type){
+  const tabNM=document.getElementById('tab-nm');
+  const tabM=document.getElementById('tab-m');
+  const plansNM=document.getElementById('plans-nm');
+  const plansM=document.getElementById('plans-m');
+  const descNM=document.getElementById('desc-nm');
+  const descM=document.getElementById('desc-m');
+  if(type==='nm'){
+    tabNM.className='type-tab active-nm';
+    tabM.className='type-tab inactive';
+    plansNM.style.display='grid';
+    plansM.style.display='none';
+    descNM.style.display='block';
+    descM.style.display='none';
+  } else {
+    tabNM.className='type-tab inactive';
+    tabM.className='type-tab active-m';
+    plansNM.style.display='none';
+    plansM.style.display='grid';
+    descNM.style.display='none';
+    descM.style.display='block';
+  }
+}
+
+/* ===== Live pricing from the backend ===== */
+function _applyRates(sel, rows){
+  const els=document.querySelectorAll(sel);
+  rows.forEach((r,i)=>{ if(els[i]) els[i].textContent='৳'+parseFloat(r.price).toFixed(2); });
+}
+function applyLivePricing(d){
+  if(!d) return;
+  if(Array.isArray(d.pricingNM)&&d.pricingNM.length){
+    _applyRates('#plans-nm .text-5xl.font-black', d.pricingNM);          // pricing cards
+    _applyRates('table.ctable td.nm-col.font-black', d.pricingNM);       // comparison table
+  }
+  if(Array.isArray(d.pricingM)&&d.pricingM.length){
+    _applyRates('#plans-m .text-5xl.font-black', d.pricingM);
+    _applyRates('table.ctable td.m-col.font-black', d.pricingM);
+  }
+}
+// cms.js fetches /content and fires cms:ready with the full payload.
+document.addEventListener('cms:ready', e => applyLivePricing(e.detail));
+</script>
+<script src="cms.js"></script>
+</body></html>

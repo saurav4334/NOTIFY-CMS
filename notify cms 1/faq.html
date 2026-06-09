@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>FAQ – NotifySMS</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="mobile.css">
+<script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
+<style>
+:root{--navy:#003087;--blue:#009cde;--gold:#ffc439;}
+.mesh-bg{background-color:#f0f7ff;background-image:radial-gradient(at 40% 20%,hsla(205,100%,90%,.35) 0,transparent 50%);}
+.grid-pattern{background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:48px 48px;}
+#navbar{transition:all .3s;}#navbar.scrolled{background:rgba(15,23,42,.96)!important;backdrop-filter:blur(12px);box-shadow:0 1px 30px rgba(0,0,0,.3);}
+#mobile-menu{max-height:0;overflow:hidden;transition:max-height .35s;}#mobile-menu.open{max-height:520px;}
+#scrollTop{position:fixed;bottom:28px;right:28px;z-index:999;width:44px;height:44px;background:linear-gradient(135deg,#003087,#009cde);border-radius:12px;display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;pointer-events:none;transition:all .3s;}
+#scrollTop.visible{opacity:1;pointer-events:all;}#scrollTop:hover{transform:translateY(-3px);}
+#waBtn{position:fixed;bottom:82px;right:28px;z-index:999;width:44px;height:44px;background:#25d366;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:all .3s;text-decoration:none;}
+#waBtn:hover{transform:translateY(-3px);}
+.page-hero{background:linear-gradient(135deg,#003087 0%,#001a5c 60%,#003087 100%);padding:100px 0 60px;position:relative;overflow:hidden;}
+.page-hero .grid-pattern{position:absolute;inset:0;opacity:.6;}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-item.open .faq-answer{max-height:300px;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-icon{transition:transform .3s ease;}
+.faq-cat-btn{transition:all .2s;}
+.faq-cat-btn.active{background:#003087;color:white;}
+</style>
+</head>
+<body class="font-sans antialiased bg-white">
+<div id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fas fa-chevron-up text-white text-sm"></i></div>
+<a id="waBtn" href="https://wa.me/8801XXXXXXXXX" target="_blank"><i class="fab fa-whatsapp text-white text-xl"></i></a>
+
+<!-- NAVBAR -->
+<nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4" style="background:rgba(0,48,135,.95);">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <a href="index.html" class="flex items-center gap-2"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-sm"></i></div><span class="text-white font-bold text-xl">Notify<span style="color:#009cde;">SMS</span></span></a>
+    <div class="hidden lg:flex items-center gap-7">
+      <a href="index.html" class="text-gray-300 hover:text-white text-sm font-medium">Home</a>
+      <a href="about.html" class="text-gray-300 hover:text-white text-sm font-medium">About</a>
+      <a href="services.html" class="text-gray-300 hover:text-white text-sm font-medium">Services</a>
+      <a href="pricing.html" class="text-gray-300 hover:text-white text-sm font-medium">Pricing</a>
+      <a href="calculator.html" class="text-gray-300 hover:text-white text-sm font-medium">Calculator</a>
+      <a href="faq.html" class="text-white text-sm font-semibold border-b-2 pb-0.5" style="border-color:#ffc439;">FAQ</a>
+      <a href="contact.html" class="text-gray-300 hover:text-white text-sm font-medium">Contact</a>
+    </div>
+    <div class="hidden lg:flex items-center gap-3"><a href="#" class="text-gray-300 hover:text-white text-sm px-4 py-2 rounded-lg hover:bg-white/10"><i class="fas fa-sign-in-alt mr-1 text-xs"></i>Login</a><a href="contact.html" class="text-sm font-semibold px-5 py-2.5 rounded-xl hover:opacity-90" style="background:#ffc439;color:#003087;">Get Started</a></div>
+    <button onclick="toggleMenu()" class="lg:hidden text-white p-2 rounded-lg hover:bg-white/10"><i class="fas fa-bars"></i></button>
+  </div>
+  <div id="mobile-menu" class="lg:hidden"><div class="max-w-7xl mx-auto mt-3 bg-slate-800/95 backdrop-blur rounded-2xl p-5 flex flex-col gap-1">
+    <a href="index.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Home</a>
+    <a href="about.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">About</a>
+    <a href="services.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Services</a>
+    <a href="pricing.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Pricing</a>
+    <a href="calculator.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Calculator</a>
+    <a href="faq.html" class="text-white text-sm font-semibold py-2.5 px-3 rounded-xl bg-white/10">FAQ</a>
+    <a href="contact.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Contact</a>
+    <div class="flex gap-3 mt-3 pt-3 border-t border-white/10"><a href="#" class="flex-1 border border-white/20 text-white text-sm font-semibold py-3 rounded-xl text-center">Login</a><a href="contact.html" class="flex-1 text-sm font-semibold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get Started</a></div>
+  </div></div>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="grid-pattern"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+    <span class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4" style="background:rgba(0,156,222,.15);border:1px solid rgba(0,156,222,.3);color:#009cde;">FAQ</span>
+    <h1 class="text-5xl font-black text-white mb-4">Frequently Asked Questions</h1>
+    <p class="text-gray-400 text-xl max-w-xl mx-auto">Everything you need to know about NotifySMS.</p>
+  </div>
+</div>
+
+<!-- FAQ CONTENT -->
+<section class="bg-white py-20">
+  <div class="max-w-4xl mx-auto px-4" id="faq-container">
+
+    <!-- General -->
+    <div class="mb-12">
+      <h3 class="text-xl font-black text-gray-900 mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold" style="background:#003087;">G</span>General</h3>
+      <div class="space-y-3">
+        <div class="faq-item open bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Bulk SMS ki ebong ki kaje lage?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Bulk SMS holo ek sathe baro sankhyok manush-ke SMS pathano-r service. Promotional offer, OTP, transactional alert, ebong marketing campaign-er jonno use kora hoy. E-commerce, banking, healthcare, NGO shob sector-e use hoy.</p></div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">SMS delivery time koto lage?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Amader system-e 1,000 SMS approximately 3 seconds-e deliver hoy. Network condition-er upor nirbhor kore kichukhon bethe jete pare tobe sobcheye beshi 30 seconds. OTP SMS &lt;2 seconds-e deliver hoy guaranteed.</p></div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Kon kon operator-e SMS pathano jai?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Amra Bangladesh-er shob 4টি major operator support kori: Grameenphone (GP), Robi, Banglalink (BL), ebong Teletalk. Airtel number-e-o pathanor byabotha ache. Amader system automatic sorbotto route use kore.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing -->
+    <div class="mb-12">
+      <h3 class="text-xl font-black text-gray-900 mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold" style="background:#009cde;">৳</span>Pricing &amp; Payment</h3>
+      <div class="space-y-3">
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Minimum koto SMS order korte hobe?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Amader minimum order quantity 5,000 SMS (৳0.35/SMS). Tar kome custom pricing-er jonno sales team-er shathe contact korun. Volume barle rate kom hoy — 100,000+ SMS-e amra ৳0.26/SMS offer kori.</p></div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Price-e ki VAT, TAX ebong Dipping charge included?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5">
+            <p class="text-gray-500 text-sm leading-relaxed mb-3">Hya! Amader listed shob price-e <strong>VAT, TAX ebong Dipping charge সম্পূর্ণভাবে included</strong>। Apnake আলাদা কোনো charge দিতে হবে না। Apni যা দেখবেন, সেটাই final price।</p>
+            <div class="inline-flex items-center gap-2 text-sm font-bold px-4 py-2 rounded-xl" style="background:rgba(255,196,57,.15);border:1px solid rgba(255,196,57,.4);color:#92400e;"><i class="fas fa-shield-halved text-amber-500"></i>All-inclusive pricing — no surprise charges</div>
+          </div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Payment process ki? Koto quickly account top up hoy?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">bKash, Nagad, bank transfer, ebong online card payment accept kori. bKash/Nagad-e payment korar 5-10 minutes-er moddhe account-e credit add hoy. Bank transfer-e 1-2 working day laghe.</p></div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">100,000+ SMS-er rate ki?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">100,000 ba tar beshi SMS-er jonno amader Elite plan-e rate হলো <strong>৳0.26/SMS (including VAT, TAX &amp; Dipping)</strong>। Eta amader সবচেয়ে কম rate। Ar beshi details-er jonno <a href="pricing.html" style="color:#003087;" class="font-semibold underline">Pricing page</a> দেখুন অথবা আমাদের sales team-er সাথে contact করুন।</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technical -->
+    <div class="mb-12">
+      <h3 class="text-xl font-black text-gray-900 mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold" style="background:#7c3aed;">⚙</span>Technical</h3>
+      <div class="space-y-3">
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Masking ebong Non-masking SMS er parthokyo ki?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Masking SMS-e sender ID hisebe apnar company naam dekhabe (jemon "NotifyBD"). Non-masking-e numeric number dekhabe. Masking SMS-er price ektu beshi kintu brand trust baraye ebong open rate onek beshi hoy.</p></div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">API integration possible ki?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Hya, amader REST API v2 available. PHP, Python, Node.js, Java, .NET shob popular language-er jonno SDK thakbe. Comprehensive documentation amader developer portal-e pawa jabe. Free test account-e API integration test korte parben।</p></div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Bangla SMS pathano jabe ki?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Hya! Amader platform full Unicode support kore, tai Bangla script-e SMS pathano jay. Bangla SMS-e character limit ta English-er cheye kom hoy (70 chars per part). Campaign-e Bangla use kore much better open rate pawa jay.</p></div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Delivery report kothay dekhbo?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Customer panel-e real-time delivery dashboard ache. Sent, delivered, failed, ebong pending count live dekhte parben. CSV-te export-o kora jay. API webhook-e-o delivery callback pawa jay।</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Account -->
+    <div class="mb-4">
+      <h3 class="text-xl font-black text-gray-900 mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold" style="background:#059669;">👤</span>Account &amp; Support</h3>
+      <div class="space-y-3">
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Account khulte ki ki lagbe?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">Account khulte shudhu name, email, phone number, ebong company name lagbe। KYC verification-er jonno NID/trade license lagbe। Approval 1-2 business hours-e hoy। Free test credits die shuru korte parben.</p></div>
+        </div>
+        <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+          <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">Support kothay pabo?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">24/7 phone, email, ebong WhatsApp-e support available. Enterprise client-der jonno dedicated account manager thake. Response time guarantee: 1 hour business hours-e, 4 hours off-hours-e.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Still have questions? -->
+<section class="mesh-bg py-16">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <div class="w-16 h-16 rounded-2xl flex items-center justify-center mx-auto mb-5" style="background:linear-gradient(135deg,#003087,#009cde);"><i class="fas fa-headset text-white text-2xl"></i></div>
+    <h3 class="text-2xl font-black text-gray-900 mb-3">Still have questions?</h3>
+    <p class="text-gray-500 mb-8">Our team is available 24/7 to help you find the right solution.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="contact.html" class="font-black px-8 py-4 rounded-2xl hover:opacity-90 text-white" style="background:#003087;"><i class="fas fa-envelope mr-2"></i>Send a Message</a>
+      <a href="tel:+8801XXXXXXXXX" class="font-black px-8 py-4 rounded-2xl border-2 hover:text-white transition-all" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'"><i class="fab fa-whatsapp mr-2"></i>WhatsApp Us</a>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-gray-950 text-gray-400 border-t border-gray-800"><div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-xs"></i></div><span class="text-white font-bold">Notify<span style="color:#009cde;">SMS</span></span></div><div class="flex flex-wrap gap-5 text-sm"><a href="index.html" class="hover:text-white">Home</a><a href="pricing.html" class="hover:text-white">Pricing</a><a href="faq.html" class="text-white font-semibold">FAQ</a><a href="contact.html" class="hover:text-white">Contact</a></div><p class="text-gray-600 text-sm">© 2025 NotifySMS. BTRC Licensed.</p></div></footer>
+<script>
+function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);});
+function toggleFaq(btn){const item=btn.closest('.faq-item');const wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));if(!wasOpen)item.classList.add('open');}
+
+/* ===== Live FAQs from the backend (grouped by category) ===== */
+const _FAQ_COLORS=['#003087','#009cde','#7c3aed','#059669','#f97316','#dc2626'];
+function _esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function renderFaqs(faqs){
+  const container=document.getElementById('faq-container');
+  if(!container||!Array.isArray(faqs)||!faqs.length) return; // keep static fallback
+  const groups={}, order=[];
+  faqs.forEach(f=>{ const c=f.category||'General'; if(!groups[c]){groups[c]=[];order.push(c);} groups[c].push(f); });
+  let firstOpened=false;
+  container.innerHTML=order.map((cat,gi)=>{
+    const color=_FAQ_COLORS[gi%_FAQ_COLORS.length];
+    const items=groups[cat].map(f=>{
+      const open=!firstOpened?(firstOpened=true,' open'):'';
+      return `<div class="faq-item${open} bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
+        <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">${_esc(f.q)}</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
+        <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">${_esc(f.a)}</p></div>
+      </div>`;
+    }).join('');
+    return `<div class="mb-12"><h3 class="text-xl font-black text-gray-900 mb-6 flex items-center gap-3"><span class="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold" style="background:${color};">${_esc((cat[0]||'?').toUpperCase())}</span>${_esc(cat)}</h3><div class="space-y-3">${items}</div></div>`;
+  }).join('');
+}
+// cms.js fetches /content and fires cms:ready with the full payload.
+document.addEventListener('cms:ready', e => renderFaqs(e.detail && e.detail.faq));
+</script>
+<script src="cms.js"></script>
+</body></html>
