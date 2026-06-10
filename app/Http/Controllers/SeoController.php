@@ -9,22 +9,9 @@ use Illuminate\Http\Response;
 class SeoController extends Controller
 {
     /**
-     * The public marketing pages (static .html files). The site base URL is
-     * taken from settings(general.siteUrl) or APP_URL, so it works in any env.
+     * Site base URL — taken from settings(general.siteUrl) or APP_URL, so it
+     * works in any environment.
      */
-    private function pages(): array
-    {
-        return [
-            'index.html' => '1.0',
-            'about.html' => '0.7',
-            'services.html' => '0.8',
-            'pricing.html' => '0.9',
-            'calculator.html' => '0.8',
-            'faq.html' => '0.6',
-            'contact.html' => '0.7',
-        ];
-    }
-
     private function baseUrl(): string
     {
         $url = Setting::value('general', 'siteUrl') ?: config('app.url');
@@ -39,13 +26,13 @@ class SeoController extends Controller
 
         $xml = '<?xml version="1.0" encoding="UTF-8"?>'."\n";
         $xml .= '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">'."\n";
-        foreach ($this->pages() as $path => $priority) {
-            $loc = $base.'/'.$path;
+        foreach ((array) config('pages') as $path => $meta) {
+            $loc = $base.'/'.ltrim((string) $path, '/');
             $xml .= "  <url>\n";
-            $xml .= '    <loc>'.htmlspecialchars($loc, ENT_XML1).'</loc>'."\n";
+            $xml .= '    <loc>'.htmlspecialchars(rtrim($loc, '/').($path === '' ? '/' : ''), ENT_XML1).'</loc>'."\n";
             $xml .= '    <lastmod>'.$lastmod.'</lastmod>'."\n";
-            $xml .= '    <changefreq>weekly</changefreq>'."\n";
-            $xml .= '    <priority>'.$priority.'</priority>'."\n";
+            $xml .= '    <changefreq>'.($meta['changefreq'] ?? 'weekly').'</changefreq>'."\n";
+            $xml .= '    <priority>'.($meta['priority'] ?? '0.5').'</priority>'."\n";
             $xml .= "  </url>\n";
         }
         $xml .= '</urlset>'."\n";

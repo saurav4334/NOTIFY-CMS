@@ -2,11 +2,30 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>FAQ – NotifySMS</title>
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" href="/favicon-32.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<title>Bulk SMS FAQ — Pricing, API, Masking &amp; Delivery | NotifySMS</title>
+<meta name="description" content="Answers to common questions about bulk SMS in Bangladesh: pricing, masking approval, API integration, delivery reports and operator coverage.">
+<link rel="canonical" href="https://notifybd.com/faq">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="theme-color" content="#003087">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NotifySMS">
+<meta property="og:locale" content="en_US">
+<meta property="og:title" content="Bulk SMS FAQ — Pricing, API, Masking &amp; Delivery | NotifySMS">
+<meta property="og:description" content="Common questions about bulk SMS in Bangladesh: pricing, masking, API, delivery reports and operator coverage.">
+<meta property="og:url" content="https://notifybd.com/faq">
+<meta property="og:image" content="https://notifybd.com/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bulk SMS FAQ | NotifySMS">
+<meta name="twitter:description" content="Common questions about bulk SMS pricing, masking, API and delivery in Bangladesh.">
+<meta name="twitter:image" content="https://notifybd.com/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://notifybd.com/"},{"@type":"ListItem","position":2,"name":"FAQ","item":"https://notifybd.com/faq"}]}</script>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<link rel="stylesheet" href="mobile.css">
+<link rel="stylesheet" href="/mobile.css">
 <script>tailwind.config={theme:{extend:{fontFamily:{sans:['Inter','sans-serif']}}}}</script>
 <style>
 :root{--navy:#003087;--blue:#009cde;--gold:#ffc439;}
@@ -35,28 +54,28 @@
 <!-- NAVBAR -->
 <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-4" style="background:rgba(0,48,135,.95);">
   <div class="max-w-7xl mx-auto flex items-center justify-between">
-    <a href="index.html" class="flex items-center gap-2"><div class="w-9 h-9 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-sm"></i></div><span class="text-white font-bold text-xl">Notify<span style="color:#009cde;">SMS</span></span></a>
+    <a href="/" class="flex items-center gap-2"><img src="/logo-white.png" alt="NotifySMS - Delivering Confidence" class="brand-logo"></a>
     <div class="hidden lg:flex items-center gap-7">
-      <a href="index.html" class="text-gray-300 hover:text-white text-sm font-medium">Home</a>
-      <a href="about.html" class="text-gray-300 hover:text-white text-sm font-medium">About</a>
-      <a href="services.html" class="text-gray-300 hover:text-white text-sm font-medium">Services</a>
-      <a href="pricing.html" class="text-gray-300 hover:text-white text-sm font-medium">Pricing</a>
-      <a href="calculator.html" class="text-gray-300 hover:text-white text-sm font-medium">Calculator</a>
-      <a href="faq.html" class="text-white text-sm font-semibold border-b-2 pb-0.5" style="border-color:#ffc439;">FAQ</a>
-      <a href="contact.html" class="text-gray-300 hover:text-white text-sm font-medium">Contact</a>
+      <a href="/" class="text-gray-300 hover:text-white text-sm font-medium">Home</a>
+      <a href="/about" class="text-gray-300 hover:text-white text-sm font-medium">About</a>
+      <a href="/services" class="text-gray-300 hover:text-white text-sm font-medium">Services</a>
+      <a href="/pricing" class="text-gray-300 hover:text-white text-sm font-medium">Pricing</a>
+      <a href="/calculator" class="text-gray-300 hover:text-white text-sm font-medium">Calculator</a>
+      <a href="/faq" class="text-white text-sm font-semibold border-b-2 pb-0.5" style="border-color:#ffc439;">FAQ</a>
+      <a href="/contact" class="text-gray-300 hover:text-white text-sm font-medium">Contact</a>
     </div>
-    <div class="hidden lg:flex items-center gap-3"><a href="#" class="text-gray-300 hover:text-white text-sm px-4 py-2 rounded-lg hover:bg-white/10"><i class="fas fa-sign-in-alt mr-1 text-xs"></i>Login</a><a href="contact.html" class="text-sm font-semibold px-5 py-2.5 rounded-xl hover:opacity-90" style="background:#ffc439;color:#003087;">Get Started</a></div>
+    <div class="hidden lg:flex items-center gap-3"><a href="#" class="text-gray-300 hover:text-white text-sm px-4 py-2 rounded-lg hover:bg-white/10"><i class="fas fa-sign-in-alt mr-1 text-xs"></i>Login</a><a href="/contact" class="text-sm font-semibold px-5 py-2.5 rounded-xl hover:opacity-90" style="background:#ffc439;color:#003087;">Get Started</a></div>
     <button onclick="toggleMenu()" class="lg:hidden text-white p-2 rounded-lg hover:bg-white/10"><i class="fas fa-bars"></i></button>
   </div>
   <div id="mobile-menu" class="lg:hidden"><div class="max-w-7xl mx-auto mt-3 bg-slate-800/95 backdrop-blur rounded-2xl p-5 flex flex-col gap-1">
-    <a href="index.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Home</a>
-    <a href="about.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">About</a>
-    <a href="services.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Services</a>
-    <a href="pricing.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Pricing</a>
-    <a href="calculator.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Calculator</a>
-    <a href="faq.html" class="text-white text-sm font-semibold py-2.5 px-3 rounded-xl bg-white/10">FAQ</a>
-    <a href="contact.html" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Contact</a>
-    <div class="flex gap-3 mt-3 pt-3 border-t border-white/10"><a href="#" class="flex-1 border border-white/20 text-white text-sm font-semibold py-3 rounded-xl text-center">Login</a><a href="contact.html" class="flex-1 text-sm font-semibold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get Started</a></div>
+    <a href="/" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Home</a>
+    <a href="/about" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">About</a>
+    <a href="/services" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Services</a>
+    <a href="/pricing" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Pricing</a>
+    <a href="/calculator" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Calculator</a>
+    <a href="/faq" class="text-white text-sm font-semibold py-2.5 px-3 rounded-xl bg-white/10">FAQ</a>
+    <a href="/contact" class="text-gray-300 text-sm py-2.5 px-3 rounded-xl hover:bg-white/5">Contact</a>
+    <div class="flex gap-3 mt-3 pt-3 border-t border-white/10"><a href="#" class="flex-1 border border-white/20 text-white text-sm font-semibold py-3 rounded-xl text-center">Login</a><a href="/contact" class="flex-1 text-sm font-semibold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get Started</a></div>
   </div></div>
 </nav>
 
@@ -114,7 +133,7 @@
         </div>
         <div class="faq-item bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
           <button class="w-full text-left px-6 py-5 flex items-center justify-between" onclick="toggleFaq(this)"><span class="font-bold text-gray-900 pr-4">100,000+ SMS-er rate ki?</span><i class="faq-icon fas fa-plus flex-shrink-0" style="color:#003087;"></i></button>
-          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">100,000 ba tar beshi SMS-er jonno amader Elite plan-e rate হলো <strong>৳0.26/SMS (including VAT, TAX &amp; Dipping)</strong>। Eta amader সবচেয়ে কম rate। Ar beshi details-er jonno <a href="pricing.html" style="color:#003087;" class="font-semibold underline">Pricing page</a> দেখুন অথবা আমাদের sales team-er সাথে contact করুন।</p></div>
+          <div class="faq-answer px-6 pb-5"><p class="text-gray-500 text-sm leading-relaxed">100,000 ba tar beshi SMS-er jonno amader Elite plan-e rate হলো <strong>৳0.26/SMS (including VAT, TAX &amp; Dipping)</strong>। Eta amader সবচেয়ে কম rate। Ar beshi details-er jonno <a href="/pricing" style="color:#003087;" class="font-semibold underline">Pricing page</a> দেখুন অথবা আমাদের sales team-er সাথে contact করুন।</p></div>
         </div>
       </div>
     </div>
@@ -167,13 +186,13 @@
     <h3 class="text-2xl font-black text-gray-900 mb-3">Still have questions?</h3>
     <p class="text-gray-500 mb-8">Our team is available 24/7 to help you find the right solution.</p>
     <div class="flex flex-wrap gap-4 justify-center">
-      <a href="contact.html" class="font-black px-8 py-4 rounded-2xl hover:opacity-90 text-white" style="background:#003087;"><i class="fas fa-envelope mr-2"></i>Send a Message</a>
+      <a href="/contact" class="font-black px-8 py-4 rounded-2xl hover:opacity-90 text-white" style="background:#003087;"><i class="fas fa-envelope mr-2"></i>Send a Message</a>
       <a href="tel:+8801XXXXXXXXX" class="font-black px-8 py-4 rounded-2xl border-2 hover:text-white transition-all" style="border-color:#003087;color:#003087;" onmouseover="this.style.background='#003087'" onmouseout="this.style.background='transparent'"><i class="fab fa-whatsapp mr-2"></i>WhatsApp Us</a>
     </div>
   </div>
 </section>
 
-<footer class="bg-gray-950 text-gray-400 border-t border-gray-800"><div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-xs"></i></div><span class="text-white font-bold">Notify<span style="color:#009cde;">SMS</span></span></div><div class="flex flex-wrap gap-5 text-sm"><a href="index.html" class="hover:text-white">Home</a><a href="pricing.html" class="hover:text-white">Pricing</a><a href="faq.html" class="text-white font-semibold">FAQ</a><a href="contact.html" class="hover:text-white">Contact</a></div><p class="text-gray-600 text-sm">© 2025 NotifySMS. BTRC Licensed.</p></div></footer>
+<footer class="bg-gray-950 text-gray-400 border-t border-gray-800"><div class="max-w-7xl mx-auto px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4"><div class="flex items-center gap-2"><div class="w-8 h-8 rounded-xl flex items-center justify-center" style="background:linear-gradient(135deg,#009cde,#003087)"><i class="fas fa-comment-sms text-white text-xs"></i></div><span class="text-white font-bold">Notify<span style="color:#009cde;">SMS</span></span></div><div class="flex flex-wrap gap-5 text-sm"><a href="/" class="hover:text-white">Home</a><a href="/pricing" class="hover:text-white">Pricing</a><a href="/faq" class="text-white font-semibold">FAQ</a><a href="/contact" class="hover:text-white">Contact</a></div><p class="text-gray-600 text-sm">© 2025 NotifySMS. BTRC Licensed.</p></div></footer>
 <script>
 function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open');}
 window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>50);document.getElementById('scrollTop').classList.toggle('visible',window.scrollY>300);});
@@ -203,5 +222,5 @@ function renderFaqs(faqs){
 // cms.js fetches /content and fires cms:ready with the full payload.
 document.addEventListener('cms:ready', e => renderFaqs(e.detail && e.detail.faq));
 </script>
-<script src="cms.js"></script>
+<script src="/cms.js"></script>
 </body></html>

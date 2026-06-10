@@ -5,6 +5,37 @@
 
     RewriteEngine On
 
+    # ───────────────────────────────────────────────────────────────
+    # Canonical host: force HTTPS and non-www (single hop each)
+    # ───────────────────────────────────────────────────────────────
+    RewriteCond %{HTTPS} off
+    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+    # ───────────────────────────────────────────────────────────────
+    # Legacy URL 301 redirects → clean SEO URLs
+    # (mirrors routes/web.php; runs in Apache before PHP — no chains)
+    # ───────────────────────────────────────────────────────────────
+    # /site/index.html  → /
+    RewriteCond %{THE_REQUEST} \s/+site/index\.html[\s?] [NC]
+    RewriteRule ^ / [R=301,L]
+
+    # /index.html  → /
+    RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+    RewriteRule ^ / [R=301,L]
+
+    # /site/<page>.html  → /<page>
+    RewriteRule ^site/(.+?)\.html$ /$1 [R=301,L,NC]
+
+    # /site/<asset|anything>  → /<asset|anything>  (cms.js, css, etc.)
+    RewriteRule ^site/(.+)$ /$1 [R=301,L]
+
+    # /<page>.html  → /<page>
+    RewriteRule ^(.+?)\.html$ /$1 [R=301,L,NC]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -22,4 +53,40 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+</IfModule>
+
+# ───────────────────────────────────────────────────────────────
+# Security headers
+# ───────────────────────────────────────────────────────────────
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set X-XSS-Protection "0"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+    # Enable HSTS once HTTPS is verified working site-wide.
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+</IfModule>
+
+# ───────────────────────────────────────────────────────────────
+# Static asset caching (performance)
+# ───────────────────────────────────────────────────────────────
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType font/woff2 "access plus 1 year"
+</IfModule>
+
+# ───────────────────────────────────────────────────────────────
+# Compression (performance)
+# ───────────────────────────────────────────────────────────────
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript application/json image/svg+xml
 </IfModule>

@@ -5,16 +5,55 @@ use App\Http\Controllers\Admin\CmsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\LeadsController;
 use App\Http\Controllers\Admin\MediaController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\SeoController;
 use App\Http\Controllers\SiteController;
 use Illuminate\Support\Facades\Route;
 
-// Public marketing site (served from the sibling static frontend folder).
-// Relative asset/page links resolve under the /site/ base, so enter via /site/index.html.
-Route::get('/', fn () => redirect('/site/index.html'));
-Route::get('/site/{path?}', [SiteController::class, 'serve'])->where('path', '.*')->name('site');
+/*
+|--------------------------------------------------------------------------
+| Public marketing site — clean SEO-friendly URLs
+|--------------------------------------------------------------------------
+| All public pages are registered from the central registry in
+| config/pages.php. Entries with a 'file' key are existing static pages
+| (frontend/*.html) served by SiteController; entries with a 'view' key are
+| Blade landing pages rendered by PageController. The clean path is the
+| array key ('' = "/").
+*/
+foreach ((array) config('pages') as $path => $meta) {
+    $uri = $path === '' ? '/' : $path;
+    $name = 'page.'.($path === '' ? 'home' : str_replace('/', '.', $path));
 
-// SEO endpoints for crawlers (generated from the DB).
+    if (isset($meta['file'])) {
+        Route::get($uri, [SiteController::class, 'page'])->defaults('key', $path)->name($name);
+    } else {
+        Route::get($uri, [PageController::class, 'show'])->defaults('key', $path)->name($name);
+    }
+}
+
+/*
+|--------------------------------------------------------------------------
+| Legacy URL 301 redirects (old /site/*.html and *.html structure)
+|--------------------------------------------------------------------------
+| Mirrored by public/.htaccess for production speed; these keep the same
+| behaviour under `artisan serve` and any non-Apache host.
+*/
+Route::redirect('/site', '/', 301);
+Route::redirect('/index.html', '/', 301);
+
+// /site/<anything>  → strip the /site/ prefix and any .html (index → /)
+Route::get('site/{path}', [SiteController::class, 'redirectLegacy'])
+    ->where('path', '.*');
+
+// /<anything>.html  → strip the .html extension (index.html → /)
+Route::get('{path}.html', [SiteController::class, 'redirectHtml'])
+    ->where('path', '.*');
+
+/*
+|--------------------------------------------------------------------------
+| SEO endpoints for crawlers (generated from the registry / DB)
+|--------------------------------------------------------------------------
+*/
 Route::get('sitemap.xml', [SeoController::class, 'sitemap']);
 Route::get('robots.txt', [SeoController::class, 'robots']);
 

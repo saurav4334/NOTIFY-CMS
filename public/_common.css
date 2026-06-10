@@ -1,5 +1,8 @@
 /* NotifySMS — Shared Styles */
 :root { --navy:#003087; --blue:#009cde; --gold:#ffc439; }
+/* Brand logo — full colour on light navbar, turns white on the dark scrolled navbar */
+.brand-logo{height:36px;width:auto;display:block;}
+#navbar.scrolled .brand-logo{filter:brightness(0) invert(1);}
 *,*::before,*::after{box-sizing:border-box;}
 body{font-family:'Inter',sans-serif;margin:0;-webkit-font-smoothing:antialiased;}
 .gradient-hero{background:linear-gradient(135deg,#003087 0%,#001a5c 50%,#003087 100%);}
