@@ -2,12 +2,11 @@
 
 A CMS-driven website and admin portal for the NotifySMS bulk-SMS platform.
 
-This repository contains two parts:
-
-| Folder | What it is |
-| ------ | ---------- |
-| [`notify cms 1/`](notify%20cms%201/) | Static marketing frontend (HTML5 + TailwindCSS + vanilla JS). Pages fetch live content from the backend API. |
-| [`notify-backend/`](notify-backend/) | Laravel backend: admin panel, REST API, database, auth, RBAC, media library. |
+This is a single, complete Laravel project: the Laravel backend (admin panel,
+REST API, database, auth, RBAC, media library) lives at the repository root, and
+the static marketing frontend (HTML5 + TailwindCSS + vanilla JS) is bundled in
+[`frontend/`](frontend/) and served by `SiteController` under `/site/`. The
+frontend pages fetch live content from the `/api/v1` endpoints.
 
 ## Features
 
@@ -23,7 +22,6 @@ This repository contains two parts:
 Requires PHP 8.3+, Composer, and (optionally) MySQL 8. SQLite works out of the box for local dev.
 
 ```bash
-cd notify-backend
 cp .env.example .env
 composer install
 php artisan key:generate

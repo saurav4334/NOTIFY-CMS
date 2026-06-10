@@ -23,10 +23,10 @@ class SiteController extends Controller
         'woff2' => 'font/woff2',
     ];
 
-    /** Absolute path to the sibling static frontend folder. */
+    /** Absolute path to the bundled static frontend folder. */
     private function frontendDir(): string
     {
-        return dirname(base_path()).DIRECTORY_SEPARATOR.'notify cms 1';
+        return base_path('frontend');
     }
 
     public function serve(string $path = 'index.html'): Response|BinaryFileResponse
