@@ -1,0 +1,73 @@
+---
+# =============================================================================
+# NotifyBD — cPanel Git Version Control deployment
+# =============================================================================
+# This file ships INSIDE the `production` branch. cPanel runs these tasks after
+# you click "Update from Remote" → "Deploy HEAD Commit", from inside the
+# repository clone (~/repositories/notifybd or wherever cPanel placed it).
+#
+# It is deliberately written with plain POSIX tools only:
+#   mkdir, cp, find, rm, tar  —  NO rsync (the host does not have it).
+#
+# BEFORE THE FIRST DEPLOY, set DEPLOYPATH below to your real document root.
+# It is left blank on purpose so a misconfigured deploy fails loudly instead of
+# copying the site into the wrong directory.
+#
+#   Typical values:
+#     /home/CPANELUSER/public_html            (primary domain)
+#     /home/CPANELUSER/public_html/notifybd   (subdirectory)
+#     /home/CPANELUSER/notifybd.com           (addon domain)
+# =============================================================================
+deployment:
+  tasks:
+    # ── 0. Configure ────────────────────────────────────────────────────────
+    - export DEPLOYPATH=""
+    - export BACKUPDIR="$HOME/notifybd-backups"
+
+    # ── 1. Fail safely if DEPLOYPATH was never set ──────────────────────────
+    - if [ -z "$DEPLOYPATH" ]; then echo "FATAL: DEPLOYPATH is not set in .cpanel.yml. Edit it and redeploy."; exit 1; fi
+    - if [ ! -d "$DEPLOYPATH" ]; then echo "FATAL: DEPLOYPATH does not exist: $DEPLOYPATH"; exit 1; fi
+    - if [ ! -f "index.html" ]; then echo "FATAL: no index.html in the repo root — are you deploying the production branch?"; exit 1; fi
+
+    # ── 2. Back up the current live site before touching anything ───────────
+    - /bin/mkdir -p "$BACKUPDIR"
+    - /bin/tar -czf "$BACKUPDIR/notifybd-$(date +%Y%m%d-%H%M%S).tar.gz" -C "$DEPLOYPATH" . 2>/dev/null || echo "WARN: backup failed (continuing)"
+    # Keep only the 5 most recent backups.
+    - /bin/sh -c 'ls -1t "$BACKUPDIR"/notifybd-*.tar.gz 2>/dev/null | tail -n +6 | xargs -r rm -f'
+
+    # ── 3. Preserve runtime state that must survive a deploy ────────────────
+    #      api/.env      — secrets, never in Git
+    #      api/storage/  — captured leads + logs
+    #      .well-known/  — ACME/TLS challenges, cPanel manages this
+    - /bin/mkdir -p "$HOME/.notifybd-preserve"
+    - if [ -f "$DEPLOYPATH/api/.env" ]; then /bin/cp -p "$DEPLOYPATH/api/.env" "$HOME/.notifybd-preserve/.env"; fi
+    - if [ -d "$DEPLOYPATH/api/storage" ]; then /bin/cp -Rp "$DEPLOYPATH/api/storage" "$HOME/.notifybd-preserve/storage"; fi
+    - if [ -d "$DEPLOYPATH/.well-known" ]; then /bin/cp -Rp "$DEPLOYPATH/.well-known" "$HOME/.notifybd-preserve/.well-known"; fi
+
+    # ── 4. Remove the previous document-root contents ───────────────────────
+    #      .well-known and cgi-bin are left alone; everything else under
+    #      DEPLOYPATH is replaced with this deployment.
+    - /usr/bin/find "$DEPLOYPATH" -mindepth 1 -maxdepth 1 ! -name '.well-known' ! -name 'cgi-bin' -exec rm -rf {} +
+
+    # ── 5. Copy the new build in (excluding Git + deployment metadata) ──────
+    - /bin/cp -R ./. "$DEPLOYPATH/"
+    - /bin/rm -rf "$DEPLOYPATH/.git" "$DEPLOYPATH/.gitignore" "$DEPLOYPATH/.cpanel.yml"
+
+    # ── 6. Restore preserved state ──────────────────────────────────────────
+    - /bin/mkdir -p "$DEPLOYPATH/api"
+    - if [ -f "$HOME/.notifybd-preserve/.env" ]; then /bin/cp -p "$HOME/.notifybd-preserve/.env" "$DEPLOYPATH/api/.env"; fi
+    - if [ -d "$HOME/.notifybd-preserve/storage" ]; then /bin/cp -Rp "$HOME/.notifybd-preserve/storage" "$DEPLOYPATH/api/storage"; fi
+    - if [ -d "$HOME/.notifybd-preserve/.well-known" ]; then /bin/cp -Rp "$HOME/.notifybd-preserve/.well-known" "$DEPLOYPATH/.well-known"; fi
+
+    # ── 7. Normal, safe permissions ─────────────────────────────────────────
+    - /usr/bin/find "$DEPLOYPATH" -type d -exec chmod 755 {} +
+    - /usr/bin/find "$DEPLOYPATH" -type f -exec chmod 644 {} +
+    # Secrets and captured leads are owner-only.
+    - if [ -f "$DEPLOYPATH/api/.env" ]; then chmod 600 "$DEPLOYPATH/api/.env"; fi
+    - if [ -d "$DEPLOYPATH/api/storage" ]; then chmod -R 750 "$DEPLOYPATH/api/storage"; fi
+
+    # ── 8. Verify the deploy actually landed ────────────────────────────────
+    - if [ ! -f "$DEPLOYPATH/index.html" ]; then echo "FATAL: index.html missing after deploy"; exit 1; fi
+    - if [ ! -f "$DEPLOYPATH/api/lead.php" ]; then echo "FATAL: api/lead.php missing after deploy"; exit 1; fi
+    - if [ ! -f "$DEPLOYPATH/.htaccess" ]; then echo "FATAL: .htaccess missing after deploy"; exit 1; fi
+    - echo "OK: NotifyBD deployed to $DEPLOYPATH"

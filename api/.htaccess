@@ -1,0 +1,39 @@
+# =============================================================================
+# NotifyBD — /api/ hardening
+# =============================================================================
+# Defence in depth: even if the root .htaccess is lost or overridden, nothing
+# in this directory is browsable and only lead.php is reachable.
+# =============================================================================
+
+<IfModule mod_autoindex.c>
+  Options -Indexes
+</IfModule>
+
+# Deny everything in this directory by default...
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order Allow,Deny
+  Deny from all
+</IfModule>
+
+# ...then allow exactly one file: the lead endpoint.
+<Files "lead.php">
+  <IfModule mod_authz_core.c>
+    Require all granted
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order Allow,Deny
+    Allow from all
+  </IfModule>
+</Files>
+
+# .env, .env.example, storage/ and logs/ are therefore unreachable over HTTP,
+# as is any file added to this directory in future unless it is explicitly
+# allowed above.
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Cache-Control "no-store"
+</IfModule>

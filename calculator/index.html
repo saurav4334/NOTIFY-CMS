@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>SMS Cost Calculator — NotifyBD</title>
+  <meta name="description" content="Estimate your bulk SMS cost in seconds. Choose masking or non-masking, enter your volume, and see the per-SMS rate and total in Bangladeshi taka.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://notifybd.com/calculator/">
+  <meta name="theme-color" content="#003087">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NotifyBD">
+  <meta property="og:title" content="SMS Cost Calculator — NotifyBD">
+  <meta property="og:description" content="Estimate your bulk SMS cost in seconds. Choose masking or non-masking, enter your volume, and see the per-SMS rate and total in Bangladeshi taka.">
+  <meta property="og:url" content="https://notifybd.com/calculator/">
+  <meta property="og:image" content="https://notifybd.com/assets/images/og-notifybd.png">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SMS Cost Calculator — NotifyBD">
+  <meta name="twitter:description" content="Estimate your bulk SMS cost in seconds. Choose masking or non-masking, enter your volume, and see the per-SMS rate and total in Bangladeshi taka.">
+  <meta name="twitter:image" content="https://notifybd.com/assets/images/og-notifybd.png">
+
+  <link rel="icon" href="/favicon.png" type="image/png">
+  <link rel="manifest" href="/manifest.webmanifest">
+
+  <!-- Self-hosted font. Preloaded because it is used by the LCP text.
+       No Google Fonts, no Font Awesome, no Tailwind CDN. -->
+  <link rel="preload" href="/assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/assets/css/global.css">
+
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://notifybd.com/"},{"@type":"ListItem","position":2,"name":"SMS Cost Calculator","item":"https://notifybd.com/calculator/"}]}]}</script>
+</head>
+<body class="font-sans antialiased bg-white text-slate-900">
+
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header>
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 px-4 py-3" aria-label="Main">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        
+    <a href="/" class="inline-flex items-center shrink-0" aria-label="NotifyBD home">
+      <span class="notify-logo-animation">
+        <span class="notify-mark-wrap" aria-hidden="true">
+          <span class="speed-line line-1"></span>
+          <span class="speed-line line-2"></span>
+          <span class="speed-line line-3"></span>
+          <img class="notify-mark" src="/assets/images/notify-icon.png" alt=""
+               width="94" height="80" decoding="async">
+        </span>
+        <span class="notify-wordmark-wrap">
+          <img class="notify-wordmark" src="/assets/images/notify-logo.png" alt=""
+               width="352" height="83" decoding="async" fetchpriority="high">
+          <span class="bell-pulse" aria-hidden="true"></span>
+        </span>
+      </span>
+    </a>
+
+        <div class="hidden lg:flex items-center gap-7">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/about/" class="nav-link">About</a>
+        <a href="/services/" class="nav-link">Services</a>
+        <a href="/pricing/" class="nav-link">Pricing</a>
+        <a href="/calculator/" class="nav-link" aria-current="page">Calculator</a>
+        <a href="/faq/" class="nav-link">FAQ</a>
+        <a href="/contact/" class="nav-link">Contact</a>
+        </div>
+
+        <div class="hidden lg:flex items-center gap-3">
+          <!-- Login button hidden: config.customerPanelUrl is not set -->
+          <a href="/contact/" class="text-sm font-bold px-5 py-2.5 rounded-xl text-white shadow-md hover:opacity-90" style="background:#003087;">Get a Quote</a>
+        </div>
+
+        <button type="button" id="menu-toggle" class="lg:hidden menu-icon p-2 rounded-lg" style="color:#003087;"
+                aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="w-6 h-6" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>
+          <span class="sr-only-text">Open main menu</span>
+        </button>
+      </div>
+
+      <div id="mobile-menu" class="lg:hidden" hidden>
+        <div class="max-w-7xl mx-auto mt-3 rounded-2xl p-4 flex flex-col gap-1" style="background:rgba(15,23,42,.97);">
+          <a href="/" class="text-slate-200 hover:text-white text-sm font-medium py-3 px-3 rounded-xl hover:bg-white/10">Home</a>
+          <a href="/about/" class="text-slate-200 hover:text-white text-sm font-medium py-3 px-3 rounded-xl hover:bg-white/10">About</a>
+          <a href="/services/" class="text-slate-200 hover:text-white text-sm font-medium py-3 px-3 rounded-xl hover:bg-white/10">Services</a>
+          <a href="/pricing/" class="text-slate-200 hover:text-white text-sm font-medium py-3 px-3 rounded-xl hover:bg-white/10">Pricing</a>
+          <a href="/calculator/" class="text-slate-200 hover:text-white text-sm font-medium py-3 px-3 rounded-xl hover:bg-white/10 bg-white/10 text-white font-bold" aria-current="page">Calculator</a>
+          <a href="/faq/" class="text-slate-200 hover:text-white text-sm font-medium py-3 px-3 rounded-xl hover:bg-white/10">FAQ</a>
+          <a href="/contact/" class="text-slate-200 hover:text-white text-sm font-medium py-3 px-3 rounded-xl hover:bg-white/10">Contact</a>
+          <div class="flex gap-3 mt-3 pt-3 border-t border-white/15">
+            
+            <a href="/contact/" class="flex-1 text-sm font-bold py-3 rounded-xl text-center" style="background:#ffc439;color:#003087;">Get a Quote</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+<main id="main">
+<div class="page-hero">
+  <div class="grid-pattern" aria-hidden="true"></div>
+  <div class="max-w-7xl mx-auto px-4 relative z-10 text-center">
+    <p class="inline-block text-xs font-bold uppercase tracking-widest px-4 py-2 rounded-full mb-4"
+       style="background:rgba(0,156,222,.15);border:1px solid rgba(0,156,222,.35);color:#7dd3fc;">Calculator</p>
+    <h1 class="text-4xl sm:text-5xl font-black text-white mb-4">SMS Cost Calculator</h1>
+    <p class="page-hero-sub text-lg sm:text-xl max-w-2xl mx-auto mb-6">
+      Estimate your cost instantly. No signup required.
+    </p>
+    <span class="vat-badge-white"><svg class="w-3 h-3" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>All rates include VAT, TAX &amp; Dipping</span>
+  </div>
+</div>
+
+<section class="py-16 relative" style="background:linear-gradient(135deg,#001030 0%,#001e6e 50%,#001030 100%);">
+  <div class="absolute inset-0 grid-pattern opacity-30 pointer-events-none" aria-hidden="true"></div>
+
+  <div class="max-w-5xl mx-auto px-4 relative z-10">
+    <div class="grid md:grid-cols-2 gap-8 items-start">
+
+      <!-- ── INPUTS ── -->
+      <div class="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8">
+        <h2 class="text-white font-bold text-xl mb-6 flex items-center gap-3">
+          <span class="w-10 h-10 rounded-xl flex items-center justify-center text-white" style="background:linear-gradient(135deg,#003087,#009cde);"><svg class="w-5 h-5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-7"/><path d="M4 10V3"/><path d="M12 21v-9"/><path d="M12 8V3"/><path d="M20 21v-5"/><path d="M20 12V3"/><path d="M1 14h6"/><path d="M9 8h6"/><path d="M17 16h6"/></svg></span>
+          Configure your SMS
+        </h2>
+
+        <div class="space-y-6">
+          <!-- SMS type -->
+          <fieldset>
+            <legend class="text-slate-300 text-sm font-medium mb-3">SMS type</legend>
+            <div class="grid grid-cols-2 gap-3">
+              <button type="button" data-sms-type="nm" aria-pressed="true"
+                      class="flex items-center gap-3 px-4 py-3.5 rounded-xl border border-white/15 bg-white/10 text-left text-white transition-all">
+                <span class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 text-sky-300" style="background:rgba(0,156,222,.25);"><svg class="w-5 h-5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10a7.31 7.31 0 0 0 10 10Z"/><path d="m9 15 3-3"/><path d="M17 13a6 6 0 0 0-6-6"/><path d="M21 13A10 10 0 0 0 11 3"/></svg></span>
+                <span>
+                  <span class="block font-bold text-sm">Non-Masking</span>
+                  <span class="block text-xs text-slate-400">Numeric sender ID</span>
+                </span>
+              </button>
+              <button type="button" data-sms-type="m" aria-pressed="false"
+                      class="flex items-center gap-3 px-4 py-3.5 rounded-xl border border-white/15 bg-white/5 text-left text-white transition-all">
+                <span class="w-9 h-9 rounded-lg flex items-center justify-center shrink-0 text-amber-300" style="background:rgba(255,255,255,.08);"><svg class="w-5 h-5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3h4"/><path d="M10 17h4"/><rect width="18" height="18" x="3" y="3" rx="2"/><circle cx="12" cy="10" r="2"/></svg></span>
+                <span>
+                  <span class="block font-bold text-sm">Masking</span>
+                  <span class="block text-xs text-slate-400">Brand sender ID</span>
+                </span>
+              </button>
+            </div>
+          </fieldset>
+
+          <!-- Quantity -->
+          <div>
+            <label for="calc-qty" class="text-slate-300 text-sm font-medium mb-2.5 block">Number of SMS</label>
+            <input type="number" id="calc-qty" name="qty" value="10000" min="5000" max="1000000" step="1"
+                   inputmode="numeric" aria-describedby="calc-qty-help calc-error"
+                   class="w-full bg-white/5 border border-white/20 text-white text-3xl sm:text-4xl font-black rounded-2xl px-5 py-4 focus:border-sky-400">
+            <p id="calc-error" class="field-error" role="alert"></p>
+            <p id="calc-qty-help" class="text-slate-400 text-xs mt-2 flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16v-4"/><path d="M12 8h.01"/><circle cx="12" cy="12" r="10"/></svg>Minimum order: 5,000 SMS
+            </p>
+          </div>
+
+          <!-- Slider -->
+          <div>
+            <label for="qty-slider" class="text-slate-300 text-sm font-medium mb-3 block">Adjust quantity</label>
+            <input type="range" id="qty-slider" min="5000" max="500000" step="1000" value="10000">
+            <div class="flex justify-between text-slate-400 text-xs mt-2" aria-hidden="true">
+              <span>5K</span><span>100K</span><span>250K</span><span>500K</span>
+            </div>
+          </div>
+
+          <!-- Quick select -->
+          <div>
+            <p class="text-slate-300 text-sm font-medium mb-3">Quick select</p>
+            <div class="grid grid-cols-3 gap-2">
+              <button type="button" data-quick-qty="5000" class="bg-white/5 hover:bg-white/15 border border-white/15 text-slate-200 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-colors">5K</button>
+              <button type="button" data-quick-qty="10000" class="bg-white/5 hover:bg-white/15 border border-white/15 text-slate-200 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-colors">10K</button>
+              <button type="button" data-quick-qty="20000" class="bg-white/5 hover:bg-white/15 border border-white/15 text-slate-200 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-colors">20K</button>
+              <button type="button" data-quick-qty="40000" class="bg-white/5 hover:bg-white/15 border border-white/15 text-slate-200 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-colors">40K</button>
+              <button type="button" data-quick-qty="100000" class="bg-white/5 hover:bg-white/15 border border-white/15 text-slate-200 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-colors">100K</button>
+              <button type="button" data-quick-qty="200000" class="bg-white/5 hover:bg-white/15 border border-white/15 text-slate-200 hover:text-white rounded-xl py-2.5 text-sm font-semibold transition-colors">200K</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RESULTS ── -->
+      <div class="space-y-5">
+        <div class="rounded-3xl p-6 sm:p-8 relative overflow-hidden" style="background:linear-gradient(135deg,#003087 0%,#009cde 100%)">
+          <h2 class="text-blue-100 text-sm font-medium mb-2">Estimated total</h2>
+          <!-- aria-live: the result is announced when the inputs change -->
+          <p class="text-5xl sm:text-6xl font-black text-white mb-3" id="calc-total" aria-live="polite">—</p>
+          <p id="calc-msg" class="text-blue-100 text-sm"></p>
+          <div class="mt-4 pt-4 border-t border-white/20">
+            <span class="vat-badge-white"><svg class="w-3 h-3" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/></svg>Includes VAT, TAX &amp; Dipping</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4">
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p class="text-slate-400 text-xs uppercase tracking-widest mb-2">Per-SMS rate</p>
+            <p class="text-2xl sm:text-3xl font-black text-white" id="calc-rate">—</p>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+            <p class="text-slate-400 text-xs uppercase tracking-widest mb-2">Quantity</p>
+            <p class="text-2xl sm:text-3xl font-black text-white" id="calc-qty-show">—</p>
+          </div>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+          <h2 class="text-slate-300 text-xs font-bold uppercase tracking-widest mb-1 flex items-center gap-2">
+            <svg class="w-4 h-4" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/><rect width="18" height="18" x="3" y="3" rx="2"/></svg>Rate bands
+            <span id="slab-type-label" class="ml-auto text-xs font-bold px-3 py-1 rounded-full" style="background:rgba(0,156,222,.2);color:#7dd3fc;">Non-Masking</span>
+          </h2>
+          <p class="text-slate-400 text-xs mb-4">Select a band to use that quantity.</p>
+          <!-- Generated by calculator.js from pricing-config.js -->
+          <div id="slabs-list"></div>
+        </div>
+
+        <a href="/contact/" class="block w-full font-black py-4 rounded-2xl text-center hover:opacity-90 text-lg text-white" style="background:linear-gradient(90deg,#003087,#009cde);">
+          Get a Quote
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-slate-950 py-14">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-2xl font-black text-white mb-3">Questions about pricing?</h2>
+    <p class="text-slate-300 mb-7">Read the FAQ, or ask our team for a quote on your volume.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="/faq/" class="font-semibold px-7 py-3 rounded-xl border-2 border-white/30 text-white hover:bg-white/10">View FAQ</a>
+      <a href="/contact/" class="font-semibold px-7 py-3 rounded-xl hover:opacity-90" style="background:#ffc439;color:#003087;">Get a Quote</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+  <footer class="bg-slate-950 text-slate-300">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+
+        <div class="lg:col-span-1">
+          
+    <a href="/" class="inline-flex items-center shrink-0" aria-label="NotifyBD home">
+      <img src="/assets/images/notify-logo.png" alt="" width="352" height="83"
+           class="h-8 w-auto" loading="lazy" decoding="async"
+           style="filter:brightness(0) invert(1);">
+    </a>
+          <p class="text-slate-400 text-sm leading-relaxed mt-5 mb-6 max-w-xs">
+            Reliable bulk SMS solutions for businesses in Bangladesh — promotional,
+            transactional, masking and non-masking SMS.
+          </p>
+          <!-- Social links hidden: none configured -->
+        </div>
+
+        <div>
+          <h2 class="text-white font-semibold mb-5 text-xs uppercase tracking-widest">Company</h2>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/about/" class="hover:text-white">About Us</a></li>
+            <li><a href="/services/" class="hover:text-white">Services</a></li>
+            <li><a href="/pricing/" class="hover:text-white">Pricing</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-white font-semibold mb-5 text-xs uppercase tracking-widest">Support</h2>
+          <ul class="space-y-3 text-sm">
+            <li><a href="/faq/" class="hover:text-white">FAQ</a></li>
+            <li><a href="/calculator/" class="hover:text-white">SMS Cost Calculator</a></li>
+            <li><a href="/contact/" class="hover:text-white">Contact Us</a></li>
+            <li><a href="/privacy/" class="hover:text-white">Privacy Policy</a></li>
+            <li><a href="/terms/" class="hover:text-white">Terms &amp; Conditions</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h2 class="text-white font-semibold mb-5 text-xs uppercase tracking-widest">Contact</h2>
+          <ul class="space-y-3.5 text-sm">
+            <li class="flex items-start gap-2.5"><svg class="w-4 h-4 mt-0.5 shrink-0" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg><span>Dhaka, Bangladesh</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+        <p class="text-slate-400 text-sm">&copy; 2026 NotifyBD. All rights reserved.</p>
+        <p class="text-slate-500 text-xs">Bulk SMS Solutions in Bangladesh</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp button hidden: config.whatsapp is not set -->
+  <button type="button" id="scrollTop" class="text-white">
+    <svg class="w-5 h-5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg><span class="sr-only-text">Back to top</span>
+  </button>
+
+  <script src="/assets/js/main.js" defer></script>
+  <script src="/assets/js/pricing-config.js" defer></script>
+  <script src="/assets/js/calculator.js" defer></script>
+</body>
+</html>

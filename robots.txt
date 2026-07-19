@@ -1,0 +1,8 @@
+# NotifyBD — https://notifybd.com
+User-agent: *
+Allow: /
+
+# The lead endpoint accepts POST only; there is nothing to index.
+Disallow: /api/
+
+Sitemap: https://notifybd.com/sitemap.xml

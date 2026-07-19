@@ -1,0 +1,19 @@
+{
+  "name": "NotifyBD — Bulk SMS Solutions in Bangladesh",
+  "short_name": "NotifyBD",
+  "description": "Reliable bulk SMS solutions for businesses in Bangladesh.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#003087",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
