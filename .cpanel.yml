@@ -9,19 +9,16 @@
 # It is deliberately written with plain POSIX tools only:
 #   mkdir, cp, find, rm, tar  —  NO rsync (the host does not have it).
 #
-# BEFORE THE FIRST DEPLOY, set DEPLOYPATH below to your real document root.
-# It is left blank on purpose so a misconfigured deploy fails loudly instead of
-# copying the site into the wrong directory.
+# DEPLOYPATH is the site's document root. If you move the domain, update it here.
+# The guard below still fails loudly if it is ever blank or missing, so a
+# misconfigured deploy can never copy the site into the wrong directory.
 #
-#   Typical values:
-#     /home/CPANELUSER/public_html            (primary domain)
-#     /home/CPANELUSER/public_html/notifybd   (subdirectory)
-#     /home/CPANELUSER/notifybd.com           (addon domain)
+#   Confirmed document root: /home/urbaneas/notifybd.com  (addon domain)
 # =============================================================================
 deployment:
   tasks:
     # ── 0. Configure ────────────────────────────────────────────────────────
-    - export DEPLOYPATH=""
+    - export DEPLOYPATH="/home/urbaneas/notifybd.com"
     - export BACKUPDIR="$HOME/notifybd-backups"
 
     # ── 1. Fail safely if DEPLOYPATH was never set ──────────────────────────
