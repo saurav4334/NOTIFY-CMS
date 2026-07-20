@@ -5,7 +5,7 @@
  *
  * Consumed by:
  *   - build/build.mjs  → generates the pricing page cards + comparison table
- *   - assets/js/calculator.js → the live calculator (window.NOTIFYBD_PRICING)
+ *   - assets/js/calculator.js → the live calculator (window.NOTIFY_PRICING)
  *
  * In the mockup these numbers were hardcoded in THREE places (pricing.html
  * markup, calculator.js, cms.js). They now live here and nowhere else.
@@ -23,7 +23,7 @@
  * at 10,999 or the second should start at 10,001.
  * ============================================================================
  */
-const NOTIFYBD_PRICING = {
+const NOTIFY_PRICING = {
   currency: '৳',
   currencyCode: 'BDT',
   locale: 'en-BD',
@@ -94,7 +94,7 @@ const NOTIFYBD_PRICING = {
  * callers must then show the "contact sales" state.
  */
 function findSlab(typeId, qty) {
-  const type = NOTIFYBD_PRICING.types[typeId];
+  const type = NOTIFY_PRICING.types[typeId];
   if (!type || !Number.isFinite(qty)) return null;
   return (
     type.slabs.find((s) => qty >= s.min && (s.max === null || qty <= s.max)) || null
@@ -102,9 +102,9 @@ function findSlab(typeId, qty) {
 }
 
 if (typeof window !== 'undefined') {
-  window.NOTIFYBD_PRICING = NOTIFYBD_PRICING;
-  window.NOTIFYBD_FIND_SLAB = findSlab;
+  window.NOTIFY_PRICING = NOTIFY_PRICING;
+  window.NOTIFY_FIND_SLAB = findSlab;
 }
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { NOTIFYBD_PRICING, findSlab };
+  module.exports = { NOTIFY_PRICING, findSlab };
 }

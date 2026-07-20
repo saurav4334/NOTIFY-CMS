@@ -5,8 +5,8 @@
 (function () {
   'use strict';
 
-  const CFG = window.NOTIFYBD_PRICING;
-  const findSlab = window.NOTIFYBD_FIND_SLAB;
+  const CFG = window.NOTIFY_PRICING;
+  const findSlab = window.NOTIFY_FIND_SLAB;
   if (!CFG || !findSlab) return;
 
   const qtyInput = document.getElementById('calc-qty');
