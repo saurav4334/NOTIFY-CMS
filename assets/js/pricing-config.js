@@ -1,5 +1,5 @@
 /**
- * NotifyBD — central pricing configuration.
+ * Notify — central pricing configuration.
  * ============================================================================
  * THE SINGLE SOURCE OF TRUTH FOR EVERY RATE ON THE SITE.
  *
