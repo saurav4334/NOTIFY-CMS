@@ -1,5 +1,5 @@
 /**
- * NotifyBD — shared behaviour for every page.
+ * Notify — shared behaviour for every page.
  * Loaded with `defer`, so the DOM is ready when this runs.
  */
 (function () {

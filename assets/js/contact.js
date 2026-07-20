@@ -1,5 +1,5 @@
 /**
- * NotifyBD — contact form.
+ * Notify — contact form.
  *
  * Submits to /api/lead.php via fetch and reports what actually happened.
  * The mockup faked a 1.5s delay and always showed "Message sent successfully!"

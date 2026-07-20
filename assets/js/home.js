@@ -1,5 +1,5 @@
 /**
- * NotifyBD — homepage hero canvas.
+ * Notify — homepage hero canvas.
  *
  * Purely decorative drifting message bubbles behind the hero.
  *

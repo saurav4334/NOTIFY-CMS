@@ -1,6 +1,6 @@
 <?php
 /**
- * NotifyBD — lead capture endpoint.
+ * Notify — lead capture endpoint.
  * =============================================================================
  * The ONLY server-side code on the site. Plain PHP, no framework, no database,
  * no Composer. Drop it on any cPanel host with PHP 7.4+.
@@ -336,17 +336,17 @@ if ($to !== '' && filter_var($to, FILTER_VALIDATE_EMAIL) && function_exists('mai
         : 'no-reply@' . preg_replace('/[^a-z0-9.\-]/i', '', $_SERVER['HTTP_HOST'] ?? 'notifybd.com');
 
     $headers = [
-        'From: NotifyBD Website <' . $fromAddress . '>',
+        'From: Notify Website <' . $fromAddress . '>',
         'Content-Type: text/plain; charset=utf-8',
         'MIME-Version: 1.0',
-        'X-Mailer: NotifyBD-Lead',
+        'X-Mailer: Notify-Lead',
     ];
     // Only set Reply-To when the visitor gave a valid address.
     if ($email !== '') {
         $headers[] = 'Reply-To: ' . $email;
     }
 
-    $body = "New enquiry from the NotifyBD website\n"
+    $body = "New enquiry from the Notify website\n"
         . str_repeat('-', 44) . "\n"
         . "Name:       {$name}\n"
         . "Mobile:     {$normalisedPhone}\n"

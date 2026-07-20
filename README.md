@@ -1,4 +1,4 @@
-# NotifyBD — Static Website (v2)
+# Notify — Static Website (v2)
 
 Bulk SMS Solutions in Bangladesh · <https://notifybd.com>
 
@@ -187,4 +187,4 @@ tar -xzf ~/notifybd-backup-YYYY-MM-DD-HHMMSS.tar.gz -C .
 
 ---
 
-© 2026 NotifyBD. All rights reserved.
+© 2026 Notify. All rights reserved.

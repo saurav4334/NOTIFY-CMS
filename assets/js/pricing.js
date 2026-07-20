@@ -1,5 +1,5 @@
 /**
- * NotifyBD — pricing page type switcher (non-masking ⇄ masking).
+ * Notify — pricing page type switcher (non-masking ⇄ masking).
  *
  * The cards themselves are generated at build time from pricing-config.js;
  * this only swaps which panel is visible. Implemented as a proper ARIA tablist

@@ -1,5 +1,5 @@
 /**
- * NotifyBD — SMS price calculator.
+ * Notify — SMS price calculator.
  * Every rate comes from assets/js/pricing-config.js. No prices are defined here.
  */
 (function () {

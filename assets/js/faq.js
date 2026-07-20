@@ -1,5 +1,5 @@
 /**
- * NotifyBD — FAQ accordion.
+ * Notify — FAQ accordion.
  *
  * Accessible by construction: each question is a real <button> carrying
  * aria-expanded + aria-controls, and the answer region is hidden from the

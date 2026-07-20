@@ -1,4 +1,4 @@
-# NotifyBD — https://notifybd.com
+# Notify — https://notifybd.com
 User-agent: *
 Allow: /
 
