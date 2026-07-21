@@ -47,9 +47,9 @@ const NOTIFY_PRICING = {
         'suited to high-volume promotional campaigns.',
       slabs: [
         { tier: 'Starter', min: 5000, max: 10000, rate: 0.35, support: 'Standard support' },
-        { tier: 'Business', min: 11000, max: 20000, rate: 0.3, support: 'Priority support', popular: true },
-        { tier: 'Enterprise', min: 40000, max: 99999, rate: 0.28, support: 'Dedicated account manager' },
-        { tier: 'Elite', min: 100000, max: null, rate: 0.26, support: 'Priority support', best: true },
+        { tier: 'Business', min: 11000, max: 20000, rate: 0.33, support: 'Priority support', popular: true },
+        { tier: 'Enterprise', min: 40000, max: 99999, rate: 0.31, support: 'Dedicated account manager' },
+        { tier: 'Elite', min: 100000, max: null, rate: 0.30, support: 'Priority support', best: true },
       ],
     },
     m: {
@@ -61,9 +61,9 @@ const NOTIFY_PRICING = {
         'that reinforces brand recognition.',
       slabs: [
         { tier: 'Starter', min: 5000, max: 10000, rate: 0.55, support: 'Standard support' },
-        { tier: 'Business', min: 11000, max: 20000, rate: 0.52, support: 'Priority support', popular: true },
-        { tier: 'Enterprise', min: 40000, max: 99999, rate: 0.5, support: 'Dedicated account manager' },
-        { tier: 'Elite', min: 100000, max: null, rate: 0.48, support: 'Priority support', best: true },
+        { tier: 'Business', min: 11000, max: 20000, rate: 0.53, support: 'Priority support', popular: true },
+        { tier: 'Enterprise', min: 40000, max: 99999, rate: 0.51, support: 'Dedicated account manager' },
+        { tier: 'Elite', min: 100000, max: null, rate: 0.50, support: 'Priority support', best: true },
       ],
     },
   },
