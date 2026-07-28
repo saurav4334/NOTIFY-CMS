@@ -23,6 +23,8 @@
   const typeButtons = Array.from(document.querySelectorAll('[data-sms-type]'));
 
   let currentType = 'nm';
+  let userInteracted = false; // don't track the initial render, only real use
+  let calcTimer;
 
   const nf = new Intl.NumberFormat(CFG.locale);
   const fmtQty = (n) => nf.format(n);
@@ -154,6 +156,20 @@
     totalEl.textContent = fmtMoney(qty * slab.rate);
     msgEl.textContent = `${fmtRate(slab.rate)} per SMS · ${bandLabel(slab)} · ${CFG.taxNote}`;
     highlightSlab(qty);
+
+    // Meta CalculatorUse — only on genuine interaction, debounced so a burst of
+    // keystrokes sends one event. No personal data, only the estimate itself.
+    if (userInteracted && window.NotifyTrack) {
+      clearTimeout(calcTimer);
+      calcTimer = setTimeout(function () {
+        window.NotifyTrack.calculatorUse({
+          sms_type: CFG.types[currentType].label,
+          quantity: qty,
+          estimated_value: Math.round(qty * slab.rate),
+          currency: 'BDT',
+        });
+      }, 1200);
+    }
   }
 
   function setQty(q) {
@@ -178,15 +194,15 @@
   }
 
   /* ── Wiring ─────────────────────────────────────────────────────────── */
-  qtyInput.addEventListener('input', calculate);
+  qtyInput.addEventListener('input', () => { userInteracted = true; calculate(); });
   if (slider) {
-    slider.addEventListener('input', () => setQty(Number(slider.value)));
+    slider.addEventListener('input', () => { userInteracted = true; setQty(Number(slider.value)); });
   }
   for (const btn of typeButtons) {
-    btn.addEventListener('click', () => setType(btn.dataset.smsType));
+    btn.addEventListener('click', () => { userInteracted = true; setType(btn.dataset.smsType); });
   }
   for (const btn of document.querySelectorAll('[data-quick-qty]')) {
-    btn.addEventListener('click', () => setQty(Number(btn.dataset.quickQty)));
+    btn.addEventListener('click', () => { userInteracted = true; setQty(Number(btn.dataset.quickQty)); });
   }
 
   setType('nm');

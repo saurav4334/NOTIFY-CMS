@@ -142,6 +142,9 @@
 
       if (res.ok && data.ok) {
         sent = true;
+        // Meta Lead — ONLY after a verified successful submission (not on click,
+        // not on validation failure, not on API error). De-duped by NotifyTrack.
+        if (window.NotifyTrack) window.NotifyTrack.lead('Contact Form');
         setStatus('success', data.message || 'Thank you. We have received your message.');
         form.reset();
         if (tsField) tsField.value = String(Date.now());
