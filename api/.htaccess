@@ -1,8 +1,9 @@
 # =============================================================================
-# NotifyBD — /api/ hardening
+# Notify — /api/ hardening
 # =============================================================================
 # Defence in depth: even if the root .htaccess is lost or overridden, nothing
-# in this directory is browsable and only lead.php is reachable.
+# in this directory is browsable, and only the two endpoints are reachable.
+# The vendored PHPMailer under lib/, .env, storage and logs stay denied.
 # =============================================================================
 
 <IfModule mod_autoindex.c>
@@ -18,8 +19,9 @@
   Deny from all
 </IfModule>
 
-# ...then allow exactly one file: the lead endpoint.
-<Files "lead.php">
+# ...then allow only the two lead endpoints (contact.php is the active one;
+# lead.php is kept for backward compatibility).
+<FilesMatch "^(contact|lead)\.php$">
   <IfModule mod_authz_core.c>
     Require all granted
   </IfModule>
@@ -27,7 +29,7 @@
     Order Allow,Deny
     Allow from all
   </IfModule>
-</Files>
+</FilesMatch>
 
 # .env, .env.example, storage/ and logs/ are therefore unreachable over HTTP,
 # as is any file added to this directory in future unless it is explicitly

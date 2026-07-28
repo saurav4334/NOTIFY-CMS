@@ -218,7 +218,7 @@ src="https://www.facebook.com/tr?id=883853861046480&ev=PageView&noscript=1"/></n
           <svg class="w-5 h-5" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/></svg>Send a message
         </h2>
 
-        <form id="contact-form" action="/api/lead.php" method="post" novalidate class="space-y-5">
+        <form id="contact-form" action="/api/contact.php" method="post" novalidate class="space-y-5">
           <!-- Honeypot: hidden from users, irresistible to bots. -->
           <div class="honeypot" aria-hidden="true">
             <label for="website">Website (leave this empty)</label>
@@ -226,6 +226,12 @@ src="https://www.facebook.com/tr?id=883853861046480&ev=PageView&noscript=1"/></n
           </div>
           <!-- Time-trap: submissions faster than a human can type are rejected. -->
           <input type="hidden" name="started_at" value="">
+          <!-- Attribution — populated by contact.js on load (analytics only). -->
+          <input type="hidden" name="source_url" value="">
+          <input type="hidden" name="referrer" value="">
+          <input type="hidden" name="utm_source" value="">
+          <input type="hidden" name="utm_medium" value="">
+          <input type="hidden" name="utm_campaign" value="">
 
           <div class="grid sm:grid-cols-2 gap-4">
             <div>

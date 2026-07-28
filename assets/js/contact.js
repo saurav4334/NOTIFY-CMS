@@ -1,7 +1,7 @@
 /**
  * Notify — contact form.
  *
- * Submits to /api/lead.php via fetch and reports what actually happened.
+ * Submits to /api/contact.php via fetch and reports what actually happened.
  * The mockup faked a 1.5s delay and always showed "Message sent successfully!"
  * while discarding the data; this does the opposite in every respect.
  *
@@ -28,6 +28,21 @@
   /* Time-trap: a real person cannot complete this form in under 3 seconds. */
   const tsField = form.querySelector('input[name="started_at"]');
   if (tsField) tsField.value = String(startedAt);
+
+  /* Attribution — captured for the server-side notification email only.
+     No credentials, no tracking cookies; just where the lead came from. */
+  (function captureAttribution() {
+    const qs = new URLSearchParams(location.search);
+    const set = (n, v) => {
+      const el = form.querySelector(`input[name="${n}"]`);
+      if (el) el.value = v || '';
+    };
+    set('source_url', location.href);
+    set('referrer', document.referrer);
+    set('utm_source', qs.get('utm_source'));
+    set('utm_medium', qs.get('utm_medium'));
+    set('utm_campaign', qs.get('utm_campaign'));
+  })();
 
   const RULES = {
     name: {
@@ -140,12 +155,12 @@
         // Non-JSON response — treat as a server failure, not a success.
       }
 
-      if (res.ok && data.ok) {
+      if (res.ok && data.success) {
         sent = true;
-        // Meta Lead — ONLY after a verified successful submission (not on click,
-        // not on validation failure, not on API error). De-duped by NotifyTrack.
+        // Meta Lead — ONLY after the server confirms success (not on click, not
+        // on validation failure, not on API error). De-duped by NotifyTrack.
         if (window.NotifyTrack) window.NotifyTrack.lead('Contact Form');
-        setStatus('success', data.message || 'Thank you. We have received your message.');
+        setStatus('success', data.message || 'Thank you. Our sales team will contact you shortly.');
         form.reset();
         if (tsField) tsField.value = String(Date.now());
         // Lock the button: the message is delivered, there is nothing to resend.
