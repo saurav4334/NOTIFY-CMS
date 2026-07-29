@@ -44,6 +44,21 @@
     set('utm_campaign', qs.get('utm_campaign'));
   })();
 
+  /* GA4 contact_form_start — fired once, on the first genuine interaction with
+     the form (not on page load). No field values are sent, only the page path. */
+  let startTracked = false;
+  form.addEventListener(
+    'input',
+    function () {
+      if (startTracked) return;
+      startTracked = true;
+      if (typeof window.trackGA4Event === 'function') {
+        window.trackGA4Event('contact_form_start', { source_page: location.pathname });
+      }
+    },
+    { once: false }
+  );
+
   const RULES = {
     name: {
       test: (v) => v.length >= 2 && v.length <= 100,
@@ -157,9 +172,13 @@
 
       if (res.ok && data.success) {
         sent = true;
-        // Meta Lead — ONLY after the server confirms success (not on click, not
-        // on validation failure, not on API error). De-duped by NotifyTrack.
-        if (window.NotifyTrack) window.NotifyTrack.lead('Contact Form');
+        // Meta Lead + GA4 generate_lead — ONLY after the server confirms success
+        // (not on click, not on validation failure, not on API error). Both are
+        // de-duped by NotifyTrack. `service` is the SMS category (not PII); read
+        // it BEFORE form.reset() clears the field.
+        const svcEl = form.elements['sms_type'];
+        const service = svcEl && svcEl.value ? svcEl.value : 'unknown';
+        if (window.NotifyTrack) window.NotifyTrack.lead('Contact Form', service);
         setStatus('success', data.message || 'Thank you. Our sales team will contact you shortly.');
         form.reset();
         if (tsField) tsField.value = String(Date.now());

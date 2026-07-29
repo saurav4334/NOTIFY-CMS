@@ -43,24 +43,44 @@
     try { fn(); } catch (e) { /* silent */ }
   }
 
+  /* ── Google Analytics 4 ───────────────────────────────────────────────────
+   * GA4 runs ALONGSIDE the Meta Pixel — the two are independent. gtag.js is
+   * loaded by the inline snippet in each page's <head>; this helper only sends
+   * events, and no-ops (never throws) if gtag is missing or blocked, so an
+   * analytics failure can never break the site. NEVER pass PII here (no names,
+   * phone numbers, email addresses or message text) — only page paths and
+   * non-identifying service/package metadata.
+   */
+  function trackGA4Event(eventName, parameters) {
+    if (typeof window.gtag === 'function') {
+      try { window.gtag('event', eventName, parameters || {}); } catch (e) { /* silent */ }
+    }
+  }
+  window.trackGA4Event = trackGA4Event; // exposed globally (matches spec §10)
+
   // Expose so calculator.js / contact.js route their events through here
-  // instead of calling fbq() directly (keeps all Meta logic centralised).
+  // instead of calling fbq() / gtag() directly (keeps all tracking centralised).
   window.NotifyTrack = {
     standard: standard,
     custom: custom,
     once: once,
+    ga4: trackGA4Event,
     meta: META,
-    lead: function (source) {
+    lead: function (source, service) {
       once('lead', function () {
         standard('Lead', { source: source || 'Contact Form' });
         // CompleteRegistration mirrors a successful enquiry submission.
         standard('CompleteRegistration', { source: source || 'Contact Form', status: true });
       });
+      // GA4 generate_lead — de-duped alongside Meta Lead. `service` is a category
+      // (e.g. "Masking"), never PII; source_page is the pathname only.
+      trackGA4Event('generate_lead', { service: service || 'unknown', source_page: path });
     },
     calculatorUse: function (data) {
       // Fired on genuine interaction (debounced by the caller). Not once-only —
       // but throttled upstream — and never carries personal data.
       custom('CalculatorUse', data || {});
+      trackGA4Event('calculator_use', data || {});
     },
   };
 
@@ -76,7 +96,19 @@
 
   /* ── PricingView (custom) once on /pricing/ ──────────────────────────────── */
   if (path === '/pricing/') {
-    once('pricingview', function () { custom('PricingView', {}); });
+    once('pricingview', function () {
+      custom('PricingView', {});
+      trackGA4Event('pricing_view', { source_page: path });
+    });
+  }
+
+  /* ── api_docs_view once on the API-docs page ─────────────────────────────── */
+  // No dedicated /api-docs/ page exists yet; this stays inert until one is added
+  // (or the API section moves to its own URL), at which point it fires once.
+  if (path === '/api-docs/' || path === '/api/' || path === '/docs/') {
+    once('apidocsview', function () {
+      trackGA4Event('api_docs_view', { source_page: path });
+    });
   }
 
   /* ── DeepScroll (custom) once at 75% page depth ──────────────────────────── */
@@ -109,17 +141,21 @@
 
     var href = (link.getAttribute && link.getAttribute('href')) || '';
 
-    // Contact events — tel / mailto / WhatsApp
+    // Contact events — tel / mailto / WhatsApp.
+    // GA4 carries only the source page — never the dialled number or address.
     if (/^tel:/i.test(href)) {
       standard('Contact', { method: 'Phone' });
+      trackGA4Event('phone_click', { source_page: path });
       return;
     }
     if (/^mailto:/i.test(href)) {
       standard('Contact', { method: 'Email' });
+      trackGA4Event('email_click', { source_page: path });
       return;
     }
     if (/wa\.me|api\.whatsapp\.com|whatsapp/i.test(href) || link.id === 'waBtn') {
       standard('Contact', { method: 'WhatsApp' });
+      trackGA4Event('whatsapp_click', { source_page: path });
       return;
     }
 
@@ -129,12 +165,14 @@
       var tierEl = card.querySelector('[class*="tracking-widest"]');
       var rateEl = card.querySelector('.text-5xl');
       var isMasking = !!(link.closest('#panel-m'));
-      custom('PackageInterest', {
+      var pkg = {
         package_name: tierEl ? textOf(tierEl) : '',
         sms_type: isMasking ? 'Masking' : 'Non-Masking',
         unit_rate: rateEl ? textOf(rateEl) : '',
         currency: 'BDT',
-      });
+      };
+      custom('PackageInterest', pkg);
+      trackGA4Event('package_interest', pkg);
       return;
     }
 
